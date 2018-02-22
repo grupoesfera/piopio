@@ -6,7 +6,6 @@ public class Usuario {
 
     private Long id;
     private String nombre;
-    private List<Usuario> seguidores;
     private List<Usuario> seguidos;
     
     public Long getId() {
@@ -27,16 +26,6 @@ public class Usuario {
     public void setNombre(String nombre) {
     
         this.nombre = nombre;
-    }
-    
-    public List<Usuario> getSeguidores() {
-    
-        return seguidores;
-    }
-    
-    public void setSeguidores(List<Usuario> seguidores) {
-    
-        this.seguidores = seguidores;
     }
     
     public List<Usuario> getSeguidos() {
