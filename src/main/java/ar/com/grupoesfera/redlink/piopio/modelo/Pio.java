@@ -1,6 +1,7 @@
 package ar.com.grupoesfera.redlink.piopio.modelo;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +24,7 @@ public class Pio {
     private Usuario autor;
     
     @Transient
-    private Comentario comentario;
+    private List<Comentario> comentarios;
     
     public Long getId() {
     
@@ -63,5 +64,15 @@ public class Pio {
     public void setAutor(Usuario autor) {
     
         this.autor = autor;
+    }
+
+    public List<Comentario> getComentarios() {
+    
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+    
+        this.comentarios = comentarios;
     }
 }
