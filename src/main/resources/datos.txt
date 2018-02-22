@@ -1,0 +1,23 @@
+Usuarios
+--------
+Marcelo, Brenda, India, Leon, Sebastian
+
+Seguidos (sigue a)
+--------
+Marcelo: Brenda, India, Sebastian
+Brenda: India, Marcelo
+India: Brenda, Sebastian, Marcelo
+Leon: -
+Sebastian: Marcelo
+
+Pios
+----
+Marcelo: 
+"Hola, este es mi primer pio" (2017-12-27) - Brenda favoritea y comenta "Bien por vos"
+"Hola, este es mi segundo pio" (2017-12-28) - Brenda, India y Sebastian favoritean
+Brenda:
+"Aguante India" (2018-01-01) - Marcelo e India favoritean
+India: 
+"Guau!" (2018-01-02) - Brenda favoritea y comenta "Muy bien"
+Leon:
+"Miau" (2018-01-02)
