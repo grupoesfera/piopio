@@ -67,7 +67,7 @@ public class Usuario {
     
     public Usuario sigueA(Usuario... seguidos) {
         
-        if (seguidos == null) {
+        if (this.seguidos == null) {
             
             this.seguidos = new ArrayList<>();
         }
