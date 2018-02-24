@@ -33,6 +33,9 @@ public class PioServer {
             .addHttpListener(8080, "localhost");
 
         server.start(builder);
+        
+        App.instancia().initData();
+        
         log.info("PioServer iniciado. Presione Ctrl+C para salir.");
     }
 }
