@@ -2,10 +2,21 @@ package ar.com.grupoesfera.redlink.piopio.modelo;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
+@Entity
 public class Usuario {
 
+    @Id
     private Long id;
+    
+    @Column
     private String nombre;
+    
+    @Transient
     private List<Usuario> seguidos;
     
     public Long getId() {

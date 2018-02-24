@@ -6,6 +6,7 @@
 	<persistence-unit name="piopio">
 	
 	   <class>ar.com.grupoesfera.redlink.piopio.modelo.Pio</class>
+	   <class>ar.com.grupoesfera.redlink.piopio.modelo.Usuario</class>
 	
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
@@ -13,7 +14,7 @@
 			<property name="javax.persistence.jdbc.user" value="sa" />
 			<property name="javax.persistence.jdbc.password" value="" />
 
-			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 		</properties>
 	</persistence-unit>
