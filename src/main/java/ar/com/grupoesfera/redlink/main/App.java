@@ -9,6 +9,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Application;
 
+import ar.com.grupoesfera.redlink.piopio.modelo.Usuario;
 import ar.com.grupoesfera.redlink.piopio.rest.API;
 
 public class App extends Application {
@@ -63,5 +64,21 @@ public class App extends Application {
 
     private void crearObjetos(EntityManager entities) {
 
+        Usuario marcelo = Usuario.nuevo().conId(1L).conNombre("Marcelo");
+        Usuario brenda = Usuario.nuevo().conId(2L).conNombre("Brenda");
+        Usuario india = Usuario.nuevo().conId(3L).conNombre("India");
+        Usuario leon = Usuario.nuevo().conId(4L).conNombre("Leon");
+        Usuario sebastian = Usuario.nuevo().conId(5L).conNombre("Sebastian");
+        
+        marcelo.sigueA(brenda, india, sebastian);
+        brenda.sigueA(india, marcelo);
+        india.sigueA(brenda, sebastian, marcelo);
+        sebastian.sigueA(marcelo);
+        
+        entities.persist(marcelo);
+        entities.persist(brenda);
+        entities.persist(india);
+        entities.persist(leon);
+        entities.persist(sebastian);
     }
 }
