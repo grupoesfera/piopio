@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Application;
 
@@ -35,5 +36,32 @@ public class App extends Application {
     public EntityManager obtenerEntityManager() {
 
         return proveedorPersistencia.createEntityManager();
+    }
+
+    public void initData() {
+
+        EntityManager entities = obtenerEntityManager();
+        EntityTransaction transaccion = entities.getTransaction();
+
+        try {
+
+            transaccion.begin();
+
+            crearObjetos(entities);
+
+            transaccion.commit();
+
+        } catch (Exception e) {
+
+            transaccion.rollback();
+
+        } finally {
+
+            entities.close();
+        }
+    }
+
+    private void crearObjetos(EntityManager entities) {
+
     }
 }
