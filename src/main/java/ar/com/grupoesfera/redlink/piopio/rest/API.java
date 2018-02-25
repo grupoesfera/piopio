@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 
 import ar.com.grupoesfera.redlink.piopio.modelo.Pio;
 import ar.com.grupoesfera.redlink.piopio.modelo.Usuario;
+import ar.com.grupoesfera.redlink.piopio.repo.Usuarios;
 
 @Path("/")
 public class API {
@@ -53,9 +54,10 @@ public class API {
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerUsuarios() {
         
-        List<Usuario> usuarios = new LinkedList<>();
+        Usuarios usuarios = new Usuarios();
+        List<Usuario> todosLosUsuarios = usuarios.obtenerTodos();
 
-        return Response.ok(usuarios).build();
+        return Response.ok(todosLosUsuarios).build();
     }
 
     @GET
