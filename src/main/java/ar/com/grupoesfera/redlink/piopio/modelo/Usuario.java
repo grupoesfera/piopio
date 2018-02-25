@@ -7,7 +7,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Usuario {
@@ -16,7 +16,7 @@ public class Usuario {
 
     @Column private String nombre;
 
-    @Transient private List<Usuario> seguidos;
+    @ManyToMany private List<Usuario> seguidos;
 
     public Long getId() {
 
