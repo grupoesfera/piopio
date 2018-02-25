@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 public class Usuario {
 
@@ -16,7 +18,7 @@ public class Usuario {
 
     @Column private String nombre;
 
-    @ManyToMany private List<Usuario> seguidos;
+    @ManyToMany @JsonIgnore private List<Usuario> seguidos;
 
     public Long getId() {
 
