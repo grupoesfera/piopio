@@ -9,11 +9,16 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Application;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import ar.com.grupoesfera.redlink.piopio.modelo.Usuario;
 import ar.com.grupoesfera.redlink.piopio.rest.API;
 
 public class App extends Application {
 
+    private static final Log log  = LogFactory.getLog(App.class);
+    
     private static final App instancia = new App();
     private static EntityManagerFactory proveedorPersistencia = Persistence.createEntityManagerFactory("piopio");
 
@@ -54,6 +59,7 @@ public class App extends Application {
 
         } catch (Exception e) {
 
+            log.error("Falló la transacción", e);
             transaccion.rollback();
 
         } finally {
