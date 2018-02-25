@@ -76,15 +76,15 @@ public class App extends Application {
         Usuario leon = Usuario.nuevo().conId(4L).conNombre("Leon");
         Usuario sebastian = Usuario.nuevo().conId(5L).conNombre("Sebastian");
         
-        marcelo.sigueA(brenda, india, sebastian);
-        brenda.sigueA(india, marcelo);
-        india.sigueA(brenda, sebastian, marcelo);
-        sebastian.sigueA(marcelo);
-        
         entities.persist(marcelo);
         entities.persist(brenda);
         entities.persist(india);
         entities.persist(leon);
         entities.persist(sebastian);
+
+        marcelo.sigueA(brenda, india, sebastian);
+        brenda.sigueA(india, marcelo);
+        india.sigueA(brenda, sebastian, marcelo);
+        sebastian.sigueA(marcelo);
     }
 }
