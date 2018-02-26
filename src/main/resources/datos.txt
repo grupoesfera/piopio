@@ -1,6 +1,6 @@
 Usuarios
 --------
-Marcelo, Brenda, India, Leon, Sebastian
+Marcelo, Brenda, India, Leon, Sebastian, Alejandro, Santiago
 
 Seguidos (sigue a)
 --------
@@ -9,6 +9,8 @@ Brenda: India, Marcelo
 India: Brenda, Sebastian, Marcelo
 Leon: -
 Sebastian: Marcelo
+Alejandro: Santiago
+Santiago: -
 
 Pios
 ----
