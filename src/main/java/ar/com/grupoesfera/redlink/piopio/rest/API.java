@@ -55,9 +55,7 @@ public class API {
     public Response obtenerUsuarios() {
         
         Usuarios usuarios = new Usuarios();
-        List<Usuario> todosLosUsuarios = usuarios.obtenerTodos();
-
-        return Response.ok(todosLosUsuarios).build();
+        return Response.ok(usuarios.obtenerTodos()).build();
     }
 
     @GET
@@ -75,9 +73,8 @@ public class API {
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerSeguidores(@PathParam("id") Long id) {
         
-        List<Usuario> usuarios = new LinkedList<>();
-
-        return Response.ok(usuarios).build();
+        Usuarios usuarios = new Usuarios();
+        return Response.ok(usuarios.obtenerSeguidoresDe(Usuario.nuevo().conId(id))).build();
     }
 
     @GET
