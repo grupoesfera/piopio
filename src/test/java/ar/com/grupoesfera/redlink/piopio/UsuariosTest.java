@@ -13,8 +13,18 @@ public class UsuariosTest {
 
     @Test
     public void deberiaObtenerTodosLosUsuarios() {
+
         Usuarios usuarios = new Usuarios();
         List<Usuario> todosLosUsuarios = usuarios.obtenerTodos();
         Assert.assertThat(todosLosUsuarios, Matchers.hasSize(5));
+    }
+
+    @Test
+    public void deberiaObtenerLosSeguidoresDeUnUusario() {
+
+        Usuarios usuarios = new Usuarios();
+        Usuario marcelo = Usuario.nuevo().conId(1L).conNombre("Marcelo");
+        List<Usuario> seguidoresDeMarcelo = usuarios.obtenerSeguidoresDe(marcelo);
+        Assert.assertThat(seguidoresDeMarcelo, Matchers.hasSize(3));
     }
 }

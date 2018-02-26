@@ -12,4 +12,13 @@ public class Usuarios {
         
         return App.instancia().obtenerEntityManager().createQuery("select u from Usuario u").getResultList();
     }
+
+    @SuppressWarnings("unchecked")
+    public List<Usuario> obtenerSeguidoresDe(Usuario usuario) {
+
+        return App.instancia().obtenerEntityManager()
+            .createQuery("select u from Usuario u where :usuario member of u.seguidos")
+            .setParameter("usuario", usuario)
+            .getResultList();
+    }
 }
