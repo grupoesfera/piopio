@@ -41,7 +41,7 @@ public class API {
     @POST
     @Path("/pio")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response obtenerPio(@QueryParam("mensaje") String mensaje, @QueryParam("usuario") Long id) {
+    public Response publicarPio(@QueryParam("mensaje") String mensaje, @QueryParam("usuario") Long id) {
         
         Pio pio = new Pio();
         
