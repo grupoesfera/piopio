@@ -16,7 +16,7 @@ public class UsuariosTest {
 
         Usuarios usuarios = new Usuarios();
         List<Usuario> todosLosUsuarios = usuarios.obtenerTodos();
-        Assert.assertThat(todosLosUsuarios, Matchers.hasSize(5));
+        Assert.assertThat(todosLosUsuarios, Matchers.hasSize(7));
     }
 
     @Test
@@ -26,5 +26,13 @@ public class UsuariosTest {
         Usuario marcelo = Usuario.nuevo().conId(1L).conNombre("Marcelo");
         List<Usuario> seguidoresDeMarcelo = usuarios.obtenerSeguidoresDe(marcelo);
         Assert.assertThat(seguidoresDeMarcelo, Matchers.hasSize(3));
+    }
+    
+    @Test
+    public void deberiaEncontrarUsuariosAislados() {
+        
+        Usuarios usuarios = new Usuarios();
+        List<Usuario> aislados = usuarios.obtenerAislados();
+        Assert.assertThat(aislados, Matchers.hasSize(1));
     }
 }

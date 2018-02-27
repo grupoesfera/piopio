@@ -21,4 +21,12 @@ public class Usuarios {
             .setParameter("usuario", usuario)
             .getResultList();
     }
+
+    @SuppressWarnings("unchecked")
+    public List<Usuario> obtenerAislados() {
+
+        return App.instancia().obtenerEntityManager()
+            .createQuery("select u from Usuario u where u.seguidos is empty and not exists (select u2 from Usuario u2 where u member of u2.seguidos)")
+            .getResultList();
+    }
 }

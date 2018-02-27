@@ -4,6 +4,8 @@ insert into usuario(id, nombre) values (2, 'Brenda');
 insert into usuario(id, nombre) values (3, 'India');
 insert into usuario(id, nombre) values (4, 'Leon');
 insert into usuario(id, nombre) values (5, 'Sebastian');
+insert into usuario(id, nombre) values (6, 'Alejandro');
+insert into usuario(id, nombre) values (7, 'Santiago');
 
 insert into Usuario_Usuario values (1, 2);
 insert into Usuario_Usuario values (1, 3);
@@ -14,6 +16,7 @@ insert into Usuario_Usuario values (3, 1);
 insert into Usuario_Usuario values (3, 2);
 insert into Usuario_Usuario values (3, 5);
 insert into Usuario_Usuario values (5, 1);
+insert into Usuario_Usuario values (6, 7);
 
 -- Pios de Marcelo
 insert into pio(id, mensaje, fechaCreacion) values (1, 'Hola, este es mi primer pio', '2017-12-27');
