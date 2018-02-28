@@ -9,7 +9,7 @@ import org.junit.Test;
 import ar.com.grupoesfera.redlink.piopio.modelo.Pio;
 import ar.com.grupoesfera.redlink.piopio.repo.BaseDePios;
 
-public class PiosTest {
+public class BaseDePiosTest {
 
     @Test
     public void deberiaObtenerTodosLosPios() {

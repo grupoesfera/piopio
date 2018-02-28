@@ -9,7 +9,7 @@ import org.junit.Test;
 import ar.com.grupoesfera.redlink.piopio.modelo.Usuario;
 import ar.com.grupoesfera.redlink.piopio.repo.BaseDeUsuarios;
 
-public class UsuariosTest {
+public class BaseDeUsuariosTest {
 
     @Test
     public void deberiaObtenerTodosLosUsuarios() {
