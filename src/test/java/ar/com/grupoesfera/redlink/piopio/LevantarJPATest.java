@@ -47,6 +47,6 @@ public class LevantarJPATest {
         
         List<Object> pios = entities.createNativeQuery("select * from pio").getResultList();
         
-        assertThat(pios, hasSize(1));
+        assertThat(pios, hasSize(5));
     }
 }
