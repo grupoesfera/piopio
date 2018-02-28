@@ -5,7 +5,7 @@ import java.util.List;
 import ar.com.grupoesfera.redlink.main.App;
 import ar.com.grupoesfera.redlink.piopio.modelo.Usuario;
 
-public class Usuarios {
+public class BaseDeUsuarios {
 
     @SuppressWarnings("unchecked")
     public List<Usuario> obtenerTodos() {

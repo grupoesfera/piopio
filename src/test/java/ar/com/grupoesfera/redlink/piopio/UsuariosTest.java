@@ -7,14 +7,14 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import ar.com.grupoesfera.redlink.piopio.modelo.Usuario;
-import ar.com.grupoesfera.redlink.piopio.repo.Usuarios;
+import ar.com.grupoesfera.redlink.piopio.repo.BaseDeUsuarios;
 
 public class UsuariosTest {
 
     @Test
     public void deberiaObtenerTodosLosUsuarios() {
 
-        Usuarios usuarios = new Usuarios();
+        BaseDeUsuarios usuarios = new BaseDeUsuarios();
         List<Usuario> todosLosUsuarios = usuarios.obtenerTodos();
         Assert.assertThat(todosLosUsuarios, Matchers.hasSize(7));
     }
@@ -22,7 +22,7 @@ public class UsuariosTest {
     @Test
     public void deberiaObtenerLosSeguidoresDeUnUusario() {
 
-        Usuarios usuarios = new Usuarios();
+        BaseDeUsuarios usuarios = new BaseDeUsuarios();
         Usuario marcelo = Usuario.nuevo().conId(1L).conNombre("Marcelo");
         List<Usuario> seguidoresDeMarcelo = usuarios.obtenerSeguidoresDe(marcelo);
         Assert.assertThat(seguidoresDeMarcelo, Matchers.hasSize(3));
@@ -31,7 +31,7 @@ public class UsuariosTest {
     @Test
     public void deberiaEncontrarUsuariosAislados() {
         
-        Usuarios usuarios = new Usuarios();
+        BaseDeUsuarios usuarios = new BaseDeUsuarios();
         List<Usuario> aislados = usuarios.obtenerAislados();
         Assert.assertThat(aislados, Matchers.hasSize(1));
     }

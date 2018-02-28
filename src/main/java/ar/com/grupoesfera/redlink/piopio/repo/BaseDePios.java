@@ -5,7 +5,7 @@ import java.util.List;
 import ar.com.grupoesfera.redlink.main.App;
 import ar.com.grupoesfera.redlink.piopio.modelo.Pio;
 
-public class Pios {
+public class BaseDePios {
 
     @SuppressWarnings("unchecked")
     public List<Pio> obtenerTodos() {

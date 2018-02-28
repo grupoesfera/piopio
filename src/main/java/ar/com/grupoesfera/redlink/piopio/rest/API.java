@@ -15,12 +15,12 @@ import javax.ws.rs.core.Response;
 import ar.com.grupoesfera.redlink.main.App;
 import ar.com.grupoesfera.redlink.piopio.modelo.Pio;
 import ar.com.grupoesfera.redlink.piopio.modelo.Usuario;
-import ar.com.grupoesfera.redlink.piopio.repo.Usuarios;
+import ar.com.grupoesfera.redlink.piopio.repo.BaseDeUsuarios;
 
 @Path("/")
 public class API {
 
-    private Usuarios usuarios = App.instancia().obtenerRepoUsuarios();
+    private BaseDeUsuarios usuarios = App.instancia().obtenerRepoUsuarios();
     
     @GET
     @Path("/hola")
