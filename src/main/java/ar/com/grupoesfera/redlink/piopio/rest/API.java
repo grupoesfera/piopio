@@ -12,6 +12,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import ar.com.grupoesfera.redlink.main.App;
 import ar.com.grupoesfera.redlink.piopio.modelo.Pio;
 import ar.com.grupoesfera.redlink.piopio.modelo.Usuario;
 import ar.com.grupoesfera.redlink.piopio.repo.Usuarios;
@@ -19,7 +20,7 @@ import ar.com.grupoesfera.redlink.piopio.repo.Usuarios;
 @Path("/")
 public class API {
 
-    private Usuarios usuarios = new Usuarios();
+    private Usuarios usuarios = App.instancia().obtenerRepoUsuarios();
     
     @GET
     @Path("/hola")
