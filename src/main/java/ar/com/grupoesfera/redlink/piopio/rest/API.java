@@ -62,10 +62,9 @@ public class API {
     @Path("/usuarios/aislados")
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerUsuariosAislados() {
-        
-        List<Usuario> usuarios = new LinkedList<>();
 
-        return Response.ok(usuarios).build();
+        Usuarios usuarios = new Usuarios();
+        return Response.ok(usuarios.obtenerAislados()).build();
     }
 
     @GET
