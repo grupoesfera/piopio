@@ -19,6 +19,8 @@ import ar.com.grupoesfera.redlink.piopio.repo.Usuarios;
 @Path("/")
 public class API {
 
+    private Usuarios usuarios = new Usuarios();
+    
     @GET
     @Path("/hola")
     @Produces(MediaType.TEXT_PLAIN)
@@ -54,7 +56,6 @@ public class API {
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerUsuarios() {
         
-        Usuarios usuarios = new Usuarios();
         return Response.ok(usuarios.obtenerTodos()).build();
     }
 
@@ -63,7 +64,6 @@ public class API {
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerUsuariosAislados() {
 
-        Usuarios usuarios = new Usuarios();
         return Response.ok(usuarios.obtenerAislados()).build();
     }
 
@@ -72,7 +72,6 @@ public class API {
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerSeguidores(@PathParam("id") Long id) {
         
-        Usuarios usuarios = new Usuarios();
         return Response.ok(usuarios.obtenerSeguidoresDe(Usuario.nuevo().conId(id))).build();
     }
 
