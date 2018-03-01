@@ -13,6 +13,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import ar.com.grupoesfera.redlink.piopio.modelo.Usuario;
+import ar.com.grupoesfera.redlink.piopio.repo.BaseDePios;
 import ar.com.grupoesfera.redlink.piopio.repo.BaseDeUsuarios;
 import ar.com.grupoesfera.redlink.piopio.rest.API;
 
@@ -24,6 +25,7 @@ public class App extends Application {
     private static EntityManagerFactory proveedorPersistencia = Persistence.createEntityManagerFactory("piopio");
 
     private BaseDeUsuarios usuarios = new BaseDeUsuarios();
+    private BaseDePios pios = new BaseDePios();
 
     private App() {
 
@@ -94,5 +96,10 @@ public class App extends Application {
     public BaseDeUsuarios obtenerRepoUsuarios() {
 
         return usuarios;
+    }
+
+    public BaseDePios obtenerRepoPios() {
+
+        return pios;
     }
 }

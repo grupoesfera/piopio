@@ -12,4 +12,9 @@ public class BaseDePios {
         
         return App.instancia().obtenerEntityManager().createQuery("select p from Pio p").getResultList();
     }
+
+    public Pio obtenerPor(Long id) {
+
+        return App.instancia().obtenerEntityManager().find(Pio.class, id);
+    }
 }

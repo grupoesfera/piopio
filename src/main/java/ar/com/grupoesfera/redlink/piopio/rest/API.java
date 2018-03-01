@@ -15,12 +15,14 @@ import javax.ws.rs.core.Response;
 import ar.com.grupoesfera.redlink.main.App;
 import ar.com.grupoesfera.redlink.piopio.modelo.Pio;
 import ar.com.grupoesfera.redlink.piopio.modelo.Usuario;
+import ar.com.grupoesfera.redlink.piopio.repo.BaseDePios;
 import ar.com.grupoesfera.redlink.piopio.repo.BaseDeUsuarios;
 
 @Path("/")
 public class API {
 
     private BaseDeUsuarios usuarios = App.instancia().obtenerRepoUsuarios();
+    private BaseDePios pios = App.instancia().obtenerRepoPios();
     
     @GET
     @Path("/hola")
@@ -35,11 +37,7 @@ public class API {
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerPio(@PathParam("id") Long id) {
         
-        Pio pio = new Pio();
-        pio.setId(id);
-        pio.setMensaje("Este es un pio autogenerado que no existe en la DB");
-        
-        return Response.ok(pio).build();
+        return Response.ok(pios.obtenerPor(id)).build();
     }
 
     @POST
