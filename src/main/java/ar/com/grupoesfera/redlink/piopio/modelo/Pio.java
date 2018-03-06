@@ -97,6 +97,12 @@ public class Pio {
         return this;
     }
 
+    public Pio conFechaCreacion(Date fechaCreacion) {
+
+        this.fechaCreacion = fechaCreacion;
+        return this;
+    }
+
     @Override
     public int hashCode() {
 
