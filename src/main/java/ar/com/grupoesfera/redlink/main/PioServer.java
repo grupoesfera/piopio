@@ -34,7 +34,7 @@ public class PioServer {
 
         server.start(builder);
         
-        App.instancia().initData();
+        Fixture.initData();
         
         log.info("PioServer iniciado. Presione Ctrl+C para salir.");
     }
