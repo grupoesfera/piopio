@@ -1,5 +1,8 @@
 package ar.com.grupoesfera.redlink.main;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -61,11 +64,11 @@ public class Fixture {
         sebastian.sigueA(marcelo);
         alejandro.sigueA(santiago);
 
-        Pio primerPioMarcelo = Pio.nuevo().conId(1L).conAutor(marcelo).conMensaje("Hola, este es mi primer pio");
-        Pio segundoPioMarcelo = Pio.nuevo().conId(2L).conAutor(marcelo).conMensaje("Hola, este es mi segundo pio");
-        Pio pioBrenda = Pio.nuevo().conId(3L).conAutor(brenda).conMensaje("Aguante India");
-        Pio pioIndia = Pio.nuevo().conId(4L).conAutor(india).conMensaje("Guau!");
-        Pio pioLeon = Pio.nuevo().conId(5L).conAutor(leon).conMensaje("Miau");
+        Pio primerPioMarcelo = Pio.nuevo().conId(1L).conAutor(marcelo).conMensaje("Hola, este es mi primer pio").conFechaCreacion(fecha(2017, 12, 27));
+        Pio segundoPioMarcelo = Pio.nuevo().conId(2L).conAutor(marcelo).conMensaje("Hola, este es mi segundo pio").conFechaCreacion(fecha(2017, 12, 28));
+        Pio pioBrenda = Pio.nuevo().conId(3L).conAutor(brenda).conMensaje("Aguante India").conFechaCreacion(fecha(2018, 1, 1));
+        Pio pioIndia = Pio.nuevo().conId(4L).conAutor(india).conMensaje("Guau!").conFechaCreacion(fecha(2018, 1, 2));
+        Pio pioLeon = Pio.nuevo().conId(5L).conAutor(leon).conMensaje("Miau").conFechaCreacion(fecha(2018, 1, 2));
         
         entities.persist(primerPioMarcelo);
         entities.persist(segundoPioMarcelo);
@@ -74,4 +77,8 @@ public class Fixture {
         entities.persist(pioLeon);
     }
     
+    private static Date fecha(Integer anio, Integer mes, Integer dia ) {
+        
+        return java.sql.Date.valueOf(LocalDate.of(anio, mes, dia));
+    }
 }
