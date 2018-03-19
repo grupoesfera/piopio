@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import ar.com.grupoesfera.redlink.main.App;
 import ar.com.grupoesfera.redlink.piopio.modelo.Pio;
@@ -45,9 +46,18 @@ public class API {
     @Produces(MediaType.APPLICATION_JSON)
     public Response publicarPio(@QueryParam("mensaje") String mensaje, @QueryParam("usuario") Long id) {
         
-        Pio pio = new Pio();
+        Response respuesta = Response.status(Status.BAD_REQUEST).build();
+        Pio nuevoPio = null;
         
-        return Response.ok(pio).build();
+        Usuario autor = usuarios.obtenerPor(id);
+        
+        if (autor != null) {
+            
+            nuevoPio = pios.guardarCon(autor, mensaje);
+            respuesta = Response.ok(nuevoPio).build();
+        }
+
+        return respuesta;
     }
 
     @GET

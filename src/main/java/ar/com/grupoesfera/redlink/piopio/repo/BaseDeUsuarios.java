@@ -29,4 +29,9 @@ public class BaseDeUsuarios {
             .createQuery("select u from Usuario u where u.seguidos is empty and not exists (select u2 from Usuario u2 where u member of u2.seguidos)")
             .getResultList();
     }
+    
+    public Usuario obtenerPor(Long id) {
+        
+        return App.instancia().obtenerEntityManager().find(Usuario.class, id);
+    }
 }
