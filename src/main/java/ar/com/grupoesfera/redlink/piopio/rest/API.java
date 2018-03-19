@@ -89,9 +89,7 @@ public class API {
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerSeguidos(@PathParam("id") Long id) {
         
-        List<Usuario> usuarios = new LinkedList<>();
-
-        return Response.ok(usuarios).build();
+        return Response.ok(usuarios.obtenerPor(id).getSeguidos()).build();
     }
 
     @GET
