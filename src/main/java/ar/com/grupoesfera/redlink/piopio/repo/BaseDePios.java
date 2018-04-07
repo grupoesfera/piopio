@@ -50,4 +50,10 @@ public class BaseDePios {
         
         return maxId;
     }
+    
+    @SuppressWarnings("unchecked")
+    public List<Pio> obtenerPor(Usuario autor) {
+        
+        return App.instancia().obtenerEntityManager().createQuery("select p from Pio p where autor = :autor").setParameter("autor", autor).getResultList();
+    }
 }

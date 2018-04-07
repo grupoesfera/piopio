@@ -40,4 +40,22 @@ public class BaseDePiosTest {
         Assert.assertThat(pioGuardado.getMensaje(), Matchers.is("mensaje"));
         Assert.assertThat(pioGuardado.getComentarios(), Matchers.nullValue());
     }
+    
+    @Test
+    public void deberiaObtenerUnaListaVaciaSiElUsuarioNoPublicoPios() {
+        
+        Usuario usuarioSinPios = Usuario.nuevo().conId(5L);
+        List<Pio> listaVacia = pios.obtenerPor(usuarioSinPios);
+        
+        Assert.assertThat(listaVacia, Matchers.empty());
+    }
+
+    @Test
+    public void deberiaObtenerUnaListaConPiosSiElUsuarioPublicoPios() {
+        
+        Usuario usuarioConPios = Usuario.nuevo().conId(1L);
+        List<Pio> piosDelUsuario = pios.obtenerPor(usuarioConPios);
+        
+        Assert.assertThat(piosDelUsuario, Matchers.not(Matchers.empty()));
+    }
 }

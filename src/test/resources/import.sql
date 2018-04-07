@@ -19,12 +19,12 @@ insert into Usuario_Usuario values (5, 1);
 insert into Usuario_Usuario values (6, 7);
 
 -- Pios de Marcelo
-insert into pio(id, mensaje, fechaCreacion) values (1, 'Hola, este es mi primer pio', '2017-12-27');
-insert into pio(id, mensaje, fechaCreacion) values (2, 'Hola, este es mi segundo pio', '2017-12-28');
+insert into pio(id, mensaje, fechaCreacion, autor_id) values (1, 'Hola, este es mi primer pio', '2017-12-27', 1);
+insert into pio(id, mensaje, fechaCreacion, autor_id) values (2, 'Hola, este es mi segundo pio', '2017-12-28', 1);
 -- Pios de Brenda
-insert into pio(id, mensaje, fechaCreacion) values (3, 'Aguante India', '2018-01-01');
+insert into pio(id, mensaje, fechaCreacion, autor_id) values (3, 'Aguante India', '2018-01-01', 2);
 -- Pios de India
-insert into pio(id, mensaje, fechaCreacion) values (4, 'Guau!', '2018-01-02');
+insert into pio(id, mensaje, fechaCreacion, autor_id) values (4, 'Guau!', '2018-01-02', 3);
 -- Pios de Leon
-insert into pio(id, mensaje, fechaCreacion) values (5, 'Miau', '2018-01-02');
+insert into pio(id, mensaje, fechaCreacion, autor_id) values (5, 'Miau', '2018-01-02', 4);
 

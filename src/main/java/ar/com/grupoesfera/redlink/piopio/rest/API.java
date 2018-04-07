@@ -97,9 +97,7 @@ public class API {
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerPios(@PathParam("id") Long id) {
         
-        List<Pio> pios = new LinkedList<>();
-
-        return Response.ok(pios).build();
+        return Response.ok(pios.obtenerPor(Usuario.nuevo().conId(id))).build();
     }
 
     @GET
