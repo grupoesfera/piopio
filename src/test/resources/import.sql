@@ -28,3 +28,13 @@ insert into pio(id, mensaje, fechaCreacion, autor_id) values (4, 'Guau!', '2018-
 -- Pios de Leon
 insert into pio(id, mensaje, fechaCreacion, autor_id) values (5, 'Miau', '2018-01-02', 4);
 
+insert into favorito(id, pio_id, fan_id) values (1, 1, 2);
+insert into favorito(id, pio_id, fan_id) values (2, 2, 2);
+insert into favorito(id, pio_id, fan_id) values (3, 2, 3);
+insert into favorito(id, pio_id, fan_id) values (4, 2, 5);
+insert into favorito(id, pio_id, fan_id) values (5, 3, 1);
+insert into favorito(id, pio_id, fan_id) values (6, 3, 3);
+insert into favorito(id, pio_id, fan_id) values (7, 4, 2);
+
+insert into comentario(id, mensaje, autor_id) values (1, 'Bien por vos', 2);
+insert into comentario(id, mensaje, autor_id) values (2, 'Muy bien!', 4);

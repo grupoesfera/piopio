@@ -7,6 +7,8 @@
 	
 	   <class>ar.com.grupoesfera.redlink.piopio.modelo.Pio</class>
 	   <class>ar.com.grupoesfera.redlink.piopio.modelo.Usuario</class>
+	   <class>ar.com.grupoesfera.redlink.piopio.modelo.Favorito</class>
+	   <class>ar.com.grupoesfera.redlink.piopio.modelo.Comentario</class>
 	
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />

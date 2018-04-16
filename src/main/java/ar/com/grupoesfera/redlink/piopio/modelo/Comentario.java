@@ -1,10 +1,26 @@
 package ar.com.grupoesfera.redlink.piopio.modelo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+@Entity
 public class Comentario {
 
-    private String mensaje;
-    private Usuario autor;
+    @Id private Long id;
+    @Column private String mensaje;
+    @ManyToOne private Usuario autor;
+    
+    public Long getId() {
+        
+        return id;
+    }
+    
+    public void setId(Long id) {
+        
+        this.id = id;
+    }
     
     public String getMensaje() {
     
