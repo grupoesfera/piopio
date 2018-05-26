@@ -37,4 +37,4 @@ insert into favorito(id, pio_id, fan_id) values (6, 3, 3);
 insert into favorito(id, pio_id, fan_id) values (7, 4, 2);
 
 insert into comentario(id, mensaje, autor_id) values (1, 'Bien por vos', 2);
-insert into comentario(id, mensaje, autor_id) values (2, 'Muy bien!', 4);
+insert into comentario(id, mensaje, autor_id) values (2, 'Muy bien', 4);
