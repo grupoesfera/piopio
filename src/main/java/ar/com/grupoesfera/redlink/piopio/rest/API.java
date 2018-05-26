@@ -99,22 +99,4 @@ public class API {
         
         return Response.ok(pios.obtenerPor(Usuario.nuevo().conId(id))).build();
     }
-
-    @GET
-    @Path("/usuario/{id}/pios/favoritos")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response obtenerPiosOrdenadosPorFavoritos(@PathParam("id") Long id) {
-        
-        List<Pio> pios = new LinkedList<>();
-
-        return Response.ok(pios).build();
-    }
-    
-    @GET
-    @Path("/pio/{id}/cant-y-fav")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response obtenerCantidadyQuienesFavDePio(@PathParam("id") Long id) {
-        
-        return Response.ok().build();
-    }
 }
