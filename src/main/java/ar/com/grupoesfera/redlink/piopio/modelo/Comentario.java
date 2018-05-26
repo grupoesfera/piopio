@@ -41,4 +41,27 @@ public class Comentario {
     
         this.autor = autor;
     }
+    
+    public static Comentario nuevo() {
+        
+        return new Comentario();
+    }
+    
+    public Comentario conId(Long id) {
+        
+        setId(id);
+        return this;
+    }
+    
+    public Comentario conMensaje(String mensaje) {
+        
+        setMensaje(mensaje);
+        return this;
+    }
+    
+    public Comentario conAutor(Usuario autor) {
+        
+        setAutor(autor);
+        return this;
+    }
 }
