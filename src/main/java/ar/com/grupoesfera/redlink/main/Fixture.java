@@ -9,6 +9,8 @@ import javax.persistence.EntityTransaction;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import ar.com.grupoesfera.redlink.piopio.modelo.Comentario;
+import ar.com.grupoesfera.redlink.piopio.modelo.Favorito;
 import ar.com.grupoesfera.redlink.piopio.modelo.Pio;
 import ar.com.grupoesfera.redlink.piopio.modelo.Usuario;
 
@@ -50,13 +52,7 @@ public class Fixture {
         Usuario alejandro = Usuario.nuevo().conId(6L).conNombre("Alejandro");
         Usuario santiago = Usuario.nuevo().conId(7L).conNombre("Santiago");
 
-        entities.persist(marcelo);
-        entities.persist(brenda);
-        entities.persist(india);
-        entities.persist(leon);
-        entities.persist(sebastian);
-        entities.persist(alejandro);
-        entities.persist(santiago);
+        persistir(entities, marcelo, brenda, india, leon, sebastian, alejandro, santiago);
 
         marcelo.sigueA(brenda, india, sebastian);
         brenda.sigueA(india, marcelo);
@@ -70,11 +66,34 @@ public class Fixture {
         Pio pioIndia = Pio.nuevo().conId(4L).conAutor(india).conMensaje("Guau!").conFechaCreacion(fecha(2018, 1, 2));
         Pio pioLeon = Pio.nuevo().conId(5L).conAutor(leon).conMensaje("Miau").conFechaCreacion(fecha(2018, 1, 2));
         
-        entities.persist(primerPioMarcelo);
-        entities.persist(segundoPioMarcelo);
-        entities.persist(pioBrenda);
-        entities.persist(pioIndia);
-        entities.persist(pioLeon);
+        persistir(entities, primerPioMarcelo, segundoPioMarcelo, pioBrenda, pioIndia, pioLeon);
+        
+        Favorito favoritoBrenMarcelo1 = Favorito.nuevo().conId(1L).conPio(primerPioMarcelo).conFan(brenda);
+        Favorito favoritoBrenMarcelo2 = Favorito.nuevo().conId(2L).conPio(segundoPioMarcelo).conFan(brenda);
+        Favorito favoritoIndiaMarcelo2 = Favorito.nuevo().conId(3L).conPio(segundoPioMarcelo).conFan(india);
+        Favorito favoritoSebastianMarcelo2 = Favorito.nuevo().conId(4L).conPio(segundoPioMarcelo).conFan(sebastian);
+        Favorito favoritoMarceloBrenda1 = Favorito.nuevo().conId(5L).conPio(pioBrenda).conFan(marcelo);
+        Favorito favoritoIndiaBrenda1 = Favorito.nuevo().conId(6L).conPio(pioBrenda).conFan(india);
+        Favorito favoritoBrendaIndia1 = Favorito.nuevo().conId(7L).conPio(pioIndia).conFan(brenda);
+        
+        persistir(entities, favoritoBrenMarcelo1, favoritoBrenMarcelo2, favoritoIndiaMarcelo2, favoritoSebastianMarcelo2, 
+            favoritoMarceloBrenda1, favoritoIndiaBrenda1, favoritoBrendaIndia1);
+        
+        Comentario comentarioBrendaMarcelo = Comentario.nuevo().conId(1L).conMensaje("Bien por vos").conAutor(brenda);
+        Comentario comentarioBrendaIndia = Comentario.nuevo().conId(2L).conMensaje("Muy bien").conAutor(brenda);
+        
+        persistir(entities, comentarioBrendaMarcelo, comentarioBrendaIndia);
+        
+        primerPioMarcelo.conComentario(comentarioBrendaMarcelo);
+        pioIndia.conComentario(comentarioBrendaIndia);
+    }
+    
+    private static void persistir(EntityManager entities, Object... entidades) {
+        
+        for (Object entidad : entidades) {
+            
+            entities.persist(entidad);
+        }
     }
     
     private static Date fecha(Integer anio, Integer mes, Integer dia ) {
