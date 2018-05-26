@@ -1,8 +1,5 @@
 package ar.com.grupoesfera.redlink.piopio.rest;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
