@@ -42,6 +42,33 @@ public class BaseDePiosTest {
     }
     
     @Test
+    public void deberiaDevolverNullSiElPioAGaurdarNoTieneAutor() {
+        
+        Usuario autor = null;
+        Pio pioGuardado = pios.guardarCon(autor, "mensaje");
+        
+        Assert.assertThat(pioGuardado, Matchers.nullValue());
+    }
+
+    @Test
+    public void deberiaDevolverNullSiElPioAGaurdarNoTieneMensaje() {
+        
+        Usuario autor = Usuario.nuevo().conNombre("Autor");
+        Pio pioGuardado = pios.guardarCon(autor, null);
+        
+        Assert.assertThat(pioGuardado, Matchers.nullValue());
+    }
+
+    @Test
+    public void deberiaDevolverNullSiElPioAGaurdarNoTieneAutorNiMensaje() {
+        
+        Usuario autor = null;
+        Pio pioGuardado = pios.guardarCon(autor, null);
+        
+        Assert.assertThat(pioGuardado, Matchers.nullValue());
+    }
+
+    @Test
     public void deberiaObtenerUnaListaVaciaSiElUsuarioNoPublicoPios() {
         
         Usuario usuarioSinPios = Usuario.nuevo().conId(5L);
