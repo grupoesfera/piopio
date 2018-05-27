@@ -1,4 +1,4 @@
-package ar.com.grupoesfera.redlink.piopio;
+package ar.com.grupoesfera.piopio;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.notNullValue;

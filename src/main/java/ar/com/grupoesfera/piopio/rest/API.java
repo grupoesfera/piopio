@@ -1,4 +1,4 @@
-package ar.com.grupoesfera.redlink.piopio.rest;
+package ar.com.grupoesfera.piopio.rest;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -10,11 +10,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import ar.com.grupoesfera.redlink.main.App;
-import ar.com.grupoesfera.redlink.piopio.modelo.Pio;
-import ar.com.grupoesfera.redlink.piopio.modelo.Usuario;
-import ar.com.grupoesfera.redlink.piopio.repo.BaseDePios;
-import ar.com.grupoesfera.redlink.piopio.repo.BaseDeUsuarios;
+import ar.com.grupoesfera.main.App;
+import ar.com.grupoesfera.piopio.modelo.Pio;
+import ar.com.grupoesfera.piopio.modelo.Usuario;
+import ar.com.grupoesfera.piopio.repo.BaseDePios;
+import ar.com.grupoesfera.piopio.repo.BaseDeUsuarios;
 
 @Path("/")
 public class API {

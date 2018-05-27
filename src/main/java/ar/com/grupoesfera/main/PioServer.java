@@ -1,4 +1,4 @@
-package ar.com.grupoesfera.redlink.main;
+package ar.com.grupoesfera.main;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

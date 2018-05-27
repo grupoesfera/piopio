@@ -1,9 +1,9 @@
-package ar.com.grupoesfera.redlink.piopio.repo;
+package ar.com.grupoesfera.piopio.repo;
 
 import java.util.List;
 
-import ar.com.grupoesfera.redlink.main.App;
-import ar.com.grupoesfera.redlink.piopio.modelo.Usuario;
+import ar.com.grupoesfera.main.App;
+import ar.com.grupoesfera.piopio.modelo.Usuario;
 
 public class BaseDeUsuarios {
 

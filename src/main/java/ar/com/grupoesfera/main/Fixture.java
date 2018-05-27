@@ -1,4 +1,4 @@
-package ar.com.grupoesfera.redlink.main;
+package ar.com.grupoesfera.main;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -9,10 +9,10 @@ import javax.persistence.EntityTransaction;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import ar.com.grupoesfera.redlink.piopio.modelo.Comentario;
-import ar.com.grupoesfera.redlink.piopio.modelo.Favorito;
-import ar.com.grupoesfera.redlink.piopio.modelo.Pio;
-import ar.com.grupoesfera.redlink.piopio.modelo.Usuario;
+import ar.com.grupoesfera.piopio.modelo.Comentario;
+import ar.com.grupoesfera.piopio.modelo.Favorito;
+import ar.com.grupoesfera.piopio.modelo.Pio;
+import ar.com.grupoesfera.piopio.modelo.Usuario;
 
 public class Fixture {
 

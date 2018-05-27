@@ -93,8 +93,8 @@
 							<aggregate>true</aggregate>
 							<instrumentation>
 								<excludes>
-									<exclude>ar/com/grupoesfera/redlink/piopio/modelo/*.class</exclude>
-									<exclude>ar/com/grupoesfera/redlink/main/*.class</exclude>
+									<exclude>ar/com/grupoesfera/piopio/modelo/*.class</exclude>
+									<exclude>ar/com/grupoesfera/main/*.class</exclude>
 								</excludes>
 								<ignoreMethodAnnotations>
 									<ignoreMethodAnnotation>ar.com.grupoesfera.cobertura.AvoidCoverage</ignoreMethodAnnotation>

@@ -1,4 +1,4 @@
-package ar.com.grupoesfera.redlink.piopio.modelo;
+package ar.com.grupoesfera.piopio.modelo;
 
 import java.util.ArrayList;
 import java.util.Arrays;

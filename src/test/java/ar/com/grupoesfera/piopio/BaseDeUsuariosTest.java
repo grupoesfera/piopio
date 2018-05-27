@@ -1,4 +1,4 @@
-package ar.com.grupoesfera.redlink.piopio;
+package ar.com.grupoesfera.piopio;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
 
-import ar.com.grupoesfera.redlink.piopio.modelo.Usuario;
-import ar.com.grupoesfera.redlink.piopio.repo.BaseDeUsuarios;
+import ar.com.grupoesfera.piopio.modelo.Usuario;
+import ar.com.grupoesfera.piopio.repo.BaseDeUsuarios;
 
 public class BaseDeUsuariosTest {
     
