@@ -127,9 +127,9 @@ public class Fixture {
 
     private static void eliminarDatos(EntityManager entities) {
         
-        entities.createQuery("delete from Comentario").executeUpdate();
         entities.createQuery("delete from Favorito").executeUpdate();
         entities.createQuery("delete from Pio").executeUpdate();
+        entities.createQuery("delete from Comentario").executeUpdate();
         entities.createQuery("delete from Usuario").executeUpdate();
     }
 }

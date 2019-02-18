@@ -10,11 +10,27 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
+import ar.com.grupoesfera.main.Fixture;
 
 public class LevantarJPATest {
 
     private EntityManagerFactory factory = Persistence.createEntityManagerFactory("piopio");
+
+    @Before
+    public void agregarDatos() {
+        
+        Fixture.initData();
+    }
+    
+    @After
+    public void eliminarDatos() {
+        
+        Fixture.dropData();
+    }
 
     @Test
     public void deberiaObtenerUnEntityManagerFactory() {
