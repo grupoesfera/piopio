@@ -42,6 +42,30 @@ public class Fixture {
         }
     }
 
+    public static void dropData() {
+
+        EntityManager entities = App.instancia().obtenerEntityManager();
+        EntityTransaction transaccion = entities.getTransaction();
+
+        try {
+
+            transaccion.begin();
+
+            eliminarDatos(entities);
+
+            transaccion.commit();
+
+        } catch (Exception e) {
+
+            log.error("Falló la transacción", e);
+            transaccion.rollback();
+
+        } finally {
+
+            entities.close();
+        }
+    }
+
     private static void crearDatos(EntityManager entities) {
 
         Usuario marcelo = Usuario.nuevo().conId(1L).conNombre("Marcelo");
@@ -99,5 +123,13 @@ public class Fixture {
     private static Date fecha(Integer anio, Integer mes, Integer dia ) {
         
         return java.sql.Date.valueOf(LocalDate.of(anio, mes, dia));
+    }
+
+    private static void eliminarDatos(EntityManager entities) {
+        
+        entities.createQuery("delete from Comentario").executeUpdate();
+        entities.createQuery("delete from Favorito").executeUpdate();
+        entities.createQuery("delete from Pio").executeUpdate();
+        entities.createQuery("delete from Usuario").executeUpdate();
     }
 }

@@ -16,7 +16,7 @@ public class App extends Application {
 
     private static final App instancia = new App();
     private static EntityManagerFactory proveedorPersistencia = Persistence.createEntityManagerFactory("piopio");
-
+    
     private BaseDeUsuarios usuarios = new BaseDeUsuarios();
     private BaseDePios pios = new BaseDePios();
 

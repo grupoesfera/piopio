@@ -3,9 +3,12 @@ package ar.com.grupoesfera.piopio;
 import java.util.List;
 
 import org.hamcrest.Matchers;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
+import ar.com.grupoesfera.main.Fixture;
 import ar.com.grupoesfera.piopio.modelo.Pio;
 import ar.com.grupoesfera.piopio.modelo.Usuario;
 import ar.com.grupoesfera.piopio.repo.BaseDePios;
@@ -13,6 +16,18 @@ import ar.com.grupoesfera.piopio.repo.BaseDePios;
 public class BaseDePiosTest {
 
     private BaseDePios pios = new BaseDePios();
+    
+    @Before
+    public void agregarDatos() {
+        
+        Fixture.initData();
+    }
+    
+    @After
+    public void eliminarDatos() {
+        
+        Fixture.dropData();
+    }
 
     @Test
     public void deberiaObtenerTodosLosPios() {
@@ -42,7 +57,7 @@ public class BaseDePiosTest {
     }
     
     @Test
-    public void deberiaDevolverNullSiElPioAGaurdarNoTieneAutor() {
+    public void deberiaDevolverNullSiElPioAGuardarNoTieneAutor() {
         
         Usuario autor = null;
         Pio pioGuardado = pios.guardarCon(autor, "mensaje");
@@ -51,7 +66,7 @@ public class BaseDePiosTest {
     }
 
     @Test
-    public void deberiaDevolverNullSiElPioAGaurdarNoTieneMensaje() {
+    public void deberiaDevolverNullSiElPioAGuardarNoTieneMensaje() {
         
         Usuario autor = Usuario.nuevo().conNombre("Autor");
         Pio pioGuardado = pios.guardarCon(autor, null);
@@ -60,7 +75,7 @@ public class BaseDePiosTest {
     }
 
     @Test
-    public void deberiaDevolverNullSiElPioAGaurdarNoTieneAutorNiMensaje() {
+    public void deberiaDevolverNullSiElPioAGuardarNoTieneAutorNiMensaje() {
         
         Usuario autor = null;
         Pio pioGuardado = pios.guardarCon(autor, null);
