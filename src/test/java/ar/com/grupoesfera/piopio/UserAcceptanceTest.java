@@ -1,5 +1,7 @@
 package ar.com.grupoesfera.piopio;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -22,8 +24,44 @@ public class UserAcceptanceTest {
     @Test
     public void hola() throws Exception {
 
-        URL url = new URL("http://localhost:8080/api/hola");
+        RespuestaServicio respuesta = invocarServicio("hola");
+        Assert.assertThat(respuesta.getCodigo(), Matchers.is(HttpStatus.SC_OK));
+    }
+     
+    private RespuestaServicio invocarServicio(String urlServicio) throws Exception {
+    	
+    	final String urlBase = "http://localhost:8080/api/";
+    	
+    	RespuestaServicio respuesta = new RespuestaServicio();
+    	
+        URL url = new URL(urlBase + urlServicio);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        Assert.assertThat(connection.getResponseCode(), Matchers.is(HttpStatus.SC_OK));
+        respuesta.setCodigo(connection.getResponseCode());
+        BufferedReader input = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        respuesta.setTexto(input.readLine());
+        
+        return respuesta;
+    }
+    
+    public class RespuestaServicio {
+    	
+    	private Integer codigo;
+    	private String texto;
+
+    	public Integer getCodigo() {
+			return codigo;
+		}
+		
+    	public void setCodigo(Integer codigo) {
+			this.codigo = codigo;
+		}
+		
+    	public String getTexto() {
+			return texto;
+		}
+		
+    	public void setTexto(String texto) {
+			this.texto = texto;
+		}
     }
 }
