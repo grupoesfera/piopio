@@ -31,7 +31,7 @@ public class API {
     }
 
     @GET
-    @Path("/pio/{id}")
+    @Path("/pios/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerPio(@PathParam("id") Long id) {
         
@@ -39,7 +39,7 @@ public class API {
     }
 
     @POST
-    @Path("/pio")
+    @Path("/pios")
     @Produces(MediaType.APPLICATION_JSON)
     public Response publicarPio(@QueryParam("mensaje") String mensaje, @QueryParam("usuario") Long id) {
         
@@ -52,6 +52,11 @@ public class API {
             
             nuevoPio = pios.guardarCon(autor, mensaje);
             respuesta = Response.ok(nuevoPio).build();
+        
+        } else {
+            
+            respuesta = Response.status(Status.BAD_REQUEST)
+                .entity("{\"error\":\"Pio no creado. El usuario '" + id + "' no existe.\"}").build();
         }
 
         return respuesta;
