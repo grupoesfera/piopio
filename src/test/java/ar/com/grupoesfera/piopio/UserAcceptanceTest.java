@@ -12,6 +12,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.jayway.jsonpath.matchers.JsonPathMatchers;
+
 import ar.com.grupoesfera.main.PioServer;
 
 public class UserAcceptanceTest {
@@ -42,7 +44,8 @@ public class UserAcceptanceTest {
 
         RespuestaServicio respuesta = invocarServicio("pio/1");
         Assert.assertThat(respuesta.getCodigo(), Matchers.is(HttpStatus.SC_OK));
-        Assert.assertThat(respuesta.getTexto(), Matchers.is("json"));
+        Assert.assertThat(respuesta.getTexto(), JsonPathMatchers.isJson());
+        Assert.assertThat(respuesta.getTexto(), JsonPathMatchers.hasJsonPath("$.id", Matchers.is(1)));
     }
 
     private RespuestaServicio invocarServicio(String urlServicio) throws Exception {
