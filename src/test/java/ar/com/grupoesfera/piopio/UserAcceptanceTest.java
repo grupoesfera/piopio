@@ -18,18 +18,18 @@ public class UserAcceptanceTest {
 
     @BeforeClass
     public static void preparar() {
-        
+
         PioServer.main(null);
     }
-    
+
     @Test
     public void deberiaDecirHolaMundo() throws Exception {
-    	
+
         RespuestaServicio respuesta = invocarServicio("hola");
         Assert.assertThat(respuesta.getCodigo(), Matchers.is(HttpStatus.SC_OK));
         Assert.assertThat(respuesta.getTexto(), Matchers.is("Hola, mundo!"));
     }
-     
+
     @Test
     public void deberiaDarNotAllowedAlLlamarAPioSinParametros() throws Exception {
 
@@ -37,47 +37,64 @@ public class UserAcceptanceTest {
         Assert.assertThat(respuesta.getCodigo(), Matchers.is(HttpStatus.SC_METHOD_NOT_ALLOWED));
     }
 
-    private RespuestaServicio invocarServicio(String urlServicio) throws Exception {
-    	
-    	final String urlBase = "http://localhost:8080/api/";
-    	
-    	RespuestaServicio respuesta = new RespuestaServicio();
-    
-    	try {
-    		
-    		URL url = new URL(urlBase + urlServicio);
-    		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-    		respuesta.setCodigo(connection.getResponseCode());
-    		BufferedReader input = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-    		respuesta.setTexto(input.readLine());
+    @Test
+    public void deberiaDevolverPioJSONAlLlamarAPioConIdValidoExistente() throws Exception {
 
-    	} catch (Exception e) {
-    		
-    		LogFactory.getLog(UserAcceptanceTest.class).error(e);
-    	}
-        
+        RespuestaServicio respuesta = invocarServicio("pio/1");
+        Assert.assertThat(respuesta.getCodigo(), Matchers.is(HttpStatus.SC_OK));
+        Assert.assertThat(respuesta.getTexto(), Matchers.is("json"));
+    }
+
+    private RespuestaServicio invocarServicio(String urlServicio) throws Exception {
+
+        final String urlBase = "http://localhost:8080/api/";
+
+        RespuestaServicio respuesta = new RespuestaServicio();
+
+        try {
+
+            URL url = new URL(urlBase + urlServicio);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            respuesta.setCodigo(connection.getResponseCode());
+
+            if (respuesta.getCodigo().equals(HttpStatus.SC_OK)) {
+
+                BufferedReader input = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                respuesta.setTexto(input.readLine());
+            }
+
+        } catch (Exception e) {
+
+            Assert.fail("La prueba falló por un error de conexión");
+            LogFactory.getLog(UserAcceptanceTest.class).error(e);
+        }
+
         return respuesta;
     }
-    
-    public class RespuestaServicio {
-    	
-    	private Integer codigo;
-    	private String texto;
 
-    	public Integer getCodigo() {
-			return codigo;
-		}
-		
-    	public void setCodigo(Integer codigo) {
-			this.codigo = codigo;
-		}
-		
-    	public String getTexto() {
-			return texto;
-		}
-		
-    	public void setTexto(String texto) {
-			this.texto = texto;
-		}
+    public class RespuestaServicio {
+
+        private Integer codigo;
+        private String texto;
+
+        public Integer getCodigo() {
+
+            return codigo;
+        }
+
+        public void setCodigo(Integer codigo) {
+
+            this.codigo = codigo;
+        }
+
+        public String getTexto() {
+
+            return texto;
+        }
+
+        public void setTexto(String texto) {
+
+            this.texto = texto;
+        }
     }
 }
