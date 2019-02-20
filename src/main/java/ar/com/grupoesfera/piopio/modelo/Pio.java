@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Pio {
@@ -14,8 +15,8 @@ public class Pio {
     @Id private Long id;
     @Column private String mensaje;
     @Column private Date fechaCreacion;
-    private Usuario autor;
-    private List<Comentario> comentarios;
+    @Transient private Usuario autor;
+    @Transient private List<Comentario> comentarios;
 
     public Long getId() {
 
