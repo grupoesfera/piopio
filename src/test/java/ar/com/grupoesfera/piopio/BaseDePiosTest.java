@@ -1,7 +1,5 @@
 package ar.com.grupoesfera.piopio;
 
-import java.util.List;
-
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Assert;
@@ -29,21 +27,6 @@ public class BaseDePiosTest {
         Fixture.dropData();
     }
 
-    @Test
-    public void deberiaObtenerTodosLosPios() {
-
-        List<Pio> todosLosPios = pios.obtenerTodos();
-        Assert.assertThat(todosLosPios, Matchers.hasSize(5));
-    }
-
-    @Test
-    public void deberiaObtenerUnPio() {
-
-        final Long ID_BUSQUEDA = 1L;
-        Pio pioEsperado = Pio.nuevo().conId(ID_BUSQUEDA).conMensaje("Hola, este es mi primer pio");
-        Assert.assertThat(pios.obtenerPor(ID_BUSQUEDA), Matchers.is(pioEsperado));
-    }
-    
     @Test
     public void deberiaGuardarUnPio() {
         
@@ -81,23 +64,5 @@ public class BaseDePiosTest {
         Pio pioGuardado = pios.guardarCon(autor, null);
         
         Assert.assertThat(pioGuardado, Matchers.nullValue());
-    }
-
-    @Test
-    public void deberiaObtenerUnaListaVaciaSiElUsuarioNoPublicoPios() {
-        
-        Usuario usuarioSinPios = Usuario.nuevo().conId(5L);
-        List<Pio> listaVacia = pios.obtenerPor(usuarioSinPios);
-        
-        Assert.assertThat(listaVacia, Matchers.empty());
-    }
-
-    @Test
-    public void deberiaObtenerUnaListaConPiosSiElUsuarioPublicoPios() {
-        
-        Usuario usuarioConPios = Usuario.nuevo().conId(1L);
-        List<Pio> piosDelUsuario = pios.obtenerPor(usuarioConPios);
-        
-        Assert.assertThat(piosDelUsuario, Matchers.not(Matchers.empty()));
     }
 }

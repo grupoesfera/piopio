@@ -1,7 +1,6 @@
 package ar.com.grupoesfera.piopio.repo;
 
 import java.util.Date;
-import java.util.List;
 
 import ar.com.grupoesfera.main.App;
 import ar.com.grupoesfera.piopio.modelo.Pio;
@@ -9,17 +8,6 @@ import ar.com.grupoesfera.piopio.modelo.Usuario;
 
 public class BaseDePios {
 
-    @SuppressWarnings("unchecked")
-    public List<Pio> obtenerTodos() {
-        
-        return App.instancia().obtenerEntityManager().createQuery("select p from Pio p").getResultList();
-    }
-
-    public Pio obtenerPor(Long id) {
-
-        return App.instancia().obtenerEntityManager().find(Pio.class, id);
-    }
-    
     public synchronized Pio guardarCon(Usuario autor, String mensaje) {
         
         Pio nuevoPio = null;
@@ -49,11 +37,5 @@ public class BaseDePios {
         }
         
         return maxId;
-    }
-    
-    @SuppressWarnings("unchecked")
-    public List<Pio> obtenerPor(Usuario autor) {
-        
-        return App.instancia().obtenerEntityManager().createQuery("select p from Pio p where autor = :autor").setParameter("autor", autor).getResultList();
     }
 }

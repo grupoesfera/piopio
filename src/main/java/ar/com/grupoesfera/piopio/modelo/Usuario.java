@@ -4,23 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-@Entity
 public class Usuario {
 
-    @Id private Long id;
-    @Column private String nombre;
+    private Long id;
+    private String nombre;
     
-    @ManyToMany 
-    @JoinTable(name = "seguidos", joinColumns = @JoinColumn(name = "seguidor"), inverseJoinColumns = @JoinColumn(name = "seguido")) 
     @JsonIgnore private List<Usuario> seguidos;
 
     public Long getId() {
