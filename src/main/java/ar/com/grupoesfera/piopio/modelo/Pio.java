@@ -7,8 +7,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Pio {
@@ -16,8 +14,8 @@ public class Pio {
     @Id private Long id;
     @Column private String mensaje;
     @Column private Date fechaCreacion;
-    @ManyToOne private Usuario autor;
-    @OneToMany private List<Comentario> comentarios;
+    private Usuario autor;
+    private List<Comentario> comentarios;
 
     public Long getId() {
 
