@@ -90,26 +90,32 @@ public class API {
     }
 
     @GET
-    @Path("/usuario/{id}/seguidores")
+    @Path("/usuarios/{id}/seguidores")
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerSeguidores(@PathParam("id") Long id) {
         
-        return Response.ok(usuarios.obtenerSeguidoresDe(Usuario.nuevo().conId(id))).build();
+        Usuario usuario = usuarios.obtenerPor(id);
+        
+        return usuario != null ? Response.ok(usuarios.obtenerSeguidoresDe(usuario)).build() : Response.status(Status.NOT_FOUND).build();
     }
 
     @GET
-    @Path("/usuario/{id}/seguidos")
+    @Path("/usuarios/{id}/seguidos")
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerSeguidos(@PathParam("id") Long id) {
         
-        return Response.ok(usuarios.obtenerPor(id).getSeguidos()).build();
+        Usuario usuario = usuarios.obtenerPor(id);
+        
+        return usuario != null ? Response.ok(usuario.getSeguidos()).build() : Response.status(Status.NOT_FOUND).build();
     }
 
     @GET
-    @Path("/usuario/{id}/pios")
+    @Path("/usuarios/{id}/pios")
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerPiosDeUsuario(@PathParam("id") Long id) {
         
-        return Response.ok(pios.obtenerPor(Usuario.nuevo().conId(id))).build();
+        Usuario autor = usuarios.obtenerPor(id);
+        
+        return autor != null ? Response.ok(pios.obtenerPor(autor)).build() : Response.status(Status.NOT_FOUND).build();
     }
 }

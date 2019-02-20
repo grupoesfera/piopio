@@ -19,7 +19,7 @@ public class PiosUserAcceptanceTest extends UserAcceptanceTest {
     }
 
     @Test
-    public void deberiaDevolverPioJSONAlLlamarAPiosConIdValidoExistente() throws Exception {
+    public void deberiaDarPioJSONAlLlamarAPiosConIdValidoExistente() throws Exception {
 
         RespuestaServicio respuesta = invocarServicio("pios/1");
         Assert.assertThat(respuesta.getCodigo(), Matchers.is(HttpStatus.SC_OK));
@@ -28,14 +28,14 @@ public class PiosUserAcceptanceTest extends UserAcceptanceTest {
     }
 
     @Test
-    public void deberiaDevolverNotFoundAlLlamarAPiosConIdValidoInexistente() throws Exception {
+    public void deberiaDarNotFoundAlLlamarAPiosConIdValidoInexistente() throws Exception {
 
         RespuestaServicio respuesta = invocarServicio("pios/1000");
         Assert.assertThat(respuesta.getCodigo(), Matchers.is(HttpStatus.SC_NOT_FOUND));
     }
 
     @Test
-    public void deberiaDevolverNotFoundAlLlamarAPiosConIdInvalido() throws Exception {
+    public void deberiaDarNotFoundAlLlamarAPiosConIdInvalido() throws Exception {
 
         RespuestaServicio respuesta = invocarServicio("pios/id-invalido");
         Assert.assertThat(respuesta.getCodigo(), Matchers.is(HttpStatus.SC_NOT_FOUND));
