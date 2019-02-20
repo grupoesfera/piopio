@@ -1,6 +1,7 @@
 package ar.com.grupoesfera.piopio;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -72,16 +73,15 @@ public class UserAcceptanceTest {
         Assert.assertThat(respuesta.getTexto(), JsonPathMatchers.hasJsonPath("$.mensaje", Matchers.is("UnPioNuevo")));
         Assert.assertThat(respuesta.getTexto(), JsonPathMatchers.hasJsonPath("$.autor.id", Matchers.is(1)));
         Assert.assertThat(respuesta.getTexto(), JsonPathMatchers.hasJsonPath("$.autor.nombre", Matchers.is("Marcelo")));
-        Assert.assertThat(respuesta.getTexto(), JsonPathMatchers.hasJsonPath("$.fechaCreacion", 
+        Assert.assertThat(respuesta.getTexto(), JsonPathMatchers.hasJsonPath("$.fechaCreacion",
             Matchers.both(Matchers.greaterThan(new Date().getTime() - 500)).and(Matchers.lessThan(new Date().getTime() + 500))));
     }
 
     @Test
-    public void deberiaDarBadRequestAlLlamarAPiosConMensajeYUsuarioInvalido() throws Exception {
+    public void deberiaDarNotFoundAlLlamarAPiosConMensajeYUsuarioInvalido() throws Exception {
 
         RespuestaServicio respuesta = invocarServicio("pios", "usuario=invalido", "mensaje=UnPioNuevo");
-        Assert.assertThat(respuesta.getCodigo(), Matchers.is(HttpStatus.SC_BAD_REQUEST));
-        Assert.assertThat(respuesta.getTexto(), Matchers.is("Pio no creado. El usuario 'invalido' es inválido."));
+        Assert.assertThat(respuesta.getCodigo(), Matchers.is(HttpStatus.SC_NOT_FOUND));
     }
 
     @Test
@@ -110,7 +110,7 @@ public class UserAcceptanceTest {
 
             URL url = null;
             HttpURLConnection connection = null;
-            
+
             if (params.length > 0) {
 
                 String query = "";
@@ -119,7 +119,7 @@ public class UserAcceptanceTest {
 
                     query = query + "&" + param;
                 }
-                
+
                 query = query.substring(1);
 
                 url = new URL(urlBase + urlServicio + "?" + query);
@@ -133,19 +133,28 @@ public class UserAcceptanceTest {
                 connection.setRequestMethod("GET");
             }
 
-
             respuesta.setCodigo(connection.getResponseCode());
 
-            if (respuesta.getCodigo().equals(HttpStatus.SC_OK)) {
+            if (respuesta.getCodigo() >= HttpStatus.SC_OK && respuesta.getCodigo() < HttpStatus.SC_MOVED_PERMANENTLY) {
 
                 BufferedReader input = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 respuesta.setTexto(input.readLine());
+
+            } else {
+
+                InputStream errorStream = connection.getErrorStream();
+
+                if (errorStream != null) {
+
+                    BufferedReader input = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+                    respuesta.setTexto(input.readLine());
+                }
             }
 
         } catch (Exception e) {
 
-            Assert.fail("La prueba falló por un error de conexión");
             LogFactory.getLog(UserAcceptanceTest.class).error(e);
+            Assert.fail("La prueba falló por un error de conexión");
         }
 
         return respuesta;

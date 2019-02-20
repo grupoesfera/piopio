@@ -31,11 +31,21 @@ public class API {
     }
 
     @GET
+    @Path("/pios")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response obtenerPios() {
+        
+        return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
+
+    @GET
     @Path("/pios/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerPio(@PathParam("id") Long id) {
         
-        return Response.ok(pios.obtenerPor(id)).build();
+        Pio pio = pios.obtenerPor(id);
+        
+        return pio != null ? Response.ok(pio).build() : Response.status(Status.NOT_FOUND).build();
     }
 
     @POST
@@ -51,12 +61,13 @@ public class API {
         if (autor != null) {
             
             nuevoPio = pios.guardarCon(autor, mensaje);
-            respuesta = Response.ok(nuevoPio).build();
+            
+            respuesta = nuevoPio != null ? Response.status(Status.CREATED).entity(nuevoPio).build() : Response.fromResponse(respuesta).entity("Pio no creado. El pio no tiene mensaje.").build();
         
         } else {
             
-            respuesta = Response.status(Status.BAD_REQUEST)
-                .entity("{\"error\":\"Pio no creado. El usuario '" + id + "' no existe.\"}").build();
+            respuesta = Response.fromResponse(respuesta)
+                .entity("Pio no creado. El usuario '" + id + "' no existe.").build();
         }
 
         return respuesta;
@@ -97,7 +108,7 @@ public class API {
     @GET
     @Path("/usuario/{id}/pios")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response obtenerPios(@PathParam("id") Long id) {
+    public Response obtenerPiosDeUsuario(@PathParam("id") Long id) {
         
         return Response.ok(pios.obtenerPor(Usuario.nuevo().conId(id))).build();
     }
