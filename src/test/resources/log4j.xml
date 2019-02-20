@@ -11,6 +11,10 @@
 
 	<appender name="null" class="org.apache.log4j.varia.NullAppender" />
 
+	<category name="ar.com.grupoesfera.main.PioServer">
+		<level value="WARN"/>
+	</category>
+
 	<root>
 		<priority value="ERROR" />
 		<appender-ref ref="console" />
