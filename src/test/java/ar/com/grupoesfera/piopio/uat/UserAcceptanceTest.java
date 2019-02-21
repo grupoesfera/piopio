@@ -9,6 +9,7 @@ import java.net.URL;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -21,6 +22,12 @@ public class UserAcceptanceTest {
     public static void preparar() {
 
         PioServer.instancia().iniciarServer();
+    }
+    
+    @AfterClass
+    public static void detener() {
+        
+        PioServer.instancia().detenerServer();
     }
 
     @Test
