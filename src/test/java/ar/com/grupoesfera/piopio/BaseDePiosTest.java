@@ -57,6 +57,19 @@ public class BaseDePiosTest {
     }
     
     @Test
+    public void deberiaGuardarUnPioConId1SiLaBaseEstaVacia() {
+        
+        // Elimina los datos para asignar el ID 1
+        Fixture.dropData();
+        
+        Usuario autor = Usuario.nuevo().conNombre("Autor");
+        Pio pioGuardado = pios.guardarCon(autor, "mensaje");
+        
+        Assert.assertThat(pioGuardado, Matchers.notNullValue());
+        Assert.assertThat(pioGuardado.getId(), Matchers.is(1L));
+    }
+    
+    @Test
     public void deberiaDevolverNullSiElPioAGuardarNoTieneAutor() {
         
         Usuario autor = null;
