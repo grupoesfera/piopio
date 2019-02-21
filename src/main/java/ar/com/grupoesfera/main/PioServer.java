@@ -76,6 +76,7 @@ public class PioServer {
 
         if (estado.equals(Estado.INICIADO)) {
 
+            Fixture.dropData();
             server.stop();
             estado = Estado.DESPLEGADO;
         }
