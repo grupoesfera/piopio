@@ -24,10 +24,7 @@ public class Fixture {
 
     private static Action<Void> crearDatos() {
 
-        return new Action<Void>() {
-
-            @Override
-            public Void execute(EntityManager entities) {
+        return (entities) -> {
 
                 Usuario marcelo = Usuario.nuevo().conId(1L).conNombre("Marcelo");
                 Usuario brenda = Usuario.nuevo().conId(2L).conNombre("Brenda");
@@ -73,9 +70,7 @@ public class Fixture {
                 pioIndia.conComentario(comentarioBrendaIndia);
                 
                 return null;
-            }
         };
-        
     }
     
     private static void persistir(EntityManager entities, Object... entidades) {
@@ -93,18 +88,14 @@ public class Fixture {
 
     private static Action<Void> eliminarDatos() {
         
-        return new Action<Void>() {
+        return (entities) -> {
 
-            @Override
-            public Void execute(EntityManager entities) {
+            entities.createQuery("delete from Favorito").executeUpdate();
+            entities.createQuery("delete from Pio").executeUpdate();
+            entities.createQuery("delete from Comentario").executeUpdate();
+            entities.createQuery("delete from Usuario").executeUpdate();
 
-                entities.createQuery("delete from Favorito").executeUpdate();
-                entities.createQuery("delete from Pio").executeUpdate();
-                entities.createQuery("delete from Comentario").executeUpdate();
-                entities.createQuery("delete from Usuario").executeUpdate();
-                
-                return null;
-            }
+            return null;
         };
     }
 }
