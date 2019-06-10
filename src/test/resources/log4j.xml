@@ -16,7 +16,7 @@
 	</category>
 
     <category name="ar.com.grupoesfera.piopio.uat.UserAcceptanceTest">
-        <level value="INFO"/>
+        <level value="WARN"/>
     </category>
 
 	<root>
