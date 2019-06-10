@@ -18,6 +18,10 @@
     <category name="ar.com.grupoesfera.piopio.uat.UserAcceptanceTest">
         <level value="WARN"/>
     </category>
+    
+    <category name="ar.com.grupoesfera.main.Fixture">
+        <level value="WARN"/>
+    </category>
 
 	<root>
 		<priority value="ERROR" />
