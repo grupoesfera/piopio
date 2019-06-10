@@ -3,7 +3,11 @@ package ar.com.grupoesfera.main;
 import java.time.LocalDate;
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import ar.com.grupoesfera.piopio.modelo.Comentario;
 import ar.com.grupoesfera.piopio.modelo.Favorito;
@@ -12,6 +16,8 @@ import ar.com.grupoesfera.piopio.modelo.Usuario;
 
 public class Fixture {
 
+    private static final Log log = LogFactory.getLog(Fixture.class);
+    
     public static void initData() {
 
         Transaction.run(crearDatos());
@@ -34,7 +40,7 @@ public class Fixture {
             Usuario alejandro = Usuario.nuevo().conId(6L).conNombre("Alejandro");
             Usuario santiago = Usuario.nuevo().conId(7L).conNombre("Santiago");
 
-            persistir(entities, marcelo, brenda, india, leon, sebastian, alejandro, santiago);
+            persistirSiEsPosible(entities, marcelo, brenda, india, leon, sebastian, alejandro, santiago);
 
             marcelo.sigueA(brenda, india, sebastian);
             brenda.sigueA(india, marcelo);
@@ -48,7 +54,7 @@ public class Fixture {
             Pio pioIndia = Pio.nuevo().conId(4L).conAutor(india).conMensaje("Guau!").conFechaCreacion(fecha(2018, 1, 2));
             Pio pioLeon = Pio.nuevo().conId(5L).conAutor(leon).conMensaje("Miau").conFechaCreacion(fecha(2018, 1, 2));
 
-            persistir(entities, primerPioMarcelo, segundoPioMarcelo, pioBrenda, pioIndia, pioLeon);
+            persistirSiEsPosible(entities, primerPioMarcelo, segundoPioMarcelo, pioBrenda, pioIndia, pioLeon);
 
             Favorito favoritoBrenMarcelo1 = Favorito.nuevo().conId(1L).conPio(primerPioMarcelo).conFan(brenda);
             Favorito favoritoBrenMarcelo2 = Favorito.nuevo().conId(2L).conPio(segundoPioMarcelo).conFan(brenda);
@@ -58,13 +64,13 @@ public class Fixture {
             Favorito favoritoIndiaBrenda1 = Favorito.nuevo().conId(6L).conPio(pioBrenda).conFan(india);
             Favorito favoritoBrendaIndia1 = Favorito.nuevo().conId(7L).conPio(pioIndia).conFan(brenda);
 
-            persistir(entities, favoritoBrenMarcelo1, favoritoBrenMarcelo2, favoritoIndiaMarcelo2, favoritoSebastianMarcelo2,
+            persistirSiEsPosible(entities, favoritoBrenMarcelo1, favoritoBrenMarcelo2, favoritoIndiaMarcelo2, favoritoSebastianMarcelo2,
                 favoritoMarceloBrenda1, favoritoIndiaBrenda1, favoritoBrendaIndia1);
 
             Comentario comentarioBrendaMarcelo = Comentario.nuevo().conId(1L).conMensaje("Bien por vos").conAutor(brenda);
             Comentario comentarioBrendaIndia = Comentario.nuevo().conId(2L).conMensaje("Muy bien").conAutor(brenda);
 
-            persistir(entities, comentarioBrendaMarcelo, comentarioBrendaIndia);
+            persistirSiEsPosible(entities, comentarioBrendaMarcelo, comentarioBrendaIndia);
 
             primerPioMarcelo.conComentario(comentarioBrendaMarcelo);
             pioIndia.conComentario(comentarioBrendaIndia);
@@ -72,12 +78,19 @@ public class Fixture {
             return null;
         };
     }
-
-    private static void persistir(EntityManager entities, Object... entidades) {
-
+    
+    private static void persistirSiEsPosible(EntityManager entities, Object... entidades) {
+        
         for (Object entidad : entidades) {
+            
+            if (esEntidad(entidad.getClass())) {
+                
+                entities.persist(entidad);
 
-            entities.persist(entidad);
+            } else {
+                
+                log.warn(entidad.getClass().getSimpleName() + " no es una Entity (no está mapeada). Nada que hacer aquí.");
+            }
         }
     }
 
@@ -90,12 +103,30 @@ public class Fixture {
 
         return (entities) -> {
 
-            entities.createQuery("delete from Favorito").executeUpdate();
-            entities.createQuery("delete from Pio").executeUpdate();
-            entities.createQuery("delete from Comentario").executeUpdate();
-            entities.createQuery("delete from Usuario").executeUpdate();
+            eliminarSiEsPosible(entities, Favorito.class);
+            eliminarSiEsPosible(entities, Pio.class);
+            eliminarSiEsPosible(entities, Comentario.class);
+            eliminarSiEsPosible(entities, Usuario.class);
 
             return null;
         };
     }
+
+    private static void eliminarSiEsPosible(EntityManager entities, Class<?> entity) {
+        
+        if (esEntidad(entity)) {
+            
+            entities.createQuery("delete from " + entity.getSimpleName()).executeUpdate();
+
+        } else {
+            
+            log.warn(entity.getSimpleName() + " no es una Entity (no está mapeada). Nada que hacer aquí.");
+        }
+    }
+    
+    private static Boolean esEntidad(Class<?> entity) {
+        
+        return entity.getAnnotation(Entity.class) != null;
+    }
+
 }

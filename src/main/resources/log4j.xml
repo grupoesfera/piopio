@@ -12,11 +12,11 @@
 	<appender name="null" class="org.apache.log4j.varia.NullAppender" />
 
 	<logger name="org.hibernate">
-		<level value="info"/>
+		<level value="WARN"/>
 	</logger>
 
 	<root>
-		<priority value="info" />
+		<priority value="INFO" />
 		<appender-ref ref="console" />
 	</root>
 

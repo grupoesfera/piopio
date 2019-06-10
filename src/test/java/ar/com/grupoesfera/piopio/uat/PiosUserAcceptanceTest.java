@@ -51,7 +51,7 @@ public class PiosUserAcceptanceTest extends UserAcceptanceTest {
         Assert.assertThat(respuesta.getTexto(), JsonPathMatchers.hasJsonPath("$.autor.id", Matchers.is(1)));
         Assert.assertThat(respuesta.getTexto(), JsonPathMatchers.hasJsonPath("$.autor.nombre", Matchers.is("Marcelo")));
         Assert.assertThat(respuesta.getTexto(), JsonPathMatchers.hasJsonPath("$.fechaCreacion",
-            Matchers.both(Matchers.greaterThan(new Date().getTime() - 500)).and(Matchers.lessThan(new Date().getTime() + 500))));
+            Matchers.both(Matchers.greaterThan(new Date().getTime() - 5000)).and(Matchers.lessThan(new Date().getTime() + 5000))));
     }
 
     @Test
