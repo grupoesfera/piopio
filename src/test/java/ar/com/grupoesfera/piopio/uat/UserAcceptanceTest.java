@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
@@ -18,9 +19,12 @@ import ar.com.grupoesfera.main.PioServer;
 
 public class UserAcceptanceTest {
 
+    protected static final Log log = LogFactory.getLog(UserAcceptanceTest.class);
+    
     @BeforeClass
     public static void preparar() {
 
+        log.info("Iniciando un conjunto de pruebas de aceptación");
         PioServer.instancia().iniciarServer();
     }
     
@@ -28,6 +32,7 @@ public class UserAcceptanceTest {
     public static void detener() {
         
         PioServer.instancia().detenerServer();
+        log.info("Un conjunto de pruebas de aceptación ha finalizado");
     }
 
     @Test
