@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ar.com.grupoesfera.main.Fixture;
+import ar.com.grupoesfera.main.Transaction;
 import ar.com.grupoesfera.piopio.modelo.Pio;
 import ar.com.grupoesfera.piopio.modelo.Usuario;
 import ar.com.grupoesfera.piopio.repo.BaseDePios;
@@ -47,7 +48,13 @@ public class BaseDePiosTest {
     @Test
     public void deberiaGuardarUnPio() {
         
-        Usuario autor = Usuario.nuevo().conNombre("Autor");
+        Usuario autor = Usuario.nuevo().conId(100L).conNombre("Autor");
+
+        Transaction.run((entities) -> {
+            entities.persist(autor);
+            return null;
+        });
+
         Pio pioGuardado = pios.guardarCon(autor, "mensaje");
         
         Assert.assertThat(pioGuardado, Matchers.notNullValue());
@@ -62,7 +69,13 @@ public class BaseDePiosTest {
         // Elimina los datos para asignar el ID 1
         Fixture.dropData();
         
-        Usuario autor = Usuario.nuevo().conNombre("Autor");
+        Usuario autor = Usuario.nuevo().conId(200L).conNombre("Autor");
+        
+        Transaction.run((entities) -> {
+            entities.persist(autor);
+            return null;
+        });
+
         Pio pioGuardado = pios.guardarCon(autor, "mensaje");
         
         Assert.assertThat(pioGuardado, Matchers.notNullValue());
