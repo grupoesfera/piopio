@@ -15,6 +15,10 @@
 		<level value="WARN"/>
 	</category>
 
+    <category name="ar.com.grupoesfera.piopio.uat.UserAcceptanceTest">
+        <level value="INFO"/>
+    </category>
+
 	<root>
 		<priority value="ERROR" />
 		<appender-ref ref="console" />
