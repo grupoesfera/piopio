@@ -38,3 +38,17 @@
 
 --insert into comentario(id, mensaje, autor_id) values (1, 'Bien por vos', 2);
 --insert into comentario(id, mensaje, autor_id) values (2, 'Muy bien', 4);
+
+DROP ALIAS IF EXISTS MYFUNCTION;
+CREATE ALIAS MYFUNCTION AS $$
+String getTableContent(java.sql.Connection con) throws Exception {
+    String resultValue=null;
+    java.sql.ResultSet rs = con.createStatement().executeQuery(
+    " SELECT * FROM TABLE_NAME");
+       while(rs.next())
+       {
+        resultValue=rs.getString(1);
+       }
+    return resultValue;
+}
+$$;
