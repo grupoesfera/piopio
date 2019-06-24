@@ -39,16 +39,8 @@
 --insert into comentario(id, mensaje, autor_id) values (1, 'Bien por vos', 2);
 --insert into comentario(id, mensaje, autor_id) values (2, 'Muy bien', 4);
 
-DROP ALIAS IF EXISTS MYFUNCTION;
-CREATE ALIAS MYFUNCTION AS $$
-String getTableContent(java.sql.Connection con) throws Exception {
-    String resultValue=null;
-    java.sql.ResultSet rs = con.createStatement().executeQuery(
-    " SELECT * FROM TABLE_NAME");
-       while(rs.next())
-       {
-        resultValue=rs.getString(1);
-       }
-    return resultValue;
-}
-$$;
+DROP ALIAS IF EXISTS REVERSE;
+CREATE ALIAS REVERSE AS $$ String reverse(String straight) { return new StringBuilder(straight).reverse().toString(); } $$;
+
+DROP ALIAS IF EXISTS NOMBRES;
+CREATE ALIAS NOMBRES AS $$ java.sql.ResultSet nombres(java.sql.Connection connection) throws java.sql.SQLException { return connection.createStatement().executeQuery("select nombre from usuario"); } $$;

@@ -34,4 +34,15 @@ public class BaseDeUsuarios {
         
         return App.instancia().obtenerEntityManager().find(Usuario.class, id);
     }
+    
+    public String obtenerReverso(String derecho) {
+        
+        return (String) App.instancia().obtenerEntityManager().createNativeQuery("call reverse('" + derecho + "')").getSingleResult();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<String> obtenerNombres() {
+        
+        return App.instancia().obtenerEntityManager().createNativeQuery("call nombres()").getResultList();
+    } 
 }
