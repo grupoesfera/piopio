@@ -65,4 +65,18 @@ public class BaseDeUsuariosTest {
         Usuario usuario = usuarios.obtenerPor(id);
         Assert.assertThat(usuario, Matchers.nullValue());
     }
+    
+    @Test
+    public void deberiaObtenerUnStringDadoVuelta() {
+        
+        String reverso = usuarios.obtenerReverso("123456789");
+        Assert.assertThat(reverso, Matchers.is("987654321"));
+    }
+
+    @Test
+    public void deberiaObtenerTodosLosNombres() {
+        
+        List<String> nombres = usuarios.obtenerNombres();
+        Assert.assertThat(nombres, Matchers.containsInAnyOrder("Marcelo", "Brenda", "India", "Leon", "Sebastian", "Santiago", "Alejandro"));
+    }
 }
