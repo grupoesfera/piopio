@@ -104,5 +104,13 @@ public class BaseDePiosTest {
         
         Assert.assertThat(listaVacia, Matchers.empty());
     }
-
+    
+    @Test
+    public void deberiaObtenerUnaListaConPiosSiElUsuarioPublicoPios() {
+        
+        Usuario usuarioConPios = Usuario.nuevo().conId(1L);
+        List<Pio> piosDelUsuario = pios.obtenerPor(usuarioConPios);
+        
+        Assert.assertThat(piosDelUsuario, Matchers.not(Matchers.empty()));
+    }
 }
