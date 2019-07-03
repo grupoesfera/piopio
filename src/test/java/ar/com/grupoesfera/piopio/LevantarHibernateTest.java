@@ -19,6 +19,7 @@ public class LevantarHibernateTest {
 	
 	private SessionFactory sessionFactory = new Configuration()
 													.addResource("Pio.hbm.xml")
+													.addResource("Usuario.hbm.xml")
 													.buildSessionFactory();
 	
     @Before
