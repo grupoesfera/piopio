@@ -38,3 +38,6 @@
 
 --insert into comentario(id, mensaje, autor_id) values (1, 'Bien por vos', 2);
 --insert into comentario(id, mensaje, autor_id) values (2, 'Muy bien', 4);
+
+DROP ALIAS IF EXISTS NOMBRES;
+CREATE ALIAS NOMBRES AS $$ java.sql.ResultSet nombres(java.sql.Connection connection) throws java.sql.SQLException { return connection.createStatement().executeQuery("select nombre from usuario"); } $$;
