@@ -15,7 +15,6 @@
 		<many-to-one
 			name="autor"
 			column="autorId"
-			class="ar.com.grupoesfera.piopio.modelo.Usuario"
-			not-null="true"/>
+			class="ar.com.grupoesfera.piopio.modelo.Usuario"/>
     </class>
 </hibernate-mapping>
