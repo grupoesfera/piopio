@@ -1,12 +1,30 @@
 package ar.com.grupoesfera.piopio.repo;
 
 import java.util.Date;
+import java.util.List;
 
 import ar.com.grupoesfera.main.App;
 import ar.com.grupoesfera.piopio.modelo.Pio;
 import ar.com.grupoesfera.piopio.modelo.Usuario;
 
 public class BaseDePios {
+    
+    @SuppressWarnings("unchecked")
+    public List<Pio> obtenerTodos() {
+        
+        return App.instancia().obtenerSesion().createQuery("from Pio p").getResultList();
+    }
+    
+    public Pio obtenerPor(Long id) {
+        return App.instancia().obtenerSesion().find(Pio.class, id);
+    }
+    
+    @SuppressWarnings("unchecked")
+    public List<Pio> obtenerPor(Usuario autor) {
+        return App.instancia().obtenerSesion().createQuery("from Pio p where p.autor = :autor")
+                                              .setParameter("autor", autor)
+                                              .getResultList();
+    }
 
     public synchronized Pio guardarCon(Usuario autor, String mensaje) {
         
