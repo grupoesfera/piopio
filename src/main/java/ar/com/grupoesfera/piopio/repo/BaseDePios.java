@@ -15,7 +15,7 @@ public class BaseDePios {
         if (autor != null && mensaje != null) {
             
             nuevoPio = Pio.nuevo().conId(proximoId()).conAutor(autor).conMensaje(mensaje).conFechaCreacion(new Date());
-            App.instancia().obtenerEntityManager().persist(nuevoPio);
+            App.instancia().obtenerSesion().persist(nuevoPio);
         }
         
         return nuevoPio;
@@ -25,7 +25,7 @@ public class BaseDePios {
         
         Long maxId = null;
         
-        maxId = (Long) App.instancia().obtenerEntityManager().createQuery("select max(p.id) from Pio p").getSingleResult();
+        maxId = (Long) App.instancia().obtenerSesion().createQuery("select max(p.id) from Pio p").getSingleResult();
         
         if (maxId != null) {
             

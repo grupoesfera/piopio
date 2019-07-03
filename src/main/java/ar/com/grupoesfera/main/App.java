@@ -3,10 +3,11 @@ package ar.com.grupoesfera.main;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.ws.rs.core.Application;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 import ar.com.grupoesfera.piopio.repo.BaseDePios;
 import ar.com.grupoesfera.piopio.repo.BaseDeUsuarios;
@@ -15,7 +16,9 @@ import ar.com.grupoesfera.piopio.rest.API;
 public class App extends Application {
 
     private static final App instancia = new App();
-    private static EntityManagerFactory proveedorPersistencia = Persistence.createEntityManagerFactory("piopio");
+    private static SessionFactory proveedorPersistencia = new Configuration()
+    														.addResource("Pio.hbm.xml")
+    														.buildSessionFactory();
     
     private BaseDeUsuarios usuarios = new BaseDeUsuarios();
     private BaseDePios pios = new BaseDePios();
@@ -37,9 +40,9 @@ public class App extends Application {
         return classes;
     }
 
-    public EntityManager obtenerEntityManager() {
+    public Session obtenerSesion() {
 
-        return proveedorPersistencia.createEntityManager();
+        return proveedorPersistencia.openSession();
     }
 
     public BaseDeUsuarios obtenerRepoUsuarios() {
