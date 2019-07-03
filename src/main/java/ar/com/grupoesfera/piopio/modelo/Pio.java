@@ -15,7 +15,7 @@ public class Pio {
     @Id private Long id;
     @Column private String mensaje;
     @Column private Date fechaCreacion;
-    @Transient private Usuario autor;
+    @Column private Usuario autor;
     @Transient private List<Comentario> comentarios;
 
     public Long getId() {
