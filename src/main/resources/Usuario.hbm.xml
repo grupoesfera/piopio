@@ -9,6 +9,12 @@
 			type="long">
 		</id>
 		
-		<property name="nombre" type="java.lang.String" column="mensaje" />
+		<bag name="seguidos" table="Seguidos">
+			<key column="seguidor"/>
+			<many-to-many column="seguido" class="ar.com.grupoesfera.piopio.modelo.Usuario"/>
+		</bag>
+		
+		<property name="nombre" type="java.lang.String" column="nombre" />
+		
     </class>
 </hibernate-mapping>
