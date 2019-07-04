@@ -98,9 +98,14 @@ public class Fixture {
         Favorito favoritoMarceloBrenda1 = Favorito.nuevo().conId(5L).conPio(pioBrenda).conFan(marcelo);
         Favorito favoritoIndiaBrenda1 = Favorito.nuevo().conId(6L).conPio(pioBrenda).conFan(india);
         Favorito favoritoBrendaIndia1 = Favorito.nuevo().conId(7L).conPio(pioIndia).conFan(brenda);
+        Favorito favoritoLeonMarcelo1 = Favorito.nuevo().conId(8L).conPio(primerPioMarcelo).conFan(leon);
+        Favorito favoritoLeonMarcelo2 = Favorito.nuevo().conId(9L).conPio(segundoPioMarcelo).conFan(leon);
+        Favorito favoritoLeonBrenda1 = Favorito.nuevo().conId(10L).conPio(pioBrenda).conFan(leon);
+        Favorito favoritoLeonIndia1 = Favorito.nuevo().conId(11L).conPio(pioIndia).conFan(leon);
         
         persistirSiEsPosible(session, favoritoBrenMarcelo1, favoritoBrenMarcelo2, favoritoIndiaMarcelo2, favoritoSebastianMarcelo2, 
-            favoritoMarceloBrenda1, favoritoIndiaBrenda1, favoritoBrendaIndia1);
+            favoritoMarceloBrenda1, favoritoIndiaBrenda1, favoritoBrendaIndia1, favoritoLeonMarcelo1, favoritoLeonMarcelo2,
+            favoritoLeonBrenda1, favoritoLeonIndia1);
         
         Comentario comentarioBrendaMarcelo = Comentario.nuevo().conId(1L).conMensaje("Bien por vos").conAutor(brenda);
         Comentario comentarioBrendaIndia = Comentario.nuevo().conId(2L).conMensaje("Muy bien").conAutor(brenda);

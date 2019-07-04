@@ -34,7 +34,7 @@ public class BaseDeFavoritosTest {
     public void deberiaObtenerTodosLosFavoritos() {
         
         List<Favorito> todosLosFavoritos = favoritos.obtenerTodos();
-        Assert.assertThat(todosLosFavoritos, Matchers.hasSize(7));
+        Assert.assertThat(todosLosFavoritos, Matchers.hasSize(11));
     }
     
     @Test
@@ -50,7 +50,7 @@ public class BaseDeFavoritosTest {
         
         Pio pio = Pio.nuevo().conId(2L);
         List<Usuario> fans = favoritos.obtenerFansDel(pio);
-        Assert.assertThat(fans, Matchers.hasSize(3));
+        Assert.assertThat(fans, Matchers.hasSize(4));
     }
     
     @Test
