@@ -17,5 +17,10 @@
 			column="autorId"
 			lazy="false"
 			class="ar.com.grupoesfera.piopio.modelo.Usuario"/>
+			
+		<bag name="comentarios" lazy="false">
+			<key column="pioId"/>
+			<one-to-many class="ar.com.grupoesfera.piopio.modelo.Comentario" />
+		</bag>	
     </class>
 </hibernate-mapping>

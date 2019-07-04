@@ -4,15 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Transient;
-
 public class Pio {
 
     private Long id;
     private String mensaje;
     private Date fechaCreacion;
     private Usuario autor;
-    @Transient private List<Comentario> comentarios;
+    private List<Comentario> comentarios;
 
     public Long getId() {
 
