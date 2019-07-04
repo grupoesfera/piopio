@@ -44,6 +44,15 @@ public class BaseDeFavoritos {
                 .createQuery("from Pio p where not exists ( from Favorito f where f.pio = p )")
                 .getResultList();
     }
+    
+    @SuppressWarnings("unchecked")
+    public List<Usuario> obtenerUsuariosFansDeTodosLosPios() {
+        
+        return App.instancia().obtenerSesion().createQuery("from Usuario u where u not in ( "
+                + "select fan from Pio pio, Usuario fan where pio.autor != fan and not exists ("
+                + " from Favorito f where f.fan = fan and f.pio = pio)"
+                + " )").getResultList();
+    }
 
     public synchronized Favorito guardarCon(Usuario fan, Pio pio) {
         
@@ -74,5 +83,5 @@ public class BaseDeFavoritos {
         }
         
         return maxId;
-    }
+    }    
 }

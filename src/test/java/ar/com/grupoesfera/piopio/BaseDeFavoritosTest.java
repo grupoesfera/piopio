@@ -2,7 +2,9 @@ package ar.com.grupoesfera.piopio;
 
 import java.util.List;
 
-import org.hamcrest.Matchers;
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.MatcherAssert.*;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -34,7 +36,7 @@ public class BaseDeFavoritosTest {
     public void deberiaObtenerTodosLosFavoritos() {
         
         List<Favorito> todosLosFavoritos = favoritos.obtenerTodos();
-        Assert.assertThat(todosLosFavoritos, Matchers.hasSize(11));
+        Assert.assertThat(todosLosFavoritos, hasSize(11));
     }
     
     @Test
@@ -42,7 +44,7 @@ public class BaseDeFavoritosTest {
         
         Usuario fan = Usuario.nuevo().conId(3L);
         List<Pio> piosFavoritosDelUsuario = favoritos.obtenerPiosFavoritosDe(fan);
-        Assert.assertThat(piosFavoritosDelUsuario, Matchers.hasSize(2));
+        Assert.assertThat(piosFavoritosDelUsuario, hasSize(2));
     }
     
     @Test
@@ -50,7 +52,7 @@ public class BaseDeFavoritosTest {
         
         Pio pio = Pio.nuevo().conId(2L);
         List<Usuario> fans = favoritos.obtenerFansDel(pio);
-        Assert.assertThat(fans, Matchers.hasSize(4));
+        Assert.assertThat(fans, hasSize(4));
     }
     
     @Test
@@ -58,7 +60,7 @@ public class BaseDeFavoritosTest {
         
         List<Pio> piosSinFans = favoritos.obtenerPiosSinFans();
         
-        Assert.assertThat(piosSinFans, Matchers.hasSize(1));
+        Assert.assertThat(piosSinFans, hasSize(1));
     }  
 
     @Test
@@ -73,9 +75,9 @@ public class BaseDeFavoritosTest {
         
         Favorito favoritoObtenido = favoritos.obtenerPor(ID_BUSQUEDA);
         
-        Assert.assertThat(favoritoObtenido, Matchers.equalTo(favoritoEsperado));
-        Assert.assertThat(favoritoObtenido.getFan(), Matchers.equalTo(fan));
-        Assert.assertThat(favoritoObtenido.getPio(), Matchers.equalTo(pioFavoriteado));
+        Assert.assertThat(favoritoObtenido, equalTo(favoritoEsperado));
+        Assert.assertThat(favoritoObtenido.getFan(), equalTo(fan));
+        Assert.assertThat(favoritoObtenido.getPio(), equalTo(pioFavoriteado));
     }
 
     @Test
@@ -85,10 +87,10 @@ public class BaseDeFavoritosTest {
         Usuario fan = Usuario.nuevo().conId(1L);        
         Favorito favoritoGuardado = favoritos.guardarCon(fan, pio);
         
-        Assert.assertThat(favoritoGuardado, Matchers.notNullValue());
-        Assert.assertThat(favoritoGuardado, Matchers.equalTo(favoritoGuardado));
-        Assert.assertThat(favoritoGuardado.getFan(), Matchers.equalTo(fan));
-        Assert.assertThat(favoritoGuardado.getPio(), Matchers.equalTo(pio));
+        Assert.assertThat(favoritoGuardado, notNullValue());
+        Assert.assertThat(favoritoGuardado, equalTo(favoritoGuardado));
+        Assert.assertThat(favoritoGuardado.getFan(), equalTo(fan));
+        Assert.assertThat(favoritoGuardado.getPio(), equalTo(pio));
     }
     
     @Test
@@ -97,7 +99,7 @@ public class BaseDeFavoritosTest {
         Pio pio = Pio.nuevo().conId(5L);
         Favorito favoritoGuardado = favoritos.guardarCon(null, pio);
         
-        Assert.assertThat(favoritoGuardado, Matchers.nullValue());
+        Assert.assertThat(favoritoGuardado, nullValue());
     }
     
     @Test
@@ -106,7 +108,7 @@ public class BaseDeFavoritosTest {
         Usuario fan = Usuario.nuevo().conId(1L);        
         Favorito favoritoGuardado = favoritos.guardarCon(fan, null);
         
-        Assert.assertThat(favoritoGuardado, Matchers.nullValue());
+        Assert.assertThat(favoritoGuardado, nullValue());
     }
     
     @Test
@@ -114,6 +116,14 @@ public class BaseDeFavoritosTest {
         
         Favorito favoritoGuardado = favoritos.guardarCon(null, null);
         
-        Assert.assertThat(favoritoGuardado, Matchers.nullValue());
+        Assert.assertThat(favoritoGuardado, nullValue());
+    }
+    
+    @Test
+    public void LeonDeberiaSerElUsuarioFanDeTodosLosPios() {
+        
+        List<Usuario> usuariosSuperFans = favoritos.obtenerUsuariosFansDeTodosLosPios();
+        Assert.assertThat(usuariosSuperFans, hasSize( 1 ));
+        Assert.assertThat(usuariosSuperFans, hasItem(hasProperty("nombre", is("Leon"))));
     }
 }
