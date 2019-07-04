@@ -3,6 +3,8 @@ package ar.com.grupoesfera.piopio.repo;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.criterion.Restrictions;
+
 import ar.com.grupoesfera.main.App;
 import ar.com.grupoesfera.piopio.modelo.Pio;
 import ar.com.grupoesfera.piopio.modelo.Usuario;
@@ -24,6 +26,14 @@ public class BaseDePios {
         return App.instancia().obtenerSesion().createQuery("from Pio p where p.autor = :autor")
                                               .setParameter("autor", autor)
                                               .getResultList();
+    }
+    
+    @SuppressWarnings({ "deprecation", "unchecked" })
+    public List<Pio> obtenerConTexto(String texto) {
+        
+        return App.instancia().obtenerSesion().createCriteria(Pio.class)
+            .add(Restrictions.like("mensaje", "%" + texto + "%"))
+            .list();
     }
 
     public synchronized Pio guardarCon(Usuario autor, String mensaje) {
