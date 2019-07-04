@@ -49,7 +49,7 @@ public class BaseDeFavoritos {
         
         Favorito favorito = null;
         
-        if (fan != null) {
+        if (fan != null && pio != null) {
             
             favorito = Favorito.nuevo().conId(proximoId()).conFan(fan).conPio(pio);
             App.instancia().obtenerSesion().save(favorito);

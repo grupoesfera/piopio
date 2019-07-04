@@ -99,4 +99,13 @@ public class BaseDeFavoritosTest {
         
         Assert.assertThat(favoritoGuardado, Matchers.nullValue());
     }
+    
+    @Test
+    public void deberiaDevolverNullSiElFavoritoAGuardarNoTienePio() {
+        
+        Usuario fan = Usuario.nuevo().conId(1L);        
+        Favorito favoritoGuardado = favoritos.guardarCon(fan, null);
+        
+        Assert.assertThat(favoritoGuardado, Matchers.nullValue());
+    }
 }
