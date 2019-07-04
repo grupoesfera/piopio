@@ -139,8 +139,8 @@ public class Fixture {
     private static void eliminarDatos(Session session) {
         
         eliminarSiEsPosible(session, Favorito.class);
-        eliminarSiEsPosible(session, Pio.class);
         eliminarSiEsPosible(session, Comentario.class);
+        eliminarSiEsPosible(session, Pio.class);
         eliminarSiEsPosible(session, Usuario.class);
     }
     
