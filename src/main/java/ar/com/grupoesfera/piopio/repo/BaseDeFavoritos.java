@@ -33,4 +33,11 @@ public class BaseDeFavoritos {
                 .setParameter("pio", pio)
                 .getResultList();
     }
+
+    @SuppressWarnings("unchecked")
+    public List<Pio> obtenerPiosSinFans() {
+        return App.instancia().obtenerSesion()
+                .createQuery("from Pio p where not exists ( from Favorito f where f.pio = p )")
+                .getResultList();
+    }
 }

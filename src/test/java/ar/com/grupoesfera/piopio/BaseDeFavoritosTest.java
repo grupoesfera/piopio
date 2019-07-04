@@ -52,5 +52,15 @@ public class BaseDeFavoritosTest {
         List<Usuario> fans = favoritos.obtenerFansDel(pio);
         Assert.assertThat(fans, Matchers.hasSize(3));
     }
+    
+    @Test
+    public void deberiaObtenerPiosSinFans() {
+        
+        List<Pio> piosSinFans = favoritos.obtenerPiosSinFans();
+        
+        Assert.assertThat(piosSinFans, Matchers.hasSize(1));
+    }
+    
+    
 
 }
