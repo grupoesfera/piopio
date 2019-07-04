@@ -44,5 +44,13 @@ public class BaseDeFavoritosTest {
         List<Pio> piosFavoritosDelUsuario = favoritos.obtenerPiosFavoritosDe(fan);
         Assert.assertThat(piosFavoritosDelUsuario, Matchers.hasSize(2));
     }
+    
+    @Test
+    public void deberiaObtenerLosUsuariosFanDeUnPio() {
+        
+        Pio pio = Pio.nuevo().conId(2L);
+        List<Usuario> fans = favoritos.obtenerFansDel(pio);
+        Assert.assertThat(fans, Matchers.hasSize(3));
+    }
 
 }

@@ -25,4 +25,12 @@ public class BaseDeFavoritos {
                 .setParameter("fan", fan)
                 .getResultList();
     }
+
+    @SuppressWarnings("unchecked")
+    public List<Usuario> obtenerFansDel(Pio pio) {
+        return App.instancia().obtenerSesion()
+                .createQuery("select f.fan from Favorito f where f.pio = :pio")
+                .setParameter("pio", pio)
+                .getResultList();
+    }
 }
