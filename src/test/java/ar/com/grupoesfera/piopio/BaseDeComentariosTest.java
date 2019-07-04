@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import ar.com.grupoesfera.main.Fixture;
 import ar.com.grupoesfera.piopio.modelo.Comentario;
+import ar.com.grupoesfera.piopio.modelo.Usuario;
 import ar.com.grupoesfera.piopio.repo.BaseDeComentarios;
 
 public class BaseDeComentariosTest {
@@ -35,5 +36,13 @@ public class BaseDeComentariosTest {
         List<Comentario> todosLosComentarios = comentarios.obtenerTodos();
         assertThat(todosLosComentarios, hasSize( 2 ));
     }
-
+    
+    @Test
+    public void deberiaObtenerLosComentariosRealizadosPorUnUsuario() {
+        
+        Usuario usuario = Usuario.nuevo().conId(2L);
+        List<Comentario> comentariosDelUsuario = comentarios.obtenerRealizadosPor(usuario);
+        
+        assertThat(comentariosDelUsuario, hasSize( 2 ));
+    }
 }
