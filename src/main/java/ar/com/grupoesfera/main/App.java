@@ -19,6 +19,7 @@ public class App extends Application {
     private static SessionFactory proveedorPersistencia = new Configuration()
     														.addResource("Pio.hbm.xml")
     														.addResource("Usuario.hbm.xml")
+    														.addResource("Favorito.hbm.xml")
     														.buildSessionFactory();
     
     private BaseDeUsuarios usuarios = new BaseDeUsuarios();
