@@ -3,7 +3,6 @@ package ar.com.grupoesfera.piopio;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
-import static org.hamcrest.MatcherAssert.*;
 
 import org.junit.After;
 import org.junit.Assert;
