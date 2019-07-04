@@ -90,4 +90,13 @@ public class BaseDeFavoritosTest {
         Assert.assertThat(favoritoGuardado.getFan(), Matchers.equalTo(fan));
         Assert.assertThat(favoritoGuardado.getPio(), Matchers.equalTo(pio));
     }
+    
+    @Test
+    public void deberiaDevolverNullSiElFavoritoAGuardarNoTieneFan() {
+        
+        Pio pio = Pio.nuevo().conId(5L);
+        Favorito favoritoGuardado = favoritos.guardarCon(null, pio);
+        
+        Assert.assertThat(favoritoGuardado, Matchers.nullValue());
+    }
 }

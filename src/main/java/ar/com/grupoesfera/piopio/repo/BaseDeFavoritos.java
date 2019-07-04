@@ -47,8 +47,14 @@ public class BaseDeFavoritos {
 
     public synchronized Favorito guardarCon(Usuario fan, Pio pio) {
         
-        Favorito favorito = Favorito.nuevo().conId(proximoId()).conFan(fan).conPio(pio);
-        App.instancia().obtenerSesion().save(favorito);
+        Favorito favorito = null;
+        
+        if (fan != null) {
+            
+            favorito = Favorito.nuevo().conId(proximoId()).conFan(fan).conPio(pio);
+            App.instancia().obtenerSesion().save(favorito);
+        }
+        
         return favorito;
     }
 
