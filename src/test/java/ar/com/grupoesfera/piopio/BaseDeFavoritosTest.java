@@ -10,6 +10,8 @@ import org.junit.Test;
 
 import ar.com.grupoesfera.main.Fixture;
 import ar.com.grupoesfera.piopio.modelo.Favorito;
+import ar.com.grupoesfera.piopio.modelo.Pio;
+import ar.com.grupoesfera.piopio.modelo.Usuario;
 import ar.com.grupoesfera.piopio.repo.BaseDeFavoritos;
 
 public class BaseDeFavoritosTest {
@@ -33,6 +35,14 @@ public class BaseDeFavoritosTest {
         
         List<Favorito> todosLosFavoritos = favoritos.obtenerTodos();
         Assert.assertThat(todosLosFavoritos, Matchers.hasSize(7));
+    }
+    
+    @Test
+    public void deberiaObtenerLosPiosFavoritadosPorUnUsuario() {
+        
+        Usuario fan = Usuario.nuevo().conId(3L);
+        List<Pio> piosFavoritosDelUsuario = favoritos.obtenerPiosFavoritosDe(fan);
+        Assert.assertThat(piosFavoritosDelUsuario, Matchers.hasSize(2));
     }
 
 }
