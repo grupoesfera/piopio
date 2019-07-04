@@ -21,6 +21,7 @@ public class App extends Application {
     														.addResource("Usuario.hbm.xml")
     														.addResource("Favorito.hbm.xml")
     														.buildSessionFactory();
+  
     
     private BaseDeUsuarios usuarios = new BaseDeUsuarios();
     private BaseDePios pios = new BaseDePios();

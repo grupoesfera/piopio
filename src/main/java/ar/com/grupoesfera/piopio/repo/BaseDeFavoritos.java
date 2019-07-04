@@ -18,7 +18,7 @@ public class BaseDeFavoritos {
     }
     
     public Favorito obtenerPor(Long id) {
-        return App.instancia().obtenerSesion().find(Favorito.class, id);
+        return App.instancia().obtenerSesion().get(Favorito.class, id);
     }
 
     @SuppressWarnings("unchecked")
@@ -43,5 +43,30 @@ public class BaseDeFavoritos {
         return App.instancia().obtenerSesion()
                 .createQuery("from Pio p where not exists ( from Favorito f where f.pio = p )")
                 .getResultList();
+    }
+
+    public synchronized Favorito guardarCon(Usuario fan, Pio pio) {
+        
+        Favorito favorito = Favorito.nuevo().conId(proximoId()).conFan(fan).conPio(pio);
+        App.instancia().obtenerSesion().save(favorito);
+        return favorito;
+    }
+
+    private Long proximoId() {
+        
+        Long maxId = null;
+        
+        maxId = (Long) App.instancia().obtenerSesion().createQuery("select max(f.id) from Favorito f").getSingleResult();
+        
+        if (maxId != null) {
+            
+            maxId += 1L;
+            
+        } else {
+            
+            maxId = 1L;
+        }
+        
+        return maxId;
     }
 }

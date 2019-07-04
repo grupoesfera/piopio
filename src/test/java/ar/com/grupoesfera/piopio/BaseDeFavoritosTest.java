@@ -3,11 +3,13 @@ package ar.com.grupoesfera.piopio;
 import java.util.List;
 
 import org.hamcrest.Matchers;
+import org.hibernate.Transaction;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import ar.com.grupoesfera.main.App;
 import ar.com.grupoesfera.main.Fixture;
 import ar.com.grupoesfera.piopio.modelo.Favorito;
 import ar.com.grupoesfera.piopio.modelo.Pio;
@@ -59,8 +61,8 @@ public class BaseDeFavoritosTest {
         List<Pio> piosSinFans = favoritos.obtenerPiosSinFans();
         
         Assert.assertThat(piosSinFans, Matchers.hasSize(1));
-    }
-    
+    }  
+
     @Test
     public void deberiaObtenerUnFavorito() {
         
@@ -77,7 +79,17 @@ public class BaseDeFavoritosTest {
         Assert.assertThat(favoritoObtenido.getFan(), Matchers.equalTo(fan));
         Assert.assertThat(favoritoObtenido.getPio(), Matchers.equalTo(pioFavoriteado));
     }
-    
-    
 
+    @Test
+    public void deberiaGuardarUnFavorito() {
+        
+        Pio pio = Pio.nuevo().conId(5L);
+        Usuario fan = Usuario.nuevo().conId(1L);        
+        Favorito favoritoGuardado = favoritos.guardarCon(fan, pio);
+        
+        Assert.assertThat(favoritoGuardado, Matchers.notNullValue());
+        Assert.assertThat(favoritoGuardado, Matchers.equalTo(favoritoGuardado));
+        Assert.assertThat(favoritoGuardado.getFan(), Matchers.equalTo(fan));
+        Assert.assertThat(favoritoGuardado.getPio(), Matchers.equalTo(pio));
+    }
 }
