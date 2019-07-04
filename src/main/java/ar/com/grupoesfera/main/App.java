@@ -20,6 +20,7 @@ public class App extends Application {
     														.addResource("Pio.hbm.xml")
     														.addResource("Usuario.hbm.xml")
     														.addResource("Favorito.hbm.xml")
+    														.addResource("Comentario.hbm.xml")
     														.buildSessionFactory();
   
     

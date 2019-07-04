@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="ar.com.grupoesfera.piopio.modelo.Comentario" table="Comentario">
+    	<id name="id" column="id" type="java.lang.Long"/>
+    	
+    	<many-to-one
+			name="autor"
+			column="autorId"
+			class="ar.com.grupoesfera.piopio.modelo.Usuario"/>
+			
+    </class>
+</hibernate-mapping>
