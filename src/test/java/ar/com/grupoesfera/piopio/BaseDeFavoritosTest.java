@@ -3,13 +3,11 @@ package ar.com.grupoesfera.piopio;
 import java.util.List;
 
 import org.hamcrest.Matchers;
-import org.hibernate.Transaction;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import ar.com.grupoesfera.main.App;
 import ar.com.grupoesfera.main.Fixture;
 import ar.com.grupoesfera.piopio.modelo.Favorito;
 import ar.com.grupoesfera.piopio.modelo.Pio;
