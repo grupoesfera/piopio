@@ -61,6 +61,23 @@ public class BaseDeFavoritosTest {
         Assert.assertThat(piosSinFans, Matchers.hasSize(1));
     }
     
+    @Test
+    public void deberiaObtenerUnFavorito() {
+        
+        final Long ID_BUSQUEDA = 1L;
+        Pio pioFavoriteado = Pio.nuevo().conId(1L);
+        Usuario fan = Usuario.nuevo().conId(2L);
+        Favorito favoritoEsperado = Favorito.nuevo().conId(ID_BUSQUEDA)
+                                                    .conPio(pioFavoriteado)
+                                                    .conFan(fan);
+        
+        Favorito favoritoObtenido = favoritos.obtenerPor(ID_BUSQUEDA);
+        
+        Assert.assertThat(favoritoObtenido, Matchers.equalTo(favoritoEsperado));
+        Assert.assertThat(favoritoObtenido.getFan(), Matchers.equalTo(fan));
+        Assert.assertThat(favoritoObtenido.getPio(), Matchers.equalTo(pioFavoriteado));
+    }
+    
     
 
 }

@@ -16,6 +16,10 @@ public class BaseDeFavoritos {
                               .createQuery("from Favorito f")
                               .getResultList();
     }
+    
+    public Favorito obtenerPor(Long id) {
+        return App.instancia().obtenerSesion().find(Favorito.class, id);
+    }
 
     @SuppressWarnings("unchecked")
     public List<Pio> obtenerPiosFavoritosDe(Usuario fan) {
