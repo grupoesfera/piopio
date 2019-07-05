@@ -1,5 +1,8 @@
 package ar.com.grupoesfera.piopio;
 
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.MatcherAssert.*;
+
 import java.util.List;
 
 import org.hamcrest.Matchers;
@@ -33,7 +36,7 @@ public class BaseDePiosTest {
     public void deberiaObtenerTodosLosPios() {
 
         List<Pio> todosLosPios = pios.obtenerTodos();
-        Assert.assertThat(todosLosPios, Matchers.hasSize(5));
+        Assert.assertThat(todosLosPios, hasSize(5));
     }
     
     @Test
@@ -41,7 +44,7 @@ public class BaseDePiosTest {
 
         final Long ID_BUSQUEDA = 1L;
         Pio pioEsperado = Pio.nuevo().conId(ID_BUSQUEDA).conMensaje("Hola, este es mi primer pio");
-        Assert.assertThat(pios.obtenerPor(ID_BUSQUEDA), Matchers.is(pioEsperado));
+        Assert.assertThat(pios.obtenerPor(ID_BUSQUEDA), is(pioEsperado));
     }
     
     @Test
@@ -50,10 +53,10 @@ public class BaseDePiosTest {
         Usuario autor = Usuario.nuevo().conNombre("Autor");
         Pio pioGuardado = pios.guardarCon(autor, "mensaje");
         
-        Assert.assertThat(pioGuardado, Matchers.notNullValue());
-        Assert.assertThat(pioGuardado.getId(), Matchers.notNullValue());
-        Assert.assertThat(pioGuardado.getMensaje(), Matchers.is("mensaje"));
-        Assert.assertThat(pioGuardado.getComentarios(), Matchers.nullValue());
+        Assert.assertThat(pioGuardado, notNullValue());
+        Assert.assertThat(pioGuardado.getId(), notNullValue());
+        Assert.assertThat(pioGuardado.getMensaje(), is("mensaje"));
+        Assert.assertThat(pioGuardado.getComentarios(), nullValue());
     }
     
     @Test
@@ -65,8 +68,8 @@ public class BaseDePiosTest {
         Usuario autor = Usuario.nuevo().conNombre("Autor");
         Pio pioGuardado = pios.guardarCon(autor, "mensaje");
         
-        Assert.assertThat(pioGuardado, Matchers.notNullValue());
-        Assert.assertThat(pioGuardado.getId(), Matchers.is(1L));
+        Assert.assertThat(pioGuardado, notNullValue());
+        Assert.assertThat(pioGuardado.getId(), is(1L));
     }
     
     @Test
@@ -75,7 +78,7 @@ public class BaseDePiosTest {
         Usuario autor = null;
         Pio pioGuardado = pios.guardarCon(autor, "mensaje");
         
-        Assert.assertThat(pioGuardado, Matchers.nullValue());
+        Assert.assertThat(pioGuardado, nullValue());
     }
     
     @Test
@@ -93,7 +96,7 @@ public class BaseDePiosTest {
         Usuario autor = null;
         Pio pioGuardado = pios.guardarCon(autor, null);
         
-        Assert.assertThat(pioGuardado, Matchers.nullValue());
+        Assert.assertThat(pioGuardado, nullValue());
     }
     
     @Test
@@ -102,7 +105,7 @@ public class BaseDePiosTest {
         Usuario usuarioSinPios = Usuario.nuevo().conId(5L);
         List<Pio> listaVacia = pios.obtenerPor(usuarioSinPios);
         
-        Assert.assertThat(listaVacia, Matchers.empty());
+        Assert.assertThat(listaVacia, empty());
     }
     
     @Test
@@ -111,19 +114,29 @@ public class BaseDePiosTest {
         Usuario usuarioConPios = Usuario.nuevo().conId(1L);
         List<Pio> piosDelUsuario = pios.obtenerPor(usuarioConPios);
         
-        Assert.assertThat(piosDelUsuario, Matchers.not(Matchers.empty()));
+        Assert.assertThat(piosDelUsuario, not(empty()));
     }
     
     @Test
     public void deberiaObtenerLossPioQueContenganEnElMensajeElTextoIndicado() {
         
         List<Pio> piosEncontrados = pios.obtenerConTexto("pio"); 
-        Assert.assertThat(piosEncontrados, Matchers.hasSize(2));
+        Assert.assertThat(piosEncontrados, hasSize(2));
     }
     
     @Test
     public void deberiaObtenerUnaListaVaciaDePiosSiNoSeCumpleElCriterio() {
         List<Pio> piosEncontrados = pios.obtenerConTexto("no hay pios con este texto");
-        Assert.assertThat(piosEncontrados, Matchers.empty());
+        Assert.assertThat(piosEncontrados, empty());
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Test
+    public void deberiaObtenerLosPiosQueFueronComentadosBuscandoPorNombreDeAutor() {
+        
+        List<Pio> piosComentados = pios.obtenerComentadosPor("Brenda");
+        assertThat(piosComentados, iterableWithSize( 2 ));
+        assertThat(piosComentados, hasItems(hasProperty("id", equalTo(1L)),
+                                            hasProperty("id", equalTo(4L))));
     }
 }

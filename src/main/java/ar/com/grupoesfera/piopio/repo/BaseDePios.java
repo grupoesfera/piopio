@@ -35,6 +35,15 @@ public class BaseDePios {
             .add(Restrictions.like("mensaje", "%" + texto + "%"))
             .list();
     }
+    
+    @SuppressWarnings({ "unchecked", "deprecation" })
+    public List<Pio> obtenerComentadosPor(String nombre) {
+        return App.instancia().obtenerSesion().createCriteria(Pio.class)
+                .createAlias("comentarios", "comentario")
+                .createAlias("comentario.autor", "autor")
+                .add(Restrictions.eq("autor.nombre", nombre))
+                .list();
+    }
 
     public synchronized Pio guardarCon(Usuario autor, String mensaje) {
         
@@ -65,5 +74,5 @@ public class BaseDePios {
         }
         
         return maxId;
-    }
+    }    
 }
