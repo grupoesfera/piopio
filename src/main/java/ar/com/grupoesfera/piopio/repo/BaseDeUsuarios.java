@@ -2,6 +2,8 @@ package ar.com.grupoesfera.piopio.repo;
 
 import java.util.List;
 
+import org.hibernate.criterion.Restrictions;
+
 import ar.com.grupoesfera.main.App;
 import ar.com.grupoesfera.piopio.modelo.Usuario;
 
@@ -33,6 +35,15 @@ public class BaseDeUsuarios {
     public List<String> obtenerNombres() {
         
         return App.instancia().obtenerSesion().createNativeQuery("call nombres()").getResultList();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Usuario> obtenerSeguidoresDePorNombre(Usuario seguido, String nombreDeSeguidor) {
+        return App.instancia().obtenerSesion().createCriteria(Usuario.class)
+                                              .add(Restrictions.eq("nombre", nombreDeSeguidor))
+                                              .createCriteria("seguidos")
+                                                  .add(Restrictions.eq("id", seguido.getId()))
+                                              .list();
     } 
 
 }
