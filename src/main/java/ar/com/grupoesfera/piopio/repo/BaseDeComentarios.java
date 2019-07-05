@@ -17,10 +17,9 @@ public class BaseDeComentarios {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Comentario> obtenerRealizadosPor(Usuario usuario) {
+    public List<Comentario> obtenerRealizadosPor(Usuario autor) {
         return App.instancia().obtenerSesion().createCriteria(Comentario.class)
-                .add(Restrictions.eq("autor", usuario))
+                .add(Restrictions.eq("autor", autor))
                 .list();
     }
-
 }
