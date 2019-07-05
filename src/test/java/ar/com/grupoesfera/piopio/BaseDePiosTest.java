@@ -115,14 +115,14 @@ public class BaseDePiosTest {
     }
     
     @Test
-    public void deberiaObtenerLosPioQueContenganEnElMensajeElTextoIndicado() {
+    public void deberiaObtenerLossPioQueContenganEnElMensajeElTextoIndicado() {
         
         List<Pio> piosEncontrados = pios.obtenerConTexto("pio"); 
         Assert.assertThat(piosEncontrados, Matchers.hasSize(2));
     }
     
     @Test
-    public void deberiaObtenerUnaListaVaciaDePiosSiNoSeCunpleElCriterio() {
+    public void deberiaObtenerUnaListaVaciaDePiosSiNoSeCumpleElCriterio() {
         List<Pio> piosEncontrados = pios.obtenerConTexto("no hay pios con este texto");
         Assert.assertThat(piosEncontrados, Matchers.empty());
     }
