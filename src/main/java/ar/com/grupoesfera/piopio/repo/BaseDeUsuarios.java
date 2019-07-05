@@ -2,6 +2,8 @@ package ar.com.grupoesfera.piopio.repo;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 import org.hibernate.criterion.Restrictions;
 
 import ar.com.grupoesfera.main.App;
@@ -41,6 +43,7 @@ public class BaseDeUsuarios {
     
     @SuppressWarnings("unchecked")
     public List<Usuario> obtenerSeguidoresDePorNombre(Usuario seguido, String nombreDeSeguidor) {
+        
         return App.instancia().obtenerSesion().createCriteria(Usuario.class)
                                               .add(Restrictions.eq("nombre", nombreDeSeguidor))
                                               .createCriteria("seguidos")

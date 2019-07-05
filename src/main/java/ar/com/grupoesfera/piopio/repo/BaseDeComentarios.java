@@ -2,24 +2,42 @@ package ar.com.grupoesfera.piopio.repo;
 
 import java.util.List;
 
-import org.hibernate.criterion.Restrictions;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
 
 import ar.com.grupoesfera.main.App;
 import ar.com.grupoesfera.piopio.modelo.Comentario;
+import ar.com.grupoesfera.piopio.modelo.Comentario_;
 import ar.com.grupoesfera.piopio.modelo.Usuario;
 
 public class BaseDeComentarios {
 
-    @SuppressWarnings("unchecked")
     public List<Comentario> obtenerTodos() {
         
-        return App.instancia().obtenerSesion().createCriteria(Comentario.class).list();
+        Session session = App.instancia().obtenerSesion();
+        
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Comentario> query = criteriaBuilder.createQuery(Comentario.class);
+        Root<Comentario> comentarios = query.from(Comentario.class);
+        query.select(comentarios);
+        
+        return session.createQuery(query).getResultList();
     }
 
-    @SuppressWarnings("unchecked")
     public List<Comentario> obtenerRealizadosPor(Usuario autor) {
-        return App.instancia().obtenerSesion().createCriteria(Comentario.class)
-                .add(Restrictions.eq("autor", autor))
-                .list();
+        
+        Session session = App.instancia().obtenerSesion();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Comentario> query = criteriaBuilder.createQuery(Comentario.class);
+        
+        Root<Comentario> comentarios = query.from(Comentario.class);
+        
+        query.select(comentarios)
+            .where(criteriaBuilder.equal(comentarios.get(Comentario_.autor), autor));
+        
+               return session.createQuery(query).getResultList();
     }
 }
