@@ -6,6 +6,8 @@ import org.hibernate.criterion.Restrictions;
 
 import ar.com.grupoesfera.main.App;
 import ar.com.grupoesfera.piopio.modelo.Usuario;
+import ar.com.grupoesfera.piopio.modelo.dto.SeguidoresPorUsuario;
+import ar.com.grupoesfera.piopio.modelo.transformer.SeguidoresPorUsuarioTransformer;
 
 public class BaseDeUsuarios {
 
@@ -36,7 +38,7 @@ public class BaseDeUsuarios {
         
         return App.instancia().obtenerSesion().createNativeQuery("call nombres()").getResultList();
     }
-
+    
     @SuppressWarnings("unchecked")
     public List<Usuario> obtenerSeguidoresDePorNombre(Usuario seguido, String nombreDeSeguidor) {
         return App.instancia().obtenerSesion().createCriteria(Usuario.class)
@@ -44,6 +46,17 @@ public class BaseDeUsuarios {
                                               .createCriteria("seguidos")
                                                   .add(Restrictions.eq("id", seguido.getId()))
                                               .list();
-    } 
-
+    }
+    
+    @SuppressWarnings("deprecation")
+    public List<SeguidoresPorUsuario> contarCantidadDeSeguidoresDeLosUsuarios() {
+        return App.instancia().obtenerSesion()
+                .createNativeQuery("SELECT u.nombre as nombre, count(s.seguidor) as cantidadDeSeguidores "
+                        + "FROM Usuario u "
+                        + "LEFT JOIN Seguidos s on u.id = s.seguido "
+                        + "GROUP BY u.nombre")
+                .setResultTransformer(new SeguidoresPorUsuarioTransformer())
+                .list();
+        
+    }
 }
