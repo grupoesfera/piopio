@@ -62,7 +62,7 @@ public class BaseDeUsuarios {
         return session.createQuery(query).getResultList();
     }
     
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings({ "deprecation", "unchecked" })
     public List<SeguidoresPorUsuario> contarCantidadDeSeguidoresDeLosUsuarios() {
         return App.instancia().obtenerSesion()
                 .createNativeQuery("SELECT u.nombre as nombre, count(s.seguidor) as cantidadDeSeguidores "
