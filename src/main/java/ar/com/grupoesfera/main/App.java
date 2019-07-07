@@ -5,9 +5,13 @@ import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import ar.com.grupoesfera.piopio.repo.BaseDePios;
 import ar.com.grupoesfera.piopio.repo.BaseDeUsuarios;
@@ -15,20 +19,29 @@ import ar.com.grupoesfera.piopio.rest.API;
 
 public class App extends Application {
 
+    private static final Log log = LogFactory.getLog(App.class);
     private static final App instancia = new App();
-    private static SessionFactory proveedorPersistencia = new Configuration()
-    														.addResource("Pio.hbm.xml")
-    														.addResource("Usuario.hbm.xml")
-    														.addResource("Favorito.hbm.xml")
-    														.addResource("Comentario.hbm.xml")
-    														.buildSessionFactory();
-  
+    private static SessionFactory proveedorPersistencia;
     
     private BaseDeUsuarios usuarios = new BaseDeUsuarios();
     private BaseDePios pios = new BaseDePios();
 
     private App() {
+        configurarHibernate();
+    }
 
+    private void configurarHibernate() {
+        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+                .configure() 
+                .build();
+        try {
+            proveedorPersistencia = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
+        }
+        catch (Exception e) {
+            StandardServiceRegistryBuilder.destroy( registry );
+            log.error("No se pudo configurar hibernate. Mensaje: " + e.getMessage());
+            log.debug("No se pudo configurar hibernate. Mensaje: " + e.getMessage() + " Causa: " + e);
+        }
     }
 
     public static App instancia() {
