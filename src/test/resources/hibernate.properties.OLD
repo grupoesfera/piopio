@@ -1,6 +1,0 @@
-hibernate.connection.driver_class = org.h2.Driver
-hibernate.connection.url = jdbc:h2:mem:piopio;DB_CLOSE_DELAY=-1;MVCC=TRUE
-hibernate.connection.username = sa
-hibernate.connection.password = 
-hibernate.dialect = org.hibernate.dialect.H2Dialect
-hibernate.hbm2ddl.auto = create-drop
