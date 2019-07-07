@@ -3,11 +3,20 @@ package ar.com.grupoesfera.piopio.repo;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.criterion.Restrictions;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
 
 import ar.com.grupoesfera.main.App;
+import ar.com.grupoesfera.piopio.modelo.Comentario;
+import ar.com.grupoesfera.piopio.modelo.Comentario_;
 import ar.com.grupoesfera.piopio.modelo.Pio;
+import ar.com.grupoesfera.piopio.modelo.Pio_;
 import ar.com.grupoesfera.piopio.modelo.Usuario;
+import ar.com.grupoesfera.piopio.modelo.Usuario_;
 
 public class BaseDePios {
     
@@ -28,21 +37,33 @@ public class BaseDePios {
                                               .getResultList();
     }
     
-    @SuppressWarnings({ "deprecation", "unchecked" })
     public List<Pio> obtenerConTexto(String texto) {
         
-        return App.instancia().obtenerSesion().createCriteria(Pio.class)
-            .add(Restrictions.like("mensaje", "%" + texto + "%"))
-            .list();
+        Session session = App.instancia().obtenerSesion();
+        
+        CriteriaBuilder criteriaBuilder = App.instancia().obtenerSesion().getCriteriaBuilder();
+        CriteriaQuery<Pio> query = criteriaBuilder.createQuery(Pio.class);
+        Root<Pio> pios = query.from(Pio.class);
+        
+        query.select(pios)
+            .where(criteriaBuilder.like(pios.get(Pio_.mensaje), "%" + texto + "%"));
+        
+        return session.createQuery(query).getResultList();
     }
     
-    @SuppressWarnings({ "unchecked", "deprecation" })
     public List<Pio> obtenerComentadosPor(String nombre) {
-        return App.instancia().obtenerSesion().createCriteria(Pio.class)
-                .createAlias("comentarios", "comentario")
-                .createAlias("comentario.autor", "autor")
-                .add(Restrictions.eq("autor.nombre", nombre))
-                .list();
+        
+        Session session = App.instancia().obtenerSesion();
+        
+        CriteriaBuilder criteriaBuilder = App.instancia().obtenerSesion().getCriteriaBuilder();
+        CriteriaQuery<Pio> query = criteriaBuilder.createQuery(Pio.class);
+        Root<Pio> pios = query.from(Pio.class);
+        Join<Comentario, Usuario> autor = pios.join(Pio_.comentarios).join(Comentario_.autor);
+        
+        query.select(pios)
+            .where(criteriaBuilder.equal(autor.get(Usuario_.nombre), nombre));
+        
+        return session.createQuery(query).getResultList();
     }
 
     public synchronized Pio guardarCon(Usuario autor, String mensaje) {
