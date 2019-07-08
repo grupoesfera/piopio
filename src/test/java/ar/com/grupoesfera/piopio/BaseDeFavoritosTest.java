@@ -125,4 +125,13 @@ public class BaseDeFavoritosTest {
         Assert.assertThat(usuariosSuperFans, hasSize( 1 ));
         Assert.assertThat(usuariosSuperFans, hasItem(hasProperty("nombre", is("Leon"))));
     }
+    
+    @Test
+    public void deberiaContarElNumeroDeFavoritosDeUnPio() {
+        
+        Pio pio = Pio.nuevo().conId(2L);
+        Long numeroDeFavoritos = favoritos.contarNumeroDeFavoritosDe(pio);
+        
+        Assert.assertThat(numeroDeFavoritos, equalTo( 4L ));
+    }
 }

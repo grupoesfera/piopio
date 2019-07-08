@@ -1,6 +1,14 @@
 package ar.com.grupoesfera.piopio.repo;
 
+import java.math.BigInteger;
 import java.util.List;
+
+import javax.persistence.ParameterMode;
+
+import org.hibernate.Session;
+import org.hibernate.procedure.ProcedureCall;
+import org.hibernate.result.Output;
+import org.hibernate.result.ResultSetOutput;
 
 import ar.com.grupoesfera.main.App;
 import ar.com.grupoesfera.piopio.modelo.Favorito;
@@ -53,6 +61,19 @@ public class BaseDeFavoritos {
                 + " from Favorito f where f.fan = fan and f.pio = pio)"
                 + " )").getResultList();
     }
+    
+    public Long contarNumeroDeFavoritosDe(Pio pio) {
+        
+        Session sesion = App.instancia().obtenerSesion();
+        
+        ProcedureCall storeProcedure = sesion.createStoredProcedureCall("CONTAR_NUMERO_DE_FAVORITOS_DE_UN_PIO");
+        storeProcedure.registerParameter(1, Long.class, ParameterMode.IN).bindValue(pio.getId());
+        Output output = storeProcedure.getOutputs().getCurrent();
+        
+        Object resultado = ((ResultSetOutput)output).getSingleResult();
+        
+        return BigInteger.class.cast(resultado).longValue();
+    }
 
     public synchronized Favorito guardarCon(Usuario fan, Pio pio) {
         
@@ -83,5 +104,5 @@ public class BaseDeFavoritos {
         }
         
         return maxId;
-    }    
+    }
 }
