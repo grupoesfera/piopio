@@ -15,5 +15,6 @@
         <mapping resource="mappings/Pio.hbm.xml" />
         <mapping resource="mappings/Comentario.hbm.xml" />
         <mapping resource="mappings/Favorito.hbm.xml" />
+        <mapping resource="mappings/consultas.xml" />
     </session-factory>
 </hibernate-configuration>
