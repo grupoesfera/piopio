@@ -40,4 +40,12 @@ public class BaseDeComentarios {
         
                return session.createQuery(query).getResultList();
     }
+
+    public long contarComentariosRealizadosPor(Usuario usuario) {
+        
+        return App.instancia().obtenerSesion()
+                    .createNamedQuery("contarComentariosRealizadosPor", Long.class)
+                    .setParameter("autor", usuario)
+                    .getSingleResult();
+    }
 }
