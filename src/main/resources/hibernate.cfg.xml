@@ -11,10 +11,6 @@
         <property name="show_sql">false</property>
         <property name="hbm2ddl.auto">create-drop</property>
         
-        <mapping resource="mappings/Usuario.hbm.xml" />
         <mapping resource="mappings/Pio.hbm.xml" />
-        <mapping resource="mappings/Comentario.hbm.xml" />
-        <mapping resource="mappings/Favorito.hbm.xml" />
-        <mapping resource="mappings/consultas.xml" />
     </session-factory>
 </hibernate-configuration>
