@@ -1,79 +1,11 @@
 package ar.com.grupoesfera.piopio.repo;
 
-import java.math.BigInteger;
-import java.util.List;
-
-import javax.persistence.ParameterMode;
-
-import org.hibernate.Session;
-import org.hibernate.procedure.ProcedureCall;
-import org.hibernate.result.Output;
-import org.hibernate.result.ResultSetOutput;
-
 import ar.com.grupoesfera.main.App;
 import ar.com.grupoesfera.piopio.modelo.Favorito;
 import ar.com.grupoesfera.piopio.modelo.Pio;
 import ar.com.grupoesfera.piopio.modelo.Usuario;
 
 public class BaseDeFavoritos {
-
-    @SuppressWarnings("unchecked")
-    public List<Favorito> obtenerTodos() {
-        
-        return App.instancia().obtenerSesion()
-                              .createQuery("from Favorito f")
-                              .getResultList();
-    }
-    
-    public Favorito obtenerPor(Long id) {
-        return App.instancia().obtenerSesion().get(Favorito.class, id);
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<Pio> obtenerPiosFavoritosDe(Usuario fan) {
-
-        return App.instancia().obtenerSesion()
-                .createQuery("select f.pio from Favorito f where f.fan = :fan")
-                .setParameter("fan", fan)
-                .getResultList();
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<Usuario> obtenerFansDel(Pio pio) {
-        return App.instancia().obtenerSesion()
-                .createQuery("select f.fan from Favorito f where f.pio = :pio")
-                .setParameter("pio", pio)
-                .getResultList();
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<Pio> obtenerPiosSinFans() {
-        return App.instancia().obtenerSesion()
-                .createQuery("from Pio p where not exists ( from Favorito f where f.pio = p )")
-                .getResultList();
-    }
-    
-    @SuppressWarnings("unchecked")
-    public List<Usuario> obtenerUsuariosFansDeTodosLosPios() {
-        
-        return App.instancia().obtenerSesion().createQuery("from Usuario u where u not in ( "
-                + "select fan from Pio pio, Usuario fan where pio.autor != fan and not exists ("
-                + " from Favorito f where f.fan = fan and f.pio = pio)"
-                + " )").getResultList();
-    }
-    
-    public Long contarNumeroDeFavoritosDe(Pio pio) {
-        
-        Session sesion = App.instancia().obtenerSesion();
-        
-        ProcedureCall storeProcedure = sesion.createStoredProcedureCall("CONTAR_NUMERO_DE_FAVORITOS_DE_UN_PIO");
-        storeProcedure.registerParameter(1, Long.class, ParameterMode.IN).bindValue(pio.getId());
-        Output output = storeProcedure.getOutputs().getCurrent();
-        
-        Object resultado = ((ResultSetOutput)output).getSingleResult();
-        
-        return BigInteger.class.cast(resultado).longValue();
-    }
 
     public synchronized Favorito guardarCon(Usuario fan, Pio pio) {
         
