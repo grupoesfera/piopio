@@ -10,18 +10,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import ar.com.grupoesfera.main.App;
-import ar.com.grupoesfera.piopio.modelo.Pio;
-import ar.com.grupoesfera.piopio.modelo.Usuario;
-import ar.com.grupoesfera.piopio.repo.BaseDePios;
-import ar.com.grupoesfera.piopio.repo.BaseDeUsuarios;
-
 @Path("/")
 public class API {
     
-    private BaseDeUsuarios usuarios = App.instancia().obtenerRepoUsuarios();
-    private BaseDePios pios = App.instancia().obtenerRepoPios();
-
     @GET
     @Path("/hola")
     @Produces(MediaType.TEXT_PLAIN)
@@ -35,7 +26,7 @@ public class API {
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerPios() {
         
-        return Response.ok(pios.obtenerTodos()).build();
+        return Response.status(Status.NOT_IMPLEMENTED).build();
     }
 
     @GET
@@ -43,9 +34,7 @@ public class API {
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerPio(@PathParam("id") Long id) {
         
-        Pio pio = pios.obtenerPor(id);
-        
-        return pio != null ? Response.ok(pio).build() : Response.status(Status.NOT_FOUND).build();
+        return Response.status(Status.NOT_IMPLEMENTED).build();
     }
 
     @POST
@@ -53,24 +42,7 @@ public class API {
     @Produces(MediaType.APPLICATION_JSON)
     public Response publicarPio(@QueryParam("mensaje") String mensaje, @QueryParam("usuario") Long id) {
         
-        Response respuesta = Response.status(Status.BAD_REQUEST).build();
-        Pio nuevoPio = null;
-        
-        Usuario autor = usuarios.obtenerPor(id);
-        
-        if (autor != null) {
-            
-            nuevoPio = pios.guardarCon(autor, mensaje);
-            
-            respuesta = nuevoPio != null ? Response.status(Status.CREATED).entity(nuevoPio).build() : Response.fromResponse(respuesta).entity("Pio no creado. El pio no tiene mensaje.").build();
-        
-        } else {
-            
-            respuesta = Response.fromResponse(respuesta)
-                .entity("Pio no creado. El usuario '" + id + "' no existe.").build();
-        }
-
-        return respuesta;
+        return Response.status(Status.NOT_IMPLEMENTED).build();
     }
 
     @GET
@@ -78,7 +50,7 @@ public class API {
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerUsuarios() {
         
-        return Response.ok(usuarios.obtenerTodos()).build();
+        return Response.status(Status.NOT_IMPLEMENTED).build();
     }
 
     @GET
@@ -86,7 +58,7 @@ public class API {
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerUsuariosAislados() {
 
-        return Response.ok(usuarios.obtenerAislados()).build();
+        return Response.status(Status.NOT_IMPLEMENTED).build();
     }
 
     @GET
@@ -94,9 +66,7 @@ public class API {
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerSeguidores(@PathParam("id") Long id) {
         
-        Usuario usuario = usuarios.obtenerPor(id);
-        
-        return usuario != null ? Response.ok(usuarios.obtenerSeguidoresDe(usuario)).build() : Response.status(Status.NOT_FOUND).build();
+        return Response.status(Status.NOT_IMPLEMENTED).build();
     }
 
     @GET
@@ -104,9 +74,7 @@ public class API {
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerSeguidos(@PathParam("id") Long id) {
         
-        Usuario usuario = usuarios.obtenerPor(id);
-        
-        return usuario != null ? Response.ok(usuario.getSeguidos()).build() : Response.status(Status.NOT_FOUND).build();
+        return Response.status(Status.NOT_IMPLEMENTED).build();
     }
 
     @GET
@@ -114,8 +82,6 @@ public class API {
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerPiosDeUsuario(@PathParam("id") Long id) {
         
-        Usuario autor = usuarios.obtenerPor(id);
-        
-        return autor != null ? Response.ok(pios.obtenerPor(autor)).build() : Response.status(Status.NOT_FOUND).build();
+        return Response.status(Status.NOT_IMPLEMENTED).build();
     }
 }
