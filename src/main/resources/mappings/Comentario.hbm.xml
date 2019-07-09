@@ -3,15 +3,9 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="ar.com.grupoesfera.piopio.modelo.Comentario" table="Comentario">
+    	
     	<id name="id" column="id" type="java.lang.Long"/>
     	
-    	<property name="mensaje" column="mensaje"/>
-    	
-    	<many-to-one
-			name="autor"
-			column="autorId"
-			class="ar.com.grupoesfera.piopio.modelo.Usuario"
-			lazy="false"/>
 			
     </class>
 </hibernate-mapping>

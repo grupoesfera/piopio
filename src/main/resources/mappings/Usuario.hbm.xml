@@ -4,17 +4,7 @@
 <hibernate-mapping>
     <class name="ar.com.grupoesfera.piopio.modelo.Usuario" table="Usuario">
     
-    	<id name="id"
-			column="id"
-			type="long">
-		</id>
-		
-		<bag name="seguidos" table="Seguidos">
-			<key column="seguidor"/>
-			<many-to-many column="seguido" class="ar.com.grupoesfera.piopio.modelo.Usuario"/>
-		</bag>
-		
-		<property name="nombre" type="java.lang.String" column="nombre" />
+    	<id name="id" column="id" type="long"/>
 		
     </class>
 </hibernate-mapping>

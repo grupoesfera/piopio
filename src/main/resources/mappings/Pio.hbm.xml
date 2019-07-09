@@ -4,23 +4,10 @@
 <hibernate-mapping>
     <class name="ar.com.grupoesfera.piopio.modelo.Pio" table="Pio">
     
-    	<id name="id"
-			column="id"
-			type="long">
-		</id>
+    	<id name="id" column="id" type="long"/>
 		
 		<property name="mensaje" type="java.lang.String" column="mensaje" />
 		<property name="fechaCreacion" type="java.util.Date" column="fechaCreacion" />
 		
-		<many-to-one
-			name="autor"
-			column="autorId"
-			lazy="false"
-			class="ar.com.grupoesfera.piopio.modelo.Usuario"/>
-			
-		<bag name="comentarios" lazy="false">
-			<key column="pioId"/>
-			<one-to-many class="ar.com.grupoesfera.piopio.modelo.Comentario" />
-		</bag>	
     </class>
 </hibernate-mapping>
