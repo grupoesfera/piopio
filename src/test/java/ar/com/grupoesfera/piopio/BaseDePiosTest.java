@@ -1,20 +1,11 @@
 package ar.com.grupoesfera.piopio;
 
-import static org.hamcrest.Matchers.*;
-import static org.hamcrest.MatcherAssert.*;
-
-import java.util.List;
-
-import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import ar.com.grupoesfera.main.Fixture;
-import ar.com.grupoesfera.piopio.modelo.Pio;
-import ar.com.grupoesfera.piopio.modelo.Usuario;
-import ar.com.grupoesfera.piopio.repo.BaseDePios;
 
 public class BaseDePiosTest {
 	
