@@ -11,6 +11,5 @@
         <property name="show_sql">false</property>
         <property name="hbm2ddl.auto">create-drop</property>
         
-        <mapping resource="mappings/Pio.hbm.xml" />
     </session-factory>
 </hibernate-configuration>
