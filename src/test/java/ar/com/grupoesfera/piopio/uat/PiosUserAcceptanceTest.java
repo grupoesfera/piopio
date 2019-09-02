@@ -12,13 +12,6 @@ import com.jayway.jsonpath.matchers.JsonPathMatchers;
 public class PiosUserAcceptanceTest extends UserAcceptanceTest {
 
     @Test
-    public void deberiaDarNotImplementedAlLlamarAPiosSinParametros() throws Exception {
-
-        RespuestaServicio respuesta = invocarServicio("pios");
-        Assert.assertThat(respuesta.getCodigo(), Matchers.is(HttpStatus.SC_NOT_IMPLEMENTED));
-    }
-
-    @Test
     public void deberiaDarPioJSONAlLlamarAPiosConIdValidoExistente() throws Exception {
 
         RespuestaServicio respuesta = invocarServicio("pios/1");

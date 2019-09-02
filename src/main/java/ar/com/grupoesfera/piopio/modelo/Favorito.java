@@ -1,10 +1,16 @@
 package ar.com.grupoesfera.piopio.modelo;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Favorito {
 
-    private Long id;
-    private Pio pio;
-    private Usuario fan;
+    @Id private Long id;
+    @ManyToOne @JoinColumn(name="pioId") private Pio pio;
+    @ManyToOne @JoinColumn(name="fanId") private Usuario fan;
 
     public Long getId() {
 
