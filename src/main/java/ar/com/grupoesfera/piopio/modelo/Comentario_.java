@@ -7,7 +7,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 public class Comentario_ {
     
     public static volatile SingularAttribute<Comentario, Long> id;
-    public static volatile SingularAttribute<Comentario, String> texto;
+    public static volatile SingularAttribute<Comentario, String> mensaje;
     public static volatile SingularAttribute<Comentario, Usuario> autor;
 
 }
