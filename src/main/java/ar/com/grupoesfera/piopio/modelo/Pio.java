@@ -2,12 +2,13 @@ package ar.com.grupoesfera.piopio.modelo;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -18,7 +19,14 @@ public class Pio {
     @Column private String mensaje;
     @Column private Date fechaCreacion;
     @ManyToOne private Usuario autor;
-    @OneToMany @JoinColumn(name="pioId") private List<Comentario> comentarios;
+    
+    
+    @OneToMany(mappedBy = "pio", cascade = CascadeType.ALL)
+    private List<Comentario> comentarios;
+    
+    public Pio() {
+        this.comentarios = new LinkedList<>();
+    }
 
     public Long getId() {
 
@@ -137,5 +145,15 @@ public class Pio {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    public void comentar(Comentario comentario) {
+        this.comentarios.add(comentario);
+        comentario.setPio(this);
+    }
+
+    public void eliminarComentario(Comentario comentario) {
+        this.comentarios.remove(comentario);
+        comentario.setPio(null);
     }
 }

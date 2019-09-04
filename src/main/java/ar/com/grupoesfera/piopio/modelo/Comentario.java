@@ -14,6 +14,8 @@ public class Comentario {
     @Column private String mensaje;
     @ManyToOne @JoinColumn(name="autorId") private Usuario autor;
     
+    @ManyToOne private Pio pio;
+    
     public Long getId() {
         
         return id;
@@ -65,5 +67,9 @@ public class Comentario {
         
         setAutor(autor);
         return this;
+    }
+
+    public void setPio(Pio pio) {
+        this.pio = pio;
     }
 }
