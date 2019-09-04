@@ -35,7 +35,7 @@ public class API {
     @Produces(MediaType.APPLICATION_JSON)
     public Response obtenerPios() {
         
-        return Response.status(Status.NOT_IMPLEMENTED).build();
+        return Response.ok(pios.obtenerTodos()).build();
     }
 
     @GET

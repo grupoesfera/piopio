@@ -15,8 +15,11 @@ public class PiosUserAcceptanceTest extends UserAcceptanceTest {
     public void deberiaDarNotImplementedAlLlamarAPiosSinParametros() throws Exception {
 
         RespuestaServicio respuesta = invocarServicio("pios");
-        Assert.assertThat(respuesta.getCodigo(), Matchers.is(HttpStatus.SC_NOT_IMPLEMENTED));
-    }
+        Assert.assertThat(respuesta.getCodigo(), Matchers.is(HttpStatus.SC_OK));
+        Assert.assertThat(respuesta.getTexto(), JsonPathMatchers.isJson());
+        Assert.assertThat(respuesta.getTexto(), JsonPathMatchers.hasJsonPath("$[*].id", Matchers.hasItems(1, 2, 3, 4, 5)));
+        Assert.assertThat(respuesta.getTexto(), JsonPathMatchers.hasJsonPath("$[*].mensaje", 
+            Matchers.hasItems("Hola, este es mi primer pio", "Hola, este es mi segundo pio", "Aguante India", "Guau!", "Miau")));    }
 
     @Test
     public void deberiaDarPioJSONAlLlamarAPiosConIdValidoExistente() throws Exception {
