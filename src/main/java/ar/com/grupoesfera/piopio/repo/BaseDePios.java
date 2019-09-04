@@ -3,6 +3,9 @@ package ar.com.grupoesfera.piopio.repo;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+
 import ar.com.grupoesfera.main.App;
 import ar.com.grupoesfera.piopio.modelo.Pio;
 import ar.com.grupoesfera.piopio.modelo.Usuario;
@@ -24,10 +27,29 @@ public class BaseDePios {
         
         Pio nuevoPio = null;
         
+        EntityManager entities = App.instancia().obtenerEntityManager();
+        
         if (autor != null && mensaje != null) {
             
             nuevoPio = Pio.nuevo().conId(proximoId()).conAutor(autor).conMensaje(mensaje).conFechaCreacion(new Date());
-            App.instancia().obtenerEntityManager().persist(nuevoPio);
+            
+            EntityTransaction tx = entities.getTransaction();
+            
+            try {
+				
+            	tx.begin();
+            	
+            	entities.persist(nuevoPio);
+            	
+            	tx.commit();
+
+            } catch (Exception e) {
+				
+            	if (tx != null) {
+            		
+            		tx.rollback();
+            	}
+			}
         }
         
         return nuevoPio;
