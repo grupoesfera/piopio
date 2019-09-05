@@ -9,6 +9,7 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import ar.com.grupoesfera.main.App;
 import ar.com.grupoesfera.piopio.modelo.Comentario;
@@ -70,10 +71,29 @@ public class BaseDePios {
         
         Pio nuevoPio = null;
         
+        Session session = App.instancia().obtenerSesion();
+        
         if (autor != null && mensaje != null) {
             
             nuevoPio = Pio.nuevo().conId(proximoId()).conAutor(autor).conMensaje(mensaje).conFechaCreacion(new Date());
-            App.instancia().obtenerSesion().persist(nuevoPio);
+            
+            Transaction tx = session.getTransaction();
+            
+            try {
+            	
+            	tx.begin();
+            	
+            	session.persist(nuevoPio);
+            	
+            	tx.commit();
+            	
+            } catch (Exception e) {
+            	
+            	if (tx != null) {
+            		
+            		tx.rollback();
+            	}
+            }
         }
         
         return nuevoPio;
