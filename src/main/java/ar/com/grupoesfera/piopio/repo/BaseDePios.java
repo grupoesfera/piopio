@@ -9,6 +9,7 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import ar.com.grupoesfera.main.App;
 import ar.com.grupoesfera.piopio.modelo.Comentario;
@@ -79,6 +80,21 @@ public class BaseDePios {
         return nuevoPio;
     }
     
+    public void actualizar(Pio pio) {
+
+        Session session = App.instancia().obtenerSesion();
+
+        Transaction transaccion = session.beginTransaction();
+        
+        session.createQuery("update Pio set mensaje = :mensaje where id = :id")
+                .setParameter("mensaje", pio.getMensaje())
+                .setParameter("id", pio.getId())
+                .executeUpdate();
+        
+        transaccion.commit();
+    }
+    
+    
     private Long proximoId() {
         
         Long maxId = null;
@@ -95,5 +111,6 @@ public class BaseDePios {
         }
         
         return maxId;
-    }    
+    }
+
 }

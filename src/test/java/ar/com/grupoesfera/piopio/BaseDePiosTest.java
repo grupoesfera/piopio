@@ -139,4 +139,18 @@ public class BaseDePiosTest {
         assertThat(piosComentados, hasItems(hasProperty("id", equalTo(1L)),
                                             hasProperty("id", equalTo(4L))));
     }
+    
+    @Test
+    public void actualizarMensajeDeUnPio() {
+        
+        Pio pio = pios.obtenerPor(1L);
+        pio.setMensaje("Mensaje actualizado");
+        
+        pios.actualizar(pio);
+        
+        Pio pioActualizado = pios.obtenerPor(1L);
+        assertThat(pioActualizado.getMensaje(), is( equalTo( "Mensaje actualizado" )));
+        
+    }
+    
 }
