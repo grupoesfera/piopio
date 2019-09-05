@@ -150,7 +150,16 @@ public class BaseDePiosTest {
         
         Pio pioActualizado = pios.obtenerPor(1L);
         assertThat(pioActualizado.getMensaje(), is( equalTo( "Mensaje actualizado" )));
+    }
+    
+    @Test
+    public void eliminarPorId() {
         
+        pios.eliminarPor(1L);
+        
+        Pio pio = pios.obtenerPor(1L);
+        
+        assertThat(pio, is (nullValue()));
     }
     
 }

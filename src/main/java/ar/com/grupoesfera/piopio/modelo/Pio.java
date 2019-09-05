@@ -117,6 +117,7 @@ public class Pio {
         }
         
         getComentarios().add(comentario);
+        comentario.setPio(this);
         return this;
     }
 

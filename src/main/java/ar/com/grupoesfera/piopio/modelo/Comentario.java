@@ -9,12 +9,12 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Comentario {
 
-    
     @Id private Long id;
     @Column private String mensaje;
     @ManyToOne @JoinColumn(name="autorId") private Usuario autor;
     
-    @ManyToOne private Pio pio;
+    @ManyToOne
+    private Pio pio;
     
     public Long getId() {
         

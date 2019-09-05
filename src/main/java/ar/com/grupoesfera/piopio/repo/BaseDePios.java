@@ -59,7 +59,8 @@ public class BaseDePios {
         CriteriaBuilder criteriaBuilder = App.instancia().obtenerSesion().getCriteriaBuilder();
         CriteriaQuery<Pio> query = criteriaBuilder.createQuery(Pio.class);
         Root<Pio> pios = query.from(Pio.class);
-        Join<Comentario, Usuario> autor = pios.join(Pio_.comentarios).join(Comentario_.autor);
+        Join<Comentario, Usuario> autor = pios.join(Pio_.comentarios)
+                                              .join(Comentario_.autor);
         
         query.select(pios)
             .where(criteriaBuilder.equal(autor.get(Usuario_.nombre), nombre));
@@ -92,8 +93,31 @@ public class BaseDePios {
                 .executeUpdate();
         
         transaccion.commit();
+        session.close();
     }
     
+    public void eliminarPor(Long id) {
+
+        Session session = App.instancia().obtenerSesion();
+        Transaction transaccion = session.beginTransaction();
+
+        try {
+            
+            session.createQuery("delete Favorito where pio.id = :id").setParameter("id", id).executeUpdate();
+            session.createQuery("delete Pio where id = :id").setParameter("id", id).executeUpdate();
+
+            transaccion.commit();
+
+        } catch (Exception e) {
+
+            transaccion.rollback();
+
+        } finally {
+
+            session.close();
+        }
+
+    }
     
     private Long proximoId() {
         
@@ -112,5 +136,6 @@ public class BaseDePios {
         
         return maxId;
     }
+
 
 }
