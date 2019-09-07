@@ -15,6 +15,11 @@
         <mapping class="ar.com.grupoesfera.piopio.modelo.Pio" />
         <mapping class="ar.com.grupoesfera.piopio.modelo.Comentario" />
         <mapping class="ar.com.grupoesfera.piopio.modelo.Favorito" />
+        
+        <mapping class="ar.com.grupoesfera.piopio.modelo.herencia.Cuenta" />
+        <mapping class="ar.com.grupoesfera.piopio.modelo.herencia.CuentaDebito" />
+        <mapping class="ar.com.grupoesfera.piopio.modelo.herencia.CuentaCredito" />
+        
         <mapping resource="mappings/consultas.xml" />
     </session-factory>
 </hibernate-configuration>
