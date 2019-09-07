@@ -16,4 +16,9 @@ public class CuentaCredito extends Cuenta {
     public BigDecimal getLimiteDeCredito() {
         return limiteDeCredito;
     }
+    
+    @Override
+    public String toString() {
+        return "CuentaCredito[saldo:"+this.getSaldo()+"]";
+    }
 }

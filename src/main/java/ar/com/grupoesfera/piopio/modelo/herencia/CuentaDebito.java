@@ -16,4 +16,9 @@ public class CuentaDebito extends Cuenta {
     public void setCargoPorSobregiro(BigDecimal cargoPorSobregiro) {
         this.cargoPorSobregiro = cargoPorSobregiro;
     }
+    
+    @Override
+    public String toString() {
+        return "CuentaDebito[saldo:"+this.getSaldo()+"]";
+    }
 }

@@ -40,10 +40,6 @@ public class HerenciaUnicaTabla {
         
         System.out.println(cuentas);
         
-        List<CuentaDebito> cuentasDebito = session.createQuery("select cd from CuentaDebito cd", CuentaDebito.class).list();
-        
-        System.out.println(cuentasDebito);
-        
         session.close();
         System.exit(0);
         
