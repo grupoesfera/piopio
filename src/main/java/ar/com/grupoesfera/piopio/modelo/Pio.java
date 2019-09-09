@@ -157,4 +157,9 @@ public class Pio {
         this.comentarios.remove(comentario);
         comentario.setPio(null);
     }
+    
+    @Override
+    public String toString() {
+        return "PIO[id:"+id+"]";
+    }
 }
