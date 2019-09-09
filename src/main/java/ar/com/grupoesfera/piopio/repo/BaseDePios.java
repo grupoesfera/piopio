@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -90,8 +91,25 @@ public class BaseDePios {
     public List<MensajePorPio> obtenerIdYMensajeDePios() {
         
         Session session = App.instancia().obtenerSesion();
-        return session.createQuery("select new ar.com.grupoesfera.piopio.modelo.dto.MensajePorPio(id, mensaje) from Pio", MensajePorPio.class).list();
+        return session.createQuery("select new ar.com.grupoesfera.piopio.modelo.dto.MensajePorPio(id, mensaje) from Pio", MensajePorPio.class)
+                      .list();
         
+    }
+    
+    public List<MensajePorPio> obtenerIdYMensajeDePiosByCriteria() {
+        
+        Session session = App.instancia().obtenerSesion();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        
+        CriteriaQuery<MensajePorPio> criteria = criteriaBuilder.createQuery(MensajePorPio.class);
+        Root<Pio> from = criteria.from(Pio.class);       
+        
+        Path<Long> idPio = from.get(Pio_.id);
+        Path<String> mensajePio = from.get(Pio_.mensaje);
+        
+        criteria.select(criteriaBuilder.construct(MensajePorPio.class, idPio, mensajePio));
+        
+        return session.createQuery(criteria).list();
     }
 
     public synchronized Pio guardarCon(Usuario autor, String mensaje) {

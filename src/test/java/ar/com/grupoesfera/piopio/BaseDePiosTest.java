@@ -188,5 +188,23 @@ public class BaseDePiosTest {
         
     }
     
+    @SuppressWarnings("unchecked")
+    @Test
+    public void obtenerIdYMensajeDePiosByCriteria() {
+        List<MensajePorPio> mensajePorPio = pios.obtenerIdYMensajeDePiosByCriteria();
+        assertThat(mensajePorPio, hasItems(hasProperty("id", is(equalTo( 1L) )),
+                                           hasProperty("id", is(equalTo( 2L) )),
+                                           hasProperty("id", is(equalTo( 3L) )),
+                                           hasProperty("id", is(equalTo( 4L) )),
+                                           hasProperty("id", is(equalTo( 5L) ))));
+        
+        assertThat(mensajePorPio, hasItems(hasProperty("mensaje", is(equalTo( "Hola, este es mi primer pio") )),
+                hasProperty("mensaje", is(equalTo( "Hola, este es mi segundo pio" ) )),
+                hasProperty("mensaje", is(equalTo( "Aguante India" ) )),
+                hasProperty("mensaje", is(equalTo( "Guau!" ) )),
+                hasProperty("mensaje", is(equalTo( "Miau" )))));
+        
+    }
+    
     
 }
