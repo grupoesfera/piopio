@@ -162,4 +162,11 @@ public class BaseDePiosTest {
         assertThat(pio, is (nullValue()));
     }
     
+    @Test
+    public void obtenerLosMensajesByCriteria() {
+        
+        List<String> mensajes = pios.obtenerMensajesDePios();
+        assertThat(mensajes, contains("Hola, este es mi primer pio", "Hola, este es mi segundo pio", "Aguante India", "Guau!", "Miau"));
+    }
+    
 }

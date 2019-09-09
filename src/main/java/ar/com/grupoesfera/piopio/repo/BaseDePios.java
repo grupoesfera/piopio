@@ -42,12 +42,30 @@ public class BaseDePios {
         
         Session session = App.instancia().obtenerSesion();
         
+        // PRIMER PASO
         CriteriaBuilder criteriaBuilder = App.instancia().obtenerSesion().getCriteriaBuilder();
-        CriteriaQuery<Pio> query = criteriaBuilder.createQuery(Pio.class);
+        
+        // SEGUNDO PASO
+        CriteriaQuery<Pio> query = criteriaBuilder.createQuery(Pio.class); // EL TIPO INDICA EL VALOR DE RETORNO
+        
         Root<Pio> pios = query.from(Pio.class);
         
-        query.select(pios)
-            .where(criteriaBuilder.like(pios.get(Pio_.mensaje), "%" + texto + "%"));
+        query.select(pios);
+        query.where(criteriaBuilder.like(pios.get(Pio_.mensaje), "%" + texto + "%"));
+        
+        return session.createQuery(query).getResultList();
+    }
+    
+    public List<String> obtenerMensajesDePios() {
+        Session session = App.instancia().obtenerSesion();
+        
+        CriteriaBuilder criteriaBuilder = App.instancia().obtenerSesion().getCriteriaBuilder();
+        
+        CriteriaQuery<String> query = criteriaBuilder.createQuery(String.class);
+        
+        Root<Pio> from = query.from(Pio.class);
+        
+        query.select(from.get(Pio_.mensaje));
         
         return session.createQuery(query).getResultList();
     }
