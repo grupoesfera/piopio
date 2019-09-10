@@ -24,5 +24,10 @@ public class MensajePorPio {
     public Long getId() {
         return id;
     }
+    
+    @Override
+    public String toString() {
+        return "id:" + id + "-mensaje:" + mensaje;
+    }
 
 }
