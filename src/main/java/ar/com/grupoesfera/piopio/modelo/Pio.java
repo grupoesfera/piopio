@@ -162,4 +162,9 @@ public class Pio {
     public String toString() {
         return "PIO[id:"+id+"]";
     }
+
+    public void borrarComentarios() {
+        this.comentarios.stream().forEach(c -> c.setPio(null));
+        this.comentarios.clear();
+    }
 }
