@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import ar.com.grupoesfera.main.App;
+import ar.com.grupoesfera.piopio.modelo.Comentario;
 import ar.com.grupoesfera.piopio.modelo.Pio;
 import ar.com.grupoesfera.piopio.modelo.Usuario;
 
@@ -116,12 +117,6 @@ public class EjerciciosHQL {
             .list();
     }
     
-    public List<Pio> obtenerSinComentar() {
-        return App.instancia().obtenerSesion()
-                .createQuery("From Pio p where p.comentarios is empty", Pio.class)
-                .list();
-    }
-    
     public List<String> obtenerTodosLosNombresDeUsuarios() {
         return App.instancia().obtenerSesion().createQuery("select nombre from Usuario", String.class).list();
     }
@@ -130,6 +125,98 @@ public class EjerciciosHQL {
         return App.instancia().obtenerSesion()
                 .createQuery("select p from Pio p where p.autor = :autor", Pio.class)
                 .setParameter("autor", usuario)
+                .list();
+    }
+    
+    public List<Usuario> obtenerSinActividad() {
+        return App.instancia().obtenerSesion()
+                              .createQuery("from Usuario u where not exists ( from Pio p where p.autor = u )", Usuario.class)
+                              .list();
+    }
+
+    public Long contarPios(Usuario usuario) {
+        return App.instancia().obtenerSesion().createQuery("select count(p) from Pio p where p.autor = :autor", Long.class)
+                .setParameter("autor", usuario)
+                .uniqueResult();
+    }
+    
+    public Integer contarCuantosUsuariosSigue(Usuario usuario) {
+        return App.instancia().obtenerSesion()
+                .createQuery("select size(seguidos) from Usuario u where u = :usuario", Integer.class)
+                .setParameter("usuario", usuario)
+                .uniqueResult();
+    }
+    
+    public List<Usuario> obtenerSeguidoresDe(Usuario usuario) {
+        return App.instancia().obtenerSesion().createQuery("from Usuario u where :usuario member of u.seguidos", Usuario.class)
+                                              .setParameter("usuario", usuario)
+                                              .list();
+    }
+    
+    public List<Usuario> obtenerAislados() {
+        return App.instancia().obtenerSesion()
+                .createQuery("from Usuario u where u.seguidos is empty and not exists (select u2 from Usuario u2 where u member of u2.seguidos)", Usuario.class)
+                .list();
+    }
+    
+    public List<Comentario> obtenerComentariosDe(Usuario usuario) {
+        return App.instancia().obtenerSesion()
+                    .createQuery("from Comentario where autor = :autor", Comentario.class)
+                    .setParameter("autor", usuario)
+                    .list();
+    }
+    
+    public long contarComentariosRealizadosPor(Usuario usuario) {
+        
+        return App.instancia().obtenerSesion()
+                    .createNamedQuery("contarComentariosRealizadosPor", Long.class)
+                    .setParameter("autor", usuario)
+                    .uniqueResult();
+    }
+    
+    public List<Pio> obtenerSinComentar() {
+        return App.instancia().obtenerSesion()
+                .createQuery("From Pio p where p.comentarios is empty", Pio.class)
+                .list();
+    }
+    
+    public List<Pio> obtenerPiosFavoritosDe(Usuario fan) {
+
+        return App.instancia().obtenerSesion()
+                .createQuery("select f.pio from Favorito f where f.fan = :fan", Pio.class)
+                .setParameter("fan", fan)
+                .list();
+    }
+    
+    public List<Usuario> obtenerFansDel(Pio pio) {
+        return App.instancia().obtenerSesion()
+                .createQuery("select f.fan from Favorito f where f.pio = :pio", Usuario.class)
+                .setParameter("pio", pio)
+                .list();
+    }
+    
+    public List<Pio> obtenerPiosSinFans() {
+        return App.instancia().obtenerSesion()
+                .createQuery("from Pio p where not exists ( from Favorito f where f.pio = p )", Pio.class)
+                .list();
+    }
+    
+    public Long contarFavoritosDeUnPio(Pio pio) {
+        
+        Long cantidad = App.instancia().obtenerSesion()
+                .createQuery("select count( f.pio) from Favorito f where f.pio = :pio group by f.pio", Long.class)
+                .setParameter("pio", pio)
+                .uniqueResult();
+        
+        return cantidad == null ? 0 : cantidad;
+    }
+    
+    public List<Usuario> obtenerUsuarioFanDeTodosLosPios() {
+        
+        return App.instancia().obtenerSesion().createQuery("from Usuario u where u not in ( "
+                + "select fan from Pio pio, Usuario fan where pio.autor != fan and not exists ("
+                + " from Favorito f where f.fan = fan and f.pio = pio)"
+                + " )", Usuario.class)
                 .list();
     }
 }

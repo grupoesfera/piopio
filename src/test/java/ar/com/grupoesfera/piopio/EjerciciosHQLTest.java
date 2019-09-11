@@ -114,13 +114,6 @@ public class EjerciciosHQLTest {
     }
     
     @Test
-    public void obtenerPiosSinComentar() {
-        
-        List<Pio> piosSinComentar = hql.obtenerSinComentar();
-        assertThat(piosSinComentar, hasSize( 3 ));
-    }
-    
-    @Test
     public void obtenerTodosLosNombresDeUsuarios() {
         
         List<String> nombres = hql.obtenerTodosLosNombresDeUsuarios();
@@ -140,5 +133,126 @@ public class EjerciciosHQLTest {
         
         assertThat(piosDeMarcelo, contains(primerPioMarcelo, segundoPioMarcelo));
     }
+    
+    @Test
+    public void buscarUsuariosInactivos() {
+        
+        Usuario sebastian = Usuario.nuevo().conId(5L).conNombre("Sebastian");
+        Usuario alejandro = Usuario.nuevo().conId(6L).conNombre("Alejandro");
+        Usuario santiago = Usuario.nuevo().conId(7L).conNombre("Santiago");
+        
+        List<Usuario> usuariosInactivos = hql.obtenerSinActividad();
+        assertThat(usuariosInactivos, hasItems(sebastian, alejandro, santiago));
+    }
+    
+    @Test
+    public void contarPiosDeUnUsuario() {
+        
+        Usuario marcelo = Usuario.nuevo().conId(1L);
+        
+        Long pios = hql.contarPios(marcelo);
+        
+        assertThat(pios, is( equalTo( 2L )));
+    }
+    
+    @Test
+    public void contarACuantosUsuariosSigueUnUsuario() {
+        Usuario marcelo = Usuario.nuevo().conId(1L);
+        Usuario brenda = Usuario.nuevo().conId(2L);
+        Usuario india = Usuario.nuevo().conId(3L);
+        Usuario leon = Usuario.nuevo().conId(4L);
+                
+        assertThat(hql.contarCuantosUsuariosSigue(marcelo), is( equalTo( 3 )));
+        assertThat(hql.contarCuantosUsuariosSigue(brenda), is( equalTo( 2 )));
+        assertThat(hql.contarCuantosUsuariosSigue(india), is( equalTo( 3 )));
+        assertThat(hql.contarCuantosUsuariosSigue(leon), is( equalTo( 0 )));
+    }
+    
+    @Test
+    public void deberiaObtenerLosSeguidoresDeUnUusario() {
 
+        Usuario marcelo = Usuario.nuevo().conId(1L).conNombre("Marcelo");
+        List<Usuario> seguidoresDeMarcelo = hql.obtenerSeguidoresDe(marcelo);
+        assertThat(seguidoresDeMarcelo, hasSize( 3 ));
+    }
+    
+    @Test
+    public void deberiaEncontrarUsuariosAislados() {
+        
+        List<Usuario> aislados = hql.obtenerAislados();
+        assertThat(aislados, hasSize(1));
+    }
+    
+    @Test
+    public void obtenerComentariosDeUnUsuario() {
+        
+        Usuario brenda = Usuario.nuevo().conId(2L);
+        
+        assertThat(hql.obtenerComentariosDe(brenda), hasSize( 2 ));
+    }
+    
+    @Test
+    public void deberiaContarLaCantidadDeComentariosRealizadosPorUnUsuario() {
+        Usuario usuario = Usuario.nuevo().conId(2L);
+        long cantidadDeComentarios = hql.contarComentariosRealizadosPor(usuario);
+        
+        assertThat(cantidadDeComentarios, equalTo( 2L ));
+    }
+    
+    @Test
+    public void obtenerPiosSinComentar() {
+        
+        List<Pio> piosSinComentar = hql.obtenerSinComentar();
+        assertThat(piosSinComentar, hasSize( 3 ));
+    }
+    
+    @Test
+    public void obtenerPiosFavoritosDeUnUsuario() {
+        
+        Usuario brenda = Usuario.nuevo().conId(2L);
+        
+        assertThat(hql.obtenerPiosFavoritosDe(brenda), hasSize( 3 ));
+        
+    }
+    
+    @Test
+    public void obtenersFansDeUnPio() {
+        
+        Pio primerPioMarcelo = Pio.nuevo().conId(1L);
+        assertThat(hql.obtenerFansDel(primerPioMarcelo), hasSize( 2 ));
+    }
+    
+    @Test
+    public void obtenerPiosSinFans() {
+        
+        Pio pioLeon = Pio.nuevo().conId(5L);
+        
+        List<Pio> piosSinFans = hql.obtenerPiosSinFans();
+        
+        assertThat(piosSinFans, contains( pioLeon ));
+    }
+    
+    @Test
+    public void contarFavoritosDeUnPio() {
+        
+        Pio primerPioMarcelo = Pio.nuevo().conId(1L);
+        Pio segundoPioMarcelo = Pio.nuevo().conId(2L);
+        Pio pioBrenda = Pio.nuevo().conId(3L);
+        Pio pioIndia = Pio.nuevo().conId(4L);
+        Pio pioLeon = Pio.nuevo().conId(5L);
+        
+        assertThat(hql.contarFavoritosDeUnPio(primerPioMarcelo), is( equalTo( 2L )));
+        assertThat(hql.contarFavoritosDeUnPio(segundoPioMarcelo), is( equalTo( 4L )));
+        assertThat(hql.contarFavoritosDeUnPio(pioBrenda), is( equalTo( 3L )));
+        assertThat(hql.contarFavoritosDeUnPio(pioIndia), is( equalTo( 2L )));
+        assertThat(hql.contarFavoritosDeUnPio(pioLeon), is( equalTo( 0L )));
+    }
+    
+    @Test
+    public void obtenerUsuarioFanDeTodosLosPios() {
+        
+        Usuario leon = Usuario.nuevo().conId(4L);
+        
+        assertThat(hql.obtenerUsuarioFanDeTodosLosPios(), hasItem( leon ));
+    }
 }
