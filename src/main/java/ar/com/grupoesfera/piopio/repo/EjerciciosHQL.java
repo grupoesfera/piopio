@@ -24,10 +24,10 @@ public class EjerciciosHQL {
     
     public List<Pio> obtenerPiosConMensaje(String mensaje) {
         
-        return App.instancia().obtenerSesion().createQuery("from Pio where mensaje like :mensaje", Pio.class)
+        return App.instancia().obtenerSesion()
+                    .createQuery("from Pio p where mensaje like :mensaje", Pio.class)
                     .setParameter("mensaje", "%" + mensaje + "%")
                     .list();
-        
     }
     
     public void actualizar(Long id, String mensaje) {
@@ -86,7 +86,8 @@ public class EjerciciosHQL {
     public Integer contarCaracteresDePioMasCorto() {
         return App.instancia()
                 .obtenerSesion()
-                .createQuery("select min(length(p.mensaje)) from Pio p", Integer.class)
+                .createQuery("select min(length(p.mensaje)) "
+                        + "from Pio p", Integer.class)
                 .uniqueResult();
     }
     
@@ -98,7 +99,8 @@ public class EjerciciosHQL {
     
     public Double obtenerPromedioDeCaracteres() {
         return App.instancia().obtenerSesion()
-                .createQuery("select avg(length(mensaje)) from Pio", Double.class)
+                .createQuery("select avg(length(mensaje)) from Pio",
+                        Double.class)
                 .uniqueResult();
     }
     

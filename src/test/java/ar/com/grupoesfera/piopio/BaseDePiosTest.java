@@ -57,7 +57,7 @@ public class BaseDePiosTest {
         Assert.assertThat(pioGuardado, notNullValue());
         Assert.assertThat(pioGuardado.getId(), notNullValue());
         Assert.assertThat(pioGuardado.getMensaje(), is("mensaje"));
-        Assert.assertThat(pioGuardado.getComentarios(), nullValue());
+        Assert.assertThat(pioGuardado.getComentarios(), is( empty()));
     }
     
     @Test

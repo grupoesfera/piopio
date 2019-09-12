@@ -18,7 +18,9 @@ public class Pio {
     @Id private Long id;
     @Column private String mensaje;
     @Column private Date fechaCreacion;
-    @ManyToOne private Usuario autor;
+    
+    @ManyToOne 
+    private Usuario autor;
     
     
     @OneToMany(mappedBy = "pio", cascade = CascadeType.ALL)

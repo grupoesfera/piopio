@@ -47,10 +47,11 @@ public class CriteriaEjemplos {
         System.out.println("Ej1) Obtener una instancia: " + pios);
         
         //OBTENER UN TIPO DE DATO QUE NO ES ENTITY
+        cb = sesion.getCriteriaBuilder();
         CriteriaQuery<String> criteriaMensajes = cb.createQuery(String.class);
         
         // INDICAR EL FROM
-        root = criteriaMensajes.from(Pio.class);
+        Root<Pio> rootPio = criteriaMensajes.from(Pio.class);
         
         // SE INDICA EN EL SELECT QUE ATRIBUTO QUEREMOS DEL PIO
         criteriaMensajes.select(root.get(Pio_.mensaje));
@@ -104,7 +105,8 @@ public class CriteriaEjemplos {
         root = criteriaMensajesEmpezadosEnHola.from(Pio.class);
         
         criteriaMensajesEmpezadosEnHola.select(root.get(Pio_.mensaje));
-        Predicate filtroMensaje = cb.like(root.get(Pio_.mensaje), "%Hola%");
+        Predicate filtroMensaje = 
+                cb.like(root.get(Pio_.mensaje), "%Hola%");
         
         // SE INDICAN EN EL WHERE TODOS LOS PREDICADOS
         criteriaMensajesEmpezadosEnHola.where(filtroMensaje);

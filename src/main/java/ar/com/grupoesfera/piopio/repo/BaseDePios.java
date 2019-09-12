@@ -148,7 +148,10 @@ public class BaseDePios {
         try {
             
             session.createQuery("delete Favorito where pio.id = :id").setParameter("id", id).executeUpdate();
-            session.createQuery("delete Pio where id = :id").setParameter("id", id).executeUpdate();
+            
+            Pio pio = session.load(Pio.class, id);
+            pio.borrarComentarios();
+            session.remove(pio);
 
             transaccion.commit();
 
