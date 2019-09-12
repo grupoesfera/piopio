@@ -1,7 +1,16 @@
 package ar.com.grupoesfera.piopio;
 
-import static org.hamcrest.Matchers.*;
-import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.iterableWithSize;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
 
 import java.util.List;
 
@@ -56,7 +65,7 @@ public class BaseDePiosTest {
         Assert.assertThat(pioGuardado, notNullValue());
         Assert.assertThat(pioGuardado.getId(), notNullValue());
         Assert.assertThat(pioGuardado.getMensaje(), is("mensaje"));
-        Assert.assertThat(pioGuardado.getComentarios(), nullValue());
+        Assert.assertThat(pioGuardado.getComentarios(), empty());
     }
     
     @Test

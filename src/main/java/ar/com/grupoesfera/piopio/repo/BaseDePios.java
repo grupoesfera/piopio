@@ -103,6 +103,15 @@ public class BaseDePios {
 
         try {
             
+        	Pio pio = obtenerPor(id);
+        	
+        	if (pio != null) {
+        		
+        		for (Comentario comentario : pio.getComentarios()) {
+        			
+        			session.createQuery("delete Comentario where id = :id").setParameter("id", comentario.getId()).executeUpdate();
+        		}
+        	}
             session.createQuery("delete Favorito where pio.id = :id").setParameter("id", id).executeUpdate();
             session.createQuery("delete Pio where id = :id").setParameter("id", id).executeUpdate();
 
