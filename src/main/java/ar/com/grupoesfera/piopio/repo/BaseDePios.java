@@ -9,7 +9,6 @@ import org.hibernate.Transaction;
 import ar.com.grupoesfera.main.App;
 import ar.com.grupoesfera.piopio.modelo.Pio;
 import ar.com.grupoesfera.piopio.modelo.Usuario;
-import ar.com.grupoesfera.piopio.modelo.dto.MensajePorPio;
 
 public class BaseDePios {
     
@@ -28,14 +27,6 @@ public class BaseDePios {
         return App.instancia().obtenerSesion().createQuery("from Pio p where p.autor = :autor")
                                               .setParameter("autor", autor)
                                               .getResultList();
-    }
-    
-    public List<MensajePorPio> obtenerIdYMensajeDePios() {
-        
-        Session session = App.instancia().obtenerSesion();
-        return session.createQuery("select new ar.com.grupoesfera.piopio.modelo.dto.MensajePorPio(id, mensaje) from Pio", MensajePorPio.class)
-                      .list();
-        
     }
     
     public synchronized Pio guardarCon(Usuario autor, String mensaje) {

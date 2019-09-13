@@ -14,7 +14,6 @@ import org.junit.Test;
 import ar.com.grupoesfera.main.Fixture;
 import ar.com.grupoesfera.piopio.modelo.Pio;
 import ar.com.grupoesfera.piopio.modelo.Usuario;
-import ar.com.grupoesfera.piopio.modelo.dto.MensajePorPio;
 import ar.com.grupoesfera.piopio.repo.BaseDePios;
 
 public class BaseDePiosTest {
@@ -138,23 +137,5 @@ public class BaseDePiosTest {
         Pio pio = pios.obtenerPor(1L);
         
         assertThat(pio, is (nullValue()));
-    }
-    
-    @SuppressWarnings("unchecked")
-    @Test
-    public void obtenerIdYMensajeDePios() {
-        List<MensajePorPio> mensajePorPio = pios.obtenerIdYMensajeDePios();
-        assertThat(mensajePorPio, hasItems(hasProperty("id", is(equalTo( 1L) )),
-                                           hasProperty("id", is(equalTo( 2L) )),
-                                           hasProperty("id", is(equalTo( 3L) )),
-                                           hasProperty("id", is(equalTo( 4L) )),
-                                           hasProperty("id", is(equalTo( 5L) ))));
-        
-        assertThat(mensajePorPio, hasItems(hasProperty("mensaje", is(equalTo( "Hola, este es mi primer pio") )),
-                hasProperty("mensaje", is(equalTo( "Hola, este es mi segundo pio" ) )),
-                hasProperty("mensaje", is(equalTo( "Aguante India" ) )),
-                hasProperty("mensaje", is(equalTo( "Guau!" ) )),
-                hasProperty("mensaje", is(equalTo( "Miau" )))));
-        
     }
 }
