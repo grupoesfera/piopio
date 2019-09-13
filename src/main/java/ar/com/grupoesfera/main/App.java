@@ -1,5 +1,7 @@
 package ar.com.grupoesfera.main;
 
+import javax.inject.Inject;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
@@ -7,21 +9,27 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import ar.com.grupoesfera.piopio.repo.BaseDePios;
 import ar.com.grupoesfera.piopio.repo.BaseDeUsuarios;
 
+@Repository("app")
+@Transactional
 public class App {
 
     private static final Log log = LogFactory.getLog(App.class);
     private static final App instancia = new App();
-    private static SessionFactory proveedorPersistencia;
+    
+    @Inject
+    private SessionFactory proveedorPersistencia;
     
     private BaseDeUsuarios usuarios = new BaseDeUsuarios();
     private BaseDePios pios = new BaseDePios();
 
     private App() {
-        configurarHibernate();
+        
     }
 
     private void configurarHibernate() {
@@ -45,7 +53,7 @@ public class App {
 
     public Session obtenerSesion() {
 
-        return proveedorPersistencia.openSession();
+        return proveedorPersistencia.getCurrentSession();
     }
 
     public BaseDeUsuarios obtenerRepoUsuarios() {

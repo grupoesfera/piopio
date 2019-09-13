@@ -1,14 +1,6 @@
 package ar.com.grupoesfera.piopio.repo;
 
-import java.math.BigInteger;
 import java.util.List;
-
-import javax.persistence.ParameterMode;
-
-import org.hibernate.Session;
-import org.hibernate.procedure.ProcedureCall;
-import org.hibernate.result.Output;
-import org.hibernate.result.ResultSetOutput;
 
 import ar.com.grupoesfera.main.App;
 import ar.com.grupoesfera.piopio.modelo.Favorito;
