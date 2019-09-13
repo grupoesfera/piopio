@@ -1,7 +1,7 @@
 package ar.com.grupoesfera.piopio;
 
-import static org.hamcrest.Matchers.*;
 import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 import java.util.List;
 
@@ -119,29 +119,6 @@ public class BaseDePiosTest {
     }
     
     @Test
-    public void deberiaObtenerLossPioQueContenganEnElMensajeElTextoIndicado() {
-        
-        List<Pio> piosEncontrados = pios.obtenerConTexto("pio"); 
-        Assert.assertThat(piosEncontrados, hasSize(2));
-    }
-    
-    @Test
-    public void deberiaObtenerUnaListaVaciaDePiosSiNoSeCumpleElCriterio() {
-        List<Pio> piosEncontrados = pios.obtenerConTexto("no hay pios con este texto");
-        Assert.assertThat(piosEncontrados, empty());
-    }
-    
-    @SuppressWarnings("unchecked")
-    @Test
-    public void deberiaObtenerLosPiosQueFueronComentadosBuscandoPorNombreDeAutor() {
-        
-        List<Pio> piosComentados = pios.obtenerComentadosPor("Brenda");
-        assertThat(piosComentados, iterableWithSize( 2 ));
-        assertThat(piosComentados, hasItems(hasProperty("id", equalTo(1L)),
-                                            hasProperty("id", equalTo(4L))));
-    }
-    
-    @Test
     public void actualizarMensajeDeUnPio() {
         
         Pio pio = pios.obtenerPor(1L);
@@ -163,13 +140,6 @@ public class BaseDePiosTest {
         assertThat(pio, is (nullValue()));
     }
     
-    @Test
-    public void obtenerLosMensajesByCriteria() {
-        
-        List<String> mensajes = pios.obtenerMensajesDePios();
-        assertThat(mensajes, contains("Hola, este es mi primer pio", "Hola, este es mi segundo pio", "Aguante India", "Guau!", "Miau"));
-    }
-    
     @SuppressWarnings("unchecked")
     @Test
     public void obtenerIdYMensajeDePios() {
@@ -187,24 +157,4 @@ public class BaseDePiosTest {
                 hasProperty("mensaje", is(equalTo( "Miau" )))));
         
     }
-    
-    @SuppressWarnings("unchecked")
-    @Test
-    public void obtenerIdYMensajeDePiosByCriteria() {
-        List<MensajePorPio> mensajePorPio = pios.obtenerIdYMensajeDePiosByCriteria();
-        assertThat(mensajePorPio, hasItems(hasProperty("id", is(equalTo( 1L) )),
-                                           hasProperty("id", is(equalTo( 2L) )),
-                                           hasProperty("id", is(equalTo( 3L) )),
-                                           hasProperty("id", is(equalTo( 4L) )),
-                                           hasProperty("id", is(equalTo( 5L) ))));
-        
-        assertThat(mensajePorPio, hasItems(hasProperty("mensaje", is(equalTo( "Hola, este es mi primer pio") )),
-                hasProperty("mensaje", is(equalTo( "Hola, este es mi segundo pio" ) )),
-                hasProperty("mensaje", is(equalTo( "Aguante India" ) )),
-                hasProperty("mensaje", is(equalTo( "Guau!" ) )),
-                hasProperty("mensaje", is(equalTo( "Miau" )))));
-        
-    }
-    
-    
 }

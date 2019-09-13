@@ -77,14 +77,6 @@ public class BaseDeUsuariosTest {
         Assert.assertThat(nombres, Matchers.containsInAnyOrder("Marcelo", "Brenda", "India", "Leon", "Sebastian", "Santiago", "Alejandro"));
     }
     
-    @Test
-    public void deberiaObtenerLosSeguidoresDeUnUsuarioPorNombreDelSeguidor() {
-        
-        Usuario marcelo = Usuario.nuevo().conId(1L).conNombre("Marcelo");
-        List<Usuario> seguidoresDeMarceloLlamadosIndia = usuarios.obtenerSeguidoresDePorNombre(marcelo, "India");
-        Assert.assertThat(seguidoresDeMarceloLlamadosIndia, Matchers.hasItem(Matchers.hasProperty("nombre", Matchers.equalTo("India"))));        
-    }
-    
     @SuppressWarnings("unchecked")
     @Test
     public void deberiaAgruparUsuariosConCantidadDeSeguidores() {

@@ -2,16 +2,8 @@ package ar.com.grupoesfera.piopio.repo;
 
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-
-import org.hibernate.Session;
-
 import ar.com.grupoesfera.main.App;
 import ar.com.grupoesfera.piopio.modelo.Usuario;
-import ar.com.grupoesfera.piopio.modelo.Usuario_;
 import ar.com.grupoesfera.piopio.modelo.dto.SeguidoresPorUsuario;
 import ar.com.grupoesfera.piopio.modelo.transformer.SeguidoresPorUsuarioTransformer;
 
@@ -43,23 +35,6 @@ public class BaseDeUsuarios {
     public List<String> obtenerNombres() {
         
         return App.instancia().obtenerSesion().createNativeQuery("call nombres()").getResultList();
-    }
-    
-    public List<Usuario> obtenerSeguidoresDePorNombre(Usuario seguido, String nombreDeSeguidor) {
-        
-        Session session = App.instancia().obtenerSesion();
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-        
-        CriteriaQuery<Usuario> query = criteriaBuilder.createQuery(Usuario.class);
-        Root<Usuario> usuario = query.from(Usuario.class);
-        
-        Predicate esSeguido = criteriaBuilder.isMember(seguido, usuario.get(Usuario_.seguidos));
-        Predicate seguidorTieneNombre = criteriaBuilder.equal(usuario.get(Usuario_.nombre), nombreDeSeguidor);
-        
-        query.select(usuario)
-            .where(criteriaBuilder.and(seguidorTieneNombre, esSeguido));
-        
-        return session.createQuery(query).getResultList();
     }
     
     @SuppressWarnings({ "deprecation", "unchecked" })

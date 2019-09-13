@@ -10,7 +10,6 @@ import org.hibernate.Session;
 
 import ar.com.grupoesfera.main.App;
 import ar.com.grupoesfera.piopio.modelo.Comentario;
-import ar.com.grupoesfera.piopio.modelo.Comentario_;
 import ar.com.grupoesfera.piopio.modelo.Usuario;
 
 public class BaseDeComentarios {
@@ -25,20 +24,6 @@ public class BaseDeComentarios {
         query.select(comentarios);
         
         return session.createQuery(query).getResultList();
-    }
-
-    public List<Comentario> obtenerRealizadosPor(Usuario autor) {
-        
-        Session session = App.instancia().obtenerSesion();
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-        CriteriaQuery<Comentario> query = criteriaBuilder.createQuery(Comentario.class);
-        
-        Root<Comentario> comentarios = query.from(Comentario.class);
-        
-        query.select(comentarios)
-            .where(criteriaBuilder.equal(comentarios.get(Comentario_.autor), autor));
-        
-               return session.createQuery(query).getResultList();
     }
 
     public long contarComentariosRealizadosPor(Usuario usuario) {
