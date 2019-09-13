@@ -16,6 +16,5 @@
         <mapping class="ar.com.grupoesfera.piopio.modelo.Comentario" />
         <mapping class="ar.com.grupoesfera.piopio.modelo.Favorito" />
         
-        <mapping resource="mappings/consultas.xml" />
     </session-factory>
 </hibernate-configuration>
