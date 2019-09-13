@@ -63,13 +63,6 @@ public class BaseDeUsuariosTest {
     }
     
     @Test
-    public void deberiaObtenerTodosLosNombres() {
-        
-        List<String> nombres = usuarios.obtenerNombres();
-        Assert.assertThat(nombres, Matchers.containsInAnyOrder("Marcelo", "Brenda", "India", "Leon", "Sebastian", "Santiago", "Alejandro"));
-    }
-    
-    @Test
     public void contarACuantosUsuariosSigueUnUsuario() {
         Usuario marcelo = Usuario.nuevo().conId(1L);
         Usuario brenda = Usuario.nuevo().conId(2L);

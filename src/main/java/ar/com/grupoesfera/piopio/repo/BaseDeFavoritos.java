@@ -62,19 +62,6 @@ public class BaseDeFavoritos {
                 + " )").getResultList();
     }
     
-    public Long contarNumeroDeFavoritosDe(Pio pio) {
-        
-        Session sesion = App.instancia().obtenerSesion();
-        
-        ProcedureCall storeProcedure = sesion.createStoredProcedureCall("CONTAR_NUMERO_DE_FAVORITOS_DE_UN_PIO");
-        storeProcedure.registerParameter(1, Long.class, ParameterMode.IN).bindValue(pio.getId());
-        Output output = storeProcedure.getOutputs().getCurrent();
-        
-        Object resultado = ((ResultSetOutput)output).getSingleResult();
-        
-        return BigInteger.class.cast(resultado).longValue();
-    }
-
     public synchronized Favorito guardarCon(Usuario fan, Pio pio) {
         
         Favorito favorito = null;

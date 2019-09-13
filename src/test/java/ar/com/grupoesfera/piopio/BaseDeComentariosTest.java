@@ -38,14 +38,6 @@ public class BaseDeComentariosTest {
     }
     
     @Test
-    public void deberiaContarLaCantidadDeComentariosRealizadosPorUnUsuario() {
-        Usuario usuario = Usuario.nuevo().conId(2L);
-        long cantidadDeComentarios = comentarios.contarComentariosRealizadosPor(usuario);
-        
-        assertThat(cantidadDeComentarios, equalTo( 2L ));
-    }
-    
-    @Test
     public void obtenerComentariosDeUnUsuario() {
         
         Usuario brenda = Usuario.nuevo().conId(2L);

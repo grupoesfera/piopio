@@ -23,12 +23,6 @@ public class BaseDeUsuarios {
         return App.instancia().obtenerSesion().get(Usuario.class, id);
     }
     
-    @SuppressWarnings("unchecked")
-    public List<String> obtenerNombres() {
-        
-        return App.instancia().obtenerSesion().createNativeQuery("call nombres()").getResultList();
-    }
-    
     public Integer contarCuantosUsuariosSigue(Usuario usuario) {
         return App.instancia().obtenerSesion()
                 .createQuery("select size(seguidos) from Usuario u where u = :usuario", Integer.class)
