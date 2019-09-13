@@ -1,10 +1,5 @@
 package ar.com.grupoesfera.main;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.ws.rs.core.Application;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
@@ -15,9 +10,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import ar.com.grupoesfera.piopio.repo.BaseDePios;
 import ar.com.grupoesfera.piopio.repo.BaseDeUsuarios;
-import ar.com.grupoesfera.piopio.rest.API;
 
-public class App extends Application {
+public class App {
 
     private static final Log log = LogFactory.getLog(App.class);
     private static final App instancia = new App();
@@ -47,14 +41,6 @@ public class App extends Application {
     public static App instancia() {
 
         return instancia;
-    }
-
-    @Override
-    public Set<Class<?>> getClasses() {
-
-        Set<Class<?>> classes = new HashSet<>();
-        classes.add(API.class);
-        return classes;
     }
 
     public Session obtenerSesion() {

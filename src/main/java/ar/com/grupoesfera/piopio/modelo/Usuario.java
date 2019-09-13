@@ -11,15 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
 @Entity
 public class Usuario {
 
     @Id private Long id;
     @Column private String nombre;
     
-    @JsonIgnore 
     @ManyToMany 
     @JoinTable(name = "seguidos", joinColumns = @JoinColumn(name = "seguidor"), inverseJoinColumns = @JoinColumn(name = "seguido")) 
     private List<Usuario> seguidos;
