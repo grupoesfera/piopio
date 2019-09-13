@@ -34,4 +34,11 @@ public class BaseDeComentarios {
                     .setParameter("autor", usuario)
                     .getSingleResult();
     }
+    
+    public List<Comentario> obtenerComentariosDe(Usuario usuario) {
+        return App.instancia().obtenerSesion()
+                    .createQuery("from Comentario where autor = :autor", Comentario.class)
+                    .setParameter("autor", usuario)
+                    .list();
+    }
 }

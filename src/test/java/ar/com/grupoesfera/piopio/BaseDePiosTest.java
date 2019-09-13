@@ -3,6 +3,8 @@ package ar.com.grupoesfera.piopio;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.hamcrest.Matchers;
@@ -137,5 +139,75 @@ public class BaseDePiosTest {
         Pio pio = pios.obtenerPor(1L);
         
         assertThat(pio, is (nullValue()));
+    }
+    
+    @Test
+    public void contarPios() {
+        
+        assertThat(pios.contar(), is( equalTo( 5L )));
+    }
+    
+    @Test
+    public void buscarPiosEnUnRangoDeFechas() {
+        
+        Date fechaInicio = java.sql.Date.valueOf(LocalDate.of(2017, 12, 28));
+        Date fechaFin = java.sql.Date.valueOf(LocalDate.of(2018, 1, 1));
+        
+        List<Pio> piosEnUnRangoDeFechas = pios.buscarEntre(fechaInicio, fechaFin);
+        assertThat(piosEnUnRangoDeFechas, hasSize( 2 ));
+    }
+    
+    @Test
+    public void obtenerLosPiosDeMarcelo() {
+        
+        Usuario marcelo = Usuario.nuevo().conId(1L);
+        
+        Pio primerPioMarcelo = Pio.nuevo().conId(1L);
+        Pio segundoPioMarcelo = Pio.nuevo().conId(2L);
+        
+        List<Pio> piosDeMarcelo = pios.obtenerPiosDe(marcelo);
+        
+        assertThat(piosDeMarcelo, contains(primerPioMarcelo, segundoPioMarcelo));
+    }
+    
+    @Test
+    public void contarPiosDeUnUsuario() {
+        
+        Usuario marcelo = Usuario.nuevo().conId(1L);
+        
+        Long piosDeMarcelo = pios.contarPios(marcelo);
+        
+        assertThat(piosDeMarcelo, is( equalTo( 2L )));
+    }
+    
+    @Test
+    public void deberiaObtenerTodosLosPiosConMensaje() {
+
+        List<Pio> todosLosPios = pios.obtenerPiosConMensaje("Hola");
+        Assert.assertThat(todosLosPios, hasSize(2));
+    }
+    
+    @Test
+    public void obtenerPiosFavoritosDeUnUsuario() {
+        
+        Usuario brenda = Usuario.nuevo().conId(2L);
+        
+        assertThat(pios.obtenerPiosFavoritosDe(brenda), hasSize( 3 ));
+    }
+    
+    @Test
+    public void contarFavoritosDeUnPio() {
+        
+        Pio primerPioMarcelo = Pio.nuevo().conId(1L);
+        Pio segundoPioMarcelo = Pio.nuevo().conId(2L);
+        Pio pioBrenda = Pio.nuevo().conId(3L);
+        Pio pioIndia = Pio.nuevo().conId(4L);
+        Pio pioLeon = Pio.nuevo().conId(5L);
+        
+        assertThat(pios.contarFavoritosDeUnPio(primerPioMarcelo), is( equalTo( 2L )));
+        assertThat(pios.contarFavoritosDeUnPio(segundoPioMarcelo), is( equalTo( 4L )));
+        assertThat(pios.contarFavoritosDeUnPio(pioBrenda), is( equalTo( 3L )));
+        assertThat(pios.contarFavoritosDeUnPio(pioIndia), is( equalTo( 2L )));
+        assertThat(pios.contarFavoritosDeUnPio(pioLeon), is( equalTo( 0L )));
     }
 }

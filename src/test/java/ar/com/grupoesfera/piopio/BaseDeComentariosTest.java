@@ -44,4 +44,12 @@ public class BaseDeComentariosTest {
         
         assertThat(cantidadDeComentarios, equalTo( 2L ));
     }
+    
+    @Test
+    public void obtenerComentariosDeUnUsuario() {
+        
+        Usuario brenda = Usuario.nuevo().conId(2L);
+        
+        assertThat(comentarios.obtenerComentariosDe(brenda), hasSize( 2 ));
+    }
 }
