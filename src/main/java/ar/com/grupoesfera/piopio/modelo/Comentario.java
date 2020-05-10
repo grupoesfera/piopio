@@ -1,16 +1,10 @@
 package ar.com.grupoesfera.piopio.modelo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-@Entity
 public class Comentario {
 
-    @Id private Long id;
-    @Column private String mensaje;
-    @ManyToOne private Usuario autor;
+    private Long id;
+    private String mensaje;
+    private Usuario autor;
     
     public Long getId() {
         

@@ -1,8 +1,5 @@
 package ar.com.grupoesfera.piopio;
 
-import java.util.List;
-
-import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,25 +13,16 @@ import ar.com.grupoesfera.piopio.repo.BaseDePios;
 
 public class BaseDePiosTest {
 
-    private BaseDePios pios = new BaseDePios();
-    
     @Before
     public void agregarDatos() {
-        
+
         Fixture.initData();
     }
-    
+
     @After
     public void eliminarDatos() {
-        
+
         Fixture.dropData();
-    }
-
-    @Test
-    public void deberiaObtenerTodosLosPios() {
-
-        List<Pio> todosLosPios = pios.obtenerTodos();
-        Assert.assertThat(todosLosPios, Matchers.hasSize(5));
     }
 
     @Test
@@ -110,20 +98,8 @@ public class BaseDePiosTest {
     }
 
     @Test
-    public void deberiaObtenerUnaListaVaciaSiElUsuarioNoPublicoPios() {
-        
-        Usuario usuarioSinPios = Usuario.nuevo().conId(5L);
-        List<Pio> listaVacia = pios.obtenerPor(usuarioSinPios);
-        
-        Assert.assertThat(listaVacia, Matchers.empty());
-    }
+    public void deberiasEscribirPruebasUnitarias() {
 
-    @Test
-    public void deberiaObtenerUnaListaConPiosSiElUsuarioPublicoPios() {
-        
-        Usuario usuarioConPios = Usuario.nuevo().conId(1L);
-        List<Pio> piosDelUsuario = pios.obtenerPor(usuarioConPios);
-        
-        Assert.assertThat(piosDelUsuario, Matchers.not(Matchers.empty()));
+        Assert.fail("Tus clases deberían estar probadas y con Cobertura completa");
     }
 }

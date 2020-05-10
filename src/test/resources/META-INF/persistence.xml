@@ -6,9 +6,6 @@
 	<persistence-unit name="piopio">
 	
 	   <class>ar.com.grupoesfera.piopio.modelo.Pio</class>
-	   <class>ar.com.grupoesfera.piopio.modelo.Usuario</class>
-	   <class>ar.com.grupoesfera.piopio.modelo.Favorito</class>
-	   <class>ar.com.grupoesfera.piopio.modelo.Comentario</class>
 	
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />

@@ -128,5 +128,4 @@ public class Fixture {
         
         return entity.getAnnotation(Entity.class) != null;
     }
-
 }
